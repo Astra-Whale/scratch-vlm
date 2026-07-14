@@ -25,6 +25,9 @@ outputs/
 # 本地模型缓存 (605MB CLIP + potential future weights)
 models/
 
+# 第三方 vendored 依赖 (llama.cpp 源码 + build, 319MB; 通过 docs 记录构建步骤而非入库)
+thirdparty/
+
 # ONNX 导出产物 (大文件, 由 benchmark/export_onnx.py 生成)
 onnx/
 *.onnx

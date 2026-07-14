@@ -1,0 +1,115 @@
+Failed to load /home/l/miniforge3/envs/dl/lib/python3.11/site-packages/torchao/_C_cutlass_90a.abi3.so: Could not load this library: /home/l/miniforge3/envs/dl/lib/python3.11/site-packages/torchao/_C_cutlass_90a.abi3.so
+Failed to load /home/l/miniforge3/envs/dl/lib/python3.11/site-packages/torchao/_C_mxfp8.cpython-310-x86_64-linux-gnu.so: Could not load this library: /home/l/miniforge3/envs/dl/lib/python3.11/site-packages/torchao/_C_mxfp8.cpython-310-x86_64-linux-gnu.so
+[model] vision=openai/clip-vit-large-patch14-336 llm=models/Qwen3-0.6B
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:  68%|██████▊   | 265/391 [00:00<00:00, 2584.96it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 2749.82it/s]
+[transformers] [1mCLIPVisionModel LOAD REPORT[0m from: openai/clip-vit-large-patch14-336
+Key                                                          | Status     |  | 
+-------------------------------------------------------------+------------+--+-
+text_model.encoder.layers.{0...11}.self_attn.q_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm2.bias          | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.v_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc2.bias              | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm1.weight        | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc1.bias              | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.k_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.out_proj.bias   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm1.bias          | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.k_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm2.weight        | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.out_proj.weight | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.q_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.v_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc1.weight            | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc2.weight            | UNEXPECTED |  | 
+text_model.embeddings.token_embedding.weight                 | UNEXPECTED |  | 
+text_model.embeddings.position_embedding.weight              | UNEXPECTED |  | 
+logit_scale                                                  | UNEXPECTED |  | 
+text_model.final_layer_norm.weight                           | UNEXPECTED |  | 
+text_model.final_layer_norm.bias                             | UNEXPECTED |  | 
+text_projection.weight                                       | UNEXPECTED |  | 
+visual_projection.weight                                     | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 18336.85it/s]
+[model] projector 初始化自 checkpoints/projector_stage1_qwen3_best.pt
+[model] 可训 6.49M (LoRA 2.29M + projector 4.20M)
+[data] 11022 条本地有图样本 from data/llava_instruct/sft_mix2.json
+[sft] steps=700 batch=1 accum=16 lr=0.0002 lora_r=16
+[step    0] loss=6.6016 lr=1.00e-05 |g|=23.43
+[step   10] loss=1.6665 lr=1.10e-04 |g|=9.98
+[step   20] loss=1.2518 lr=2.00e-04 |g|=2.23
+[step   30] loss=1.1057 lr=2.00e-04 |g|=1.16
+[step   40] loss=1.1883 lr=2.00e-04 |g|=2.11
+[step   50] loss=0.6047 lr=1.99e-04 |g|=1.19
+[step   60] loss=0.8051 lr=1.98e-04 |g|=0.88
+[step   70] loss=1.1848 lr=1.98e-04 |g|=1.58
+[step   80] loss=0.8110 lr=1.97e-04 |g|=0.94
+[step   90] loss=1.3151 lr=1.95e-04 |g|=0.88
+[step  100] loss=0.8544 lr=1.94e-04 |g|=1.00
+[step  110] loss=0.9114 lr=1.92e-04 |g|=0.66
+[step  120] loss=0.8050 lr=1.91e-04 |g|=0.72
+[step  130] loss=0.9061 lr=1.89e-04 |g|=0.63
+[step  140] loss=0.8160 lr=1.87e-04 |g|=0.75
+[step  150] loss=1.1144 lr=1.84e-04 |g|=0.82
+[step  160] loss=0.8325 lr=1.82e-04 |g|=0.60
+[step  170] loss=0.8398 lr=1.79e-04 |g|=0.74
+[step  180] loss=0.8217 lr=1.77e-04 |g|=1.25
+[step  190] loss=0.8748 lr=1.74e-04 |g|=0.68
+[step  200] loss=1.0075 lr=1.71e-04 |g|=1.52
+[step  210] loss=0.7467 lr=1.67e-04 |g|=0.97
+[step  220] loss=0.8222 lr=1.64e-04 |g|=1.01
+[step  230] loss=0.7804 lr=1.61e-04 |g|=0.72
+[step  240] loss=0.7133 lr=1.57e-04 |g|=0.98
+[step  250] loss=0.7429 lr=1.54e-04 |g|=0.77
+[step  260] loss=0.8879 lr=1.50e-04 |g|=0.60
+[step  270] loss=0.9274 lr=1.46e-04 |g|=0.81
+[step  280] loss=0.4959 lr=1.43e-04 |g|=0.68
+[step  290] loss=1.0291 lr=1.39e-04 |g|=0.70
+[step  300] loss=1.0663 lr=1.35e-04 |g|=1.11
+[step  310] loss=0.6605 lr=1.31e-04 |g|=0.98
+[step  320] loss=0.9139 lr=1.27e-04 |g|=0.69
+[step  330] loss=0.5083 lr=1.22e-04 |g|=1.10
+[step  340] loss=0.7461 lr=1.18e-04 |g|=0.59
+[step  350] loss=0.4767 lr=1.14e-04 |g|=0.61
+[step  360] loss=0.7441 lr=1.10e-04 |g|=0.73
+[step  370] loss=0.7053 lr=1.06e-04 |g|=1.23
+[step  380] loss=0.7147 lr=1.02e-04 |g|=0.73
+[step  390] loss=0.9730 lr=9.76e-05 |g|=0.62
+[step  400] loss=0.8582 lr=9.35e-05 |g|=0.79
+[step  410] loss=0.8695 lr=8.94e-05 |g|=0.76
+[step  420] loss=0.7793 lr=8.54e-05 |g|=0.93
+[step  430] loss=0.8651 lr=8.14e-05 |g|=0.83
+[step  440] loss=1.0836 lr=7.75e-05 |g|=0.80
+[step  450] loss=0.7800 lr=7.36e-05 |g|=0.86
+[step  460] loss=0.9845 lr=6.99e-05 |g|=0.97
+[step  470] loss=0.8892 lr=6.62e-05 |g|=0.77
+[step  480] loss=0.9355 lr=6.26e-05 |g|=0.69
+[step  490] loss=0.7360 lr=5.91e-05 |g|=0.69
+[step  500] loss=0.8450 lr=5.58e-05 |g|=0.80
+[step  510] loss=0.9125 lr=5.25e-05 |g|=0.65
+[step  520] loss=1.0607 lr=4.94e-05 |g|=0.65
+[step  530] loss=0.6394 lr=4.64e-05 |g|=0.84
+[step  540] loss=1.0293 lr=4.35e-05 |g|=1.57
+[step  550] loss=0.7237 lr=4.08e-05 |g|=0.71
+[step  560] loss=0.7761 lr=3.82e-05 |g|=1.62
+[step  570] loss=0.4474 lr=3.58e-05 |g|=0.61
+[step  580] loss=0.7906 lr=3.35e-05 |g|=0.67
+[step  590] loss=1.0275 lr=3.14e-05 |g|=0.92
+[step  600] loss=0.9523 lr=2.94e-05 |g|=1.15
+[step  610] loss=1.0448 lr=2.77e-05 |g|=0.97
+[step  620] loss=0.9155 lr=2.61e-05 |g|=1.03
+[step  630] loss=0.7987 lr=2.47e-05 |g|=0.77
+[step  640] loss=0.7816 lr=2.34e-05 |g|=0.66
+[step  650] loss=0.9125 lr=2.24e-05 |g|=0.95
+[step  660] loss=0.7586 lr=2.15e-05 |g|=1.05
+[step  670] loss=0.8188 lr=2.09e-05 |g|=0.55
+[step  680] loss=0.8923 lr=2.04e-05 |g|=1.26
+[step  690] loss=1.0390 lr=2.01e-05 |g|=0.76
+[step  699] loss=1.1027 lr=2.00e-05 |g|=0.75
+/home/l/miniforge3/envs/dl/lib/python3.11/site-packages/peft/utils/save_and_load.py:386: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+[done] 700 steps 1357s (1938ms/step); loss 5.655→0.972
+[vram] 峰值 7161 MB
+[save] projector+lora → checkpoints/vlm_stage2_mix2

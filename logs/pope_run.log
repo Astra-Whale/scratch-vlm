@@ -1,0 +1,12 @@
+### stage-1 POPE 19:26:22
+[random      ] acc=50.0 f1=0.0 yes%=0.0 (n=500, miss=0)
+[popular     ] acc=50.0 f1=0.0 yes%=0.0 (n=500, miss=0)
+[adversarial ] acc=50.0 f1=0.0 yes%=0.0 (n=500, miss=0)
+[avg F1] 0.0
+### stage-2 POPE 19:29:30
+[lora] loaded checkpoints/vlm_stage2_lora/lora_adapter
+[random      ] acc=50.0 f1=0.0 yes%=0.0 (n=500, miss=0)
+[popular     ] acc=50.0 f1=0.0 yes%=0.0 (n=500, miss=0)
+[adversarial ] acc=50.0 f1=0.0 yes%=0.0 (n=500, miss=0)
+[avg F1] 0.0
+### ALLDONE 19:33:16

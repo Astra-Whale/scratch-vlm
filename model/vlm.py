@@ -267,6 +267,9 @@ class ScratchVLM(nn.Module):
         # 传 inputs_embeds 时, output_ids 只含新生成的 tokens (不含 prompt)
         raw_text = self.tokenizer.decode(output_ids[0], skip_special_tokens=False)
         clean_text = self.tokenizer.decode(output_ids[0], skip_special_tokens=True)
+        # Qwen3 thinking mode 可能自发生成 <think>...</think>, 剥离掉只留最终答案
+        import re
+        clean_text = re.sub(r"<think>.*?</think>", "", clean_text, flags=re.DOTALL).strip()
         # 返回 (raw + clean) 便于调试; 后续可换成只返 clean
         return {
             "raw": raw_text,

@@ -93,7 +93,7 @@ python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_test_1000.json -
 
 ## 8 · 未完成 / 暂缓 / 待人工
 
-- **S2 航拍领域适配**:用户暂缓,spec 见 `docs/s2_aerial_plan.md`(一条命令可执行,差数据集)。
+- **S2 航拍领域适配**:**已撤销**(2026-07-14 用户决定不做);历史 spec 仍留 `docs/s2_aerial_plan.md` 备查,不再作为待办。
 - **git 身份是占位** `徐悦 <xuyue@localhost>`(本地配置),需改真实邮箱。
 - **SOTA ckpt gitignored**(`*.pt`);若要开箱可跑可 `git add -f checkpoints/projector_flickr8k_best.pt`(7.5MB)。
 - **无 git remote**;未推送。
@@ -103,3 +103,73 @@ python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_test_1000.json -
 ## 9 · 记忆锚点
 
 Agent 记忆库(`.claude/.../memory/`)有 `vlm-strategy-constraints`(8GB 上限 / Orin 红线 / SOTA / 量化要点)与 `vlm-migration-findings`。与本文一致;若冲突以本文 + 仓库实测为准。
+
+---
+
+## 10 · selfspec 对齐执行状态(2026-07-14 · 压缩前快照)
+
+**已完成**:#4 换 Qwen3-0.6B(本地 `models/Qwen3-0.6B/`,curl 续传绕过 hf-xet 挂死);stage-1 projector 对齐(`checkpoints/projector_stage1_qwen3_best.pt`,Flickr8k,eval caption 干净、`<think>` 已在 vlm.py 剥离);#26 窄核心(llama.cpp Qwen3 GGUF **Q4_K_M 0.48GB/3.12×**,PPL f16 19.63→Q4 21.35,llama-server SSE 流式跑通,见 `docs/llamacpp_pipeline.md`)。
+
+**进行中**:stage-2 LoRA SFT(`train_sft.py`,batch=2/accum=8/steps=300,输出 `checkpoints/vlm_stage2_lora/{projector.pt, lora_adapter/}`)。注:batch=4 会 OOM,必须 batch≤2。
+
+**下一步(stage-2 完成后立即)· POPE 幻觉对比 #25**:
+```
+# stage-1 (无 LoRA)
+python benchmark/evaluate_pope.py --projector-ckpt checkpoints/projector_stage1_qwen3_best.pt \
+    --pope-dir data/pope --image-root data/coco/val2014 --out logs/pope_stage1.json
+# stage-2 (加 LoRA)
+python benchmark/evaluate_pope.py --projector-ckpt checkpoints/vlm_stage2_lora/projector.pt \
+    --lora-adapter checkpoints/vlm_stage2_lora/lora_adapter --pope-dir data/pope --image-root data/coco/val2014 --out logs/pope_stage2.json
+```
+对比两者 F1 → 简历 #17"两阶段对幻觉抑制的边际收益"。
+
+**之后待办**:多模态 mmproj 集成(CLIP+projector→llama.cpp,我自己弄,S6 已标 fiddly);更新 README/ALIGN_SELFSPEC 反映对齐结果;`git add -A && commit`(新增 train_sft.py/sft_dataset.py/evaluate_pope.py/fetch_coco_images.py/docs 等尚未提交)。数据/ckpt 均 gitignored。
+
+### §10 更新(POPE 结果 + 待 fix)· 2026-07-14
+- **两阶段训练完成**:stage-2 SFT 300步/loss 3.26→1.76,产物 `checkpoints/vlm_stage2_lora/{projector.pt, lora_adapter/}`(adapter 602M 因含 resize 的 embedding)。
+- **POPE 跑通但结果无效**:stage-1 & stage-2 均 acc=50/f1=0/yes%=0(`logs/pope_stage{1,2}.json`)。**模型从不答 yes**。
+- **根因(待验证)**:SFT 只用了 `detail_23k`(纯描述),没教 yes/no QA → 模型被问"有没有X"时描述图像而非答 yes/no,`evaluate_pope.py::parse_yesno` 默认判 no → 全 no。
+- **FIX(压缩后第一步)**:
+  1. 先验证:加载 stage-2 对 2-3 条 POPE 问题 `generate`,打印 raw 输出,确认是"描述/乱答"而非 parser bug。
+  2. 下 `conversation_58k.json`(LLaVA-Instruct 多轮 QA,含 yes/no)+ 补对应 COCO 图 → 重跑 stage-2 SFT(混 detail+conversation),使模型学会短答 yes/no。
+  3. 重跑 POPE → 得有效 stage-1 vs stage-2 F1 对比(#17)。
+- POPE 之外的对齐项(#4/#6-10/#26 窄核心)均已成;剩 mmproj + 文档 + git。
+
+### §10 更新 2(根因已验证 + 混合数据修复)· 2026-07-14
+- **根因证实(非假设)**:加载 stage-2 对 POPE 前 5 题 `generate` 打印 raw:模型对 "Is there a skis in the image?"(GT=yes)输出 `'The image features a person skiing down a snowy slope...'`。→ **模型看对了(确实识别出滑雪),但输出的是描述而非 yes/no 短答**;`parse_yesno` 保守判 no。**确认是指令跟随/输出格式 gap,非视觉能力、非 parser bug。**
+- **修复(方法对齐 LLaVA v1.5)**:下 `conversation_58k.json`(126MB,LLaVA-Instruct 通用视觉 QA;curl 走 hf-mirror,`hf_hub_download` head 调用失败故绕过)。与本地 3000 张 train2014 图交集 = **2002 条**(零额外下载,两个 split 同抽自 COCO train2014 池)。合并 detail(3000)+conversation(2002)=**5002 条** → `data/llava_instruct/sft_mix.json`。从 **stage-1 projector 重新初始化**重跑 stage-2(不接续无效的纯描述 stage-2),输出 `checkpoints/vlm_stage2_mix/`。
+- **训练配置**:batch=1/accum=16(有效 16)/steps=500/lr 2e-4/lora r=16。**为何 batch=1**:conversation 多轮样本长(截到 max_length=1024),加上 CLIP-L 的 **576 视觉 token**,单样本有效序列 ~1600 token → batch=2 峰值 15.3GB 濒临 OOM;batch=1 峰值 ~14.9GB 且被 max_length 硬顶(高水位不再涨),可靠跑完。
+- **⚠️ 诚信红线(交叉检查者重点核对)**:**绝不合成 POPE 同款"图里有没有 {物体}?→yes/no"探针来训练**。那等于在测试集分布上训练,POPE F1 会变成"背没背下格式"而非幻觉度量 → 简历 #16/#17 声称即造假。POPE 必须保持**零样本留出**;yes/no 能力只能来自**通用** QA 指令微调(conversation_58k),这正是 LLaVA v1.5 的做法(用通用 VQA/对话训练,零样本上 POPE)。合成通用视觉指令数据本身不违规(LLaVA-Instruct 本就是 GPT-4 合成),违规的是合成**与测试同格式**的探针。
+- **下一步**:训练完 → 重跑 POPE(stage-1 vs vlm_stage2_mix)→ 有效 F1 对比。
+
+### §10 更新 3(POPE 达成 + 数据消融链)· 2026-07-14
+**最终有效结果 —— `checkpoints/vlm_stage2_mix2/`(detail 3000 + conversation 2002 + 平衡VQA 6020 = 11022 条,700步,peak 7.2GB)**:
+
+| split | acc | precision | recall | f1 | yes% | n |
+|---|---|---|---|---|---|---|
+| random | 82.9 | 81.14 | 85.73 | 83.37 | 52.83 | 3000 |
+| popular | 76.1 | 71.88 | 85.73 | 78.20 | 59.63 | 3000 |
+| adversarial | 70.2 | 65.41 | 85.73 | 74.21 | 65.53 | 3000 |
+| **avg F1** | | | | **78.59** | | |
+
+`logs/pope_stage2_mix2.json`。**random>popular>adversarial 单调退化 = POPE 正确行为**;yes% 从 100→53(random)偏置消除。
+
+**数据消融链(#17 真正卖点,honest)**:
+
+| SFT 数据 | ckpt | POPE 行为 | acc | avg F1 |
+|---|---|---|---|---|
+| 仅 detail | `vlm_stage2_lora`(旧) | 全 no(不会QA) | 50 | 0 |
+| +conversation | `vlm_stage2_mix` | 全 yes(训练数据93%yes) | 50 | 66.67(虚高) |
+| +平衡VQA | `vlm_stage2_mix2` | 均衡 | 70–83 | **78.59** |
+
+**结论**:模型幻觉/作答行为随训练数据分布走;平衡 yes/no 是抑制过度肯定的关键杠杆。
+**诚信守住**:POPE 零样本(训练 train2014 / POPE val2014,图无重叠);**从未**训练 POPE 同款物体存在探针。VQAv2 平衡 yes/no 是 LLaVA v1.5 正宗配方。
+**stage-1 对照**:projector-only 无指令跟随能力 → all-no/f1=0(`logs/pope_stage1.json`),印证两阶段设计中"对齐必要但不充分,指令微调才产生能力"。
+
+### §10 更新 4(mmproj 多模态集成端到端跑通)· 2026-07-15
+- **#11 CLIP+projector 打包 + 端侧多模态推理达成**:自训视觉栈打包成 llama.cpp mmproj GGUF,与 LoRA 合并后 Qwen3 GGUF 组合,端到端图文推理跑通。
+- **产物**:`models/gguf/qwen3-stage2-merged-q4_k_m.gguf`(372MiB,LoRA 已合并)+ `models/gguf/mmproj-model-f16.gguf`(590MB,CLIP-L f16 + projector);工具 `tools_merge_lora.py`。
+- **方法**:LoRA merge_and_unload → GGUF → Q4_K_M;CLIP+projector 走 legacy `convert_image_encoder_to_gguf.py`(projector `linear1→mm.0`/`linear2→mm.2`,`--projector-type mlp`)。脚本默认丢 CLIP 末层到 `blk.22`,与 `VisionEncoder(select_layer=-2)` **特征层严格一致**。
+- **验证**(`llama-mtmd-cli`,纯 CPU,`--temp 0`,火车图 COCO_val2014_000000001171):"Describe"→ 准确描述黑色火车+树,无幻觉;"Is there a train?"→ `Yes` 正确。
+- **坑**:legacy 脚本需 `PYTHONPATH=gguf-py`;**勿加** `--clip-model-is-vision`(CLIP config 嵌套);projector 输出维须 = LLM n_embd(1024)。详见 `docs/llamacpp_pipeline.md` mmproj 专节。
+- **至此纯代码 workstream 全部对齐**;唯一未做为 #14 Xavier NX 实机(用户决定不做)。

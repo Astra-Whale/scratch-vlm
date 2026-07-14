@@ -1,0 +1,30 @@
+{
+  "random": {
+    "acc": 50.0,
+    "precision": 50.0,
+    "recall": 100.0,
+    "f1": 66.67,
+    "yes_ratio": 100.0,
+    "n": 3000,
+    "missing_img": 0
+  },
+  "popular": {
+    "acc": 50.0,
+    "precision": 50.0,
+    "recall": 100.0,
+    "f1": 66.67,
+    "yes_ratio": 100.0,
+    "n": 3000,
+    "missing_img": 0
+  },
+  "adversarial": {
+    "acc": 50.0,
+    "precision": 50.0,
+    "recall": 100.0,
+    "f1": 66.67,
+    "yes_ratio": 100.0,
+    "n": 3000,
+    "missing_img": 0
+  },
+  "avg_f1": 66.67
+}

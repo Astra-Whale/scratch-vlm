@@ -19,7 +19,61 @@ CLIP + MLP-Projector + LLM 的极简 VLM,重点展示端侧 AI 全流程能力
 - [x] **Week 2 · D2.7** · 迁移分析文档（[`benchmark/migration_analysis.md`](benchmark/migration_analysis.md)）
 - [x] **迁移 · D3.0** · 迁到 Ubuntu/RTX 5060 Ti (Blackwell) · 3 项验证一致性（2026-07-13）
 - [x] **升级 · D3.1** · 视觉塔 CLIP-B/32→L/14@336 + LLM SmolLM2→Qwen2.5-0.5B-Instruct · 重训（2026-07-13）
-- [ ] **Week 3 · D3.2** · 量化 (GGUF Q4 或 torchao, 守 Orin 兼容) + 精度/体积曲线
+- [x] **量化 · D3.2** · torchao int8/int4 混合精度 (守 Orin 兼容) + 精度/体积曲线（2026-07-13）
+- [x] **对齐 · D4.1** · LLM 换 **Qwen3-0.6B**（selfspec 选型）· `<think>` 剥离（2026-07-14）
+- [x] **对齐 · D4.2** · **两阶段训练**:stage-1 projector 对齐 → stage-2 LoRA(q/v)联合 projector SFT（LLaVA-Instruct + 平衡 VQAv2）（2026-07-14）
+- [x] **对齐 · D4.3** · **POPE 幻觉评测** avg F1 **78.59** + 数据配比消融链（2026-07-14）
+- [x] **对齐 · D4.4** · **llama.cpp 全链路**:Qwen3 GGUF **Q4_K_M** 0.48GB/3.12× · llama-server SSE 流式 · fp16↔Q4 PPL（2026-07-14）
+- [x] **对齐 · D4.5** · **mmproj 多模态集成**(CLIP+projector→llama.cpp,`llama-mtmd-cli` 端到端图文推理跑通)（2026-07-15）
+- [ ] **对齐 · D4.6** · Xavier NX 实机部署(**不做**,硬件未到手 —— 保留 5060Ti baseline + 迁移分析)
+
+> **selfspec 对齐**:见下方「selfspec 对齐结果」段与 [`ALIGN_SELFSPEC.md`](ALIGN_SELFSPEC.md) §0/§2、[`AGENT_CROSSCHECK.md`](AGENT_CROSSCHECK.md) §10。
+
+## selfspec 对齐结果 · 两阶段训练 + POPE + llama.cpp(Qwen3-0.6B)
+
+> 本段是按简历 selfspec 逐条补齐的**对齐轨**(LLM = **Qwen3-0.6B**,hidden 1024)。
+> 上方 Flickr8k captioning 旗舰(BLEU-4 31.73 / CIDEr 92.7)是 **Qwen2.5-0.5B-Instruct** 的干净可对标数字,两条轨并存、各自标注清楚。硬数据与复核见 [`AGENT_CROSSCHECK.md`](AGENT_CROSSCHECK.md) §10。
+
+### 两阶段训练(LLaVA v1.5 配方)
+
+| 阶段 | 训练内容 | 数据 | 可训参数 |
+|-----|---------|------|---------|
+| **stage-1 · 对齐** | 仅 projector | Flickr8k(vision-language 对齐) | projector 3.94M |
+| **stage-2 · 指令微调 SFT** | Qwen q_proj/v_proj **LoRA**(r=16/α=32)+ projector 联合 | LLaVA-Instruct(detail_23k + conversation_58k)+ **平衡 VQAv2 yes/no** | 6.49M(LoRA 2.29M + projector 4.20M) |
+
+CLIP-L 与 Qwen3 base 全程冻结。stage-2 batch=1/accum=16(576 视觉 token + 长对话,峰值 7.2GB)。
+
+### POPE 幻觉评测(#16)· `vlm_stage2_mix2`
+
+| split | acc | precision | recall | f1 | yes% |
+|-------|-----|-----------|--------|-----|------|
+| random | 82.9 | 81.1 | 85.7 | **83.4** | 52.8 |
+| popular | 76.1 | 71.9 | 85.7 | **78.2** | 59.6 |
+| adversarial | 70.2 | 65.4 | 85.7 | **74.2** | 65.5 |
+| **avg F1** | | | | **78.59** | |
+
+> `random > popular > adversarial` 单调退化是 POPE 的**教科书级正确行为**;yes% 回到 ~53%(random)说明无 always-yes 偏置。0.6B 从零 VLM 对照 LLaVA-1.5-**7B** 的 ~85 F1,此量级体面。
+
+### 两阶段/数据配比对幻觉的边际收益(#17)· 诚实消融链
+
+| SFT 数据 | POPE 行为 | acc | avg F1 |
+|---------|----------|-----|--------|
+| 仅 detail(纯描述) | 全答 no(不会 QA) | 50 | 0 |
+| +conversation | 全答 yes(训练短答 93% 是 yes) | 50 | 66.67(虚高) |
+| **+平衡 VQAv2** | **均衡作答** | **70–83** | **78.59** |
+
+> **结论**:模型幻觉/作答行为随训练数据分布走,**平衡 yes/no 是抑制过度肯定型幻觉的关键杠杆**。
+> **诚信红线**:POPE 全程**零样本留出** —— 训练用 COCO **train2014**、POPE 用 **val2014**,图集无重叠;**从不**训练 POPE 同款"图里有没有 {物体}?"探针(那等于训练测试集)。yes/no 能力只来自**通用**平衡 VQA(VQAv2,LLaVA v1.5 正宗配方)。
+
+### llama.cpp 端侧链路(#12/#13/#15/#18)
+
+- **GGUF Q4_K_M**:Qwen3-0.6B → GGUF,Q4_K_M 分块量化 **0.48GB**(相对 f16 **3.12×** 压缩)。
+- **llama-server SSE 流式**:HTTP + Server-Sent-Events 流式 token 输出跑通。
+- **PPL 精度代价**:f16 **19.63** → Q4_K_M **21.35**(held-out,真 Q4_K_M via llama.cpp,非旧 torchao int4)。
+
+详见 [`docs/llamacpp_pipeline.md`](docs/llamacpp_pipeline.md)。
+
+---
 
 ### 5060 Ti (Ubuntu) 当前 SOTA · CLIP-L/14@336 + Qwen2.5-0.5B-Instruct
 
@@ -284,3 +338,6 @@ vlm/
 - 2026-07-11 v0.1: skeleton 初始版本 (4060, CLIP-B/32 + SmolLM2-360M)
 - 2026-07-13 v0.2: 迁移 Ubuntu/RTX 5060 Ti; 架构升级 CLIP-L/14@336 + Qwen2.5-0.5B-Instruct;
   corpus BLEU-4 20.59% (旧 SOTA ~17%); 修跨平台 ckpt 路径 + ChatML eos; Orin NX 兼容性审计通过
+- 2026-07-14 v0.3: Flickr8k proper split 干净结果 (BLEU-4 31.73 / CIDEr 92.7); torchao int8/int4 混合精度量化
+- 2026-07-14 v0.4 (**selfspec 对齐**): LLM 换 Qwen3-0.6B; 两阶段训练 (projector 对齐 → LoRA SFT);
+  POPE 幻觉评测 avg F1 78.59 + 数据配比消融链; llama.cpp GGUF Q4_K_M (0.48GB/3.12×) + llama-server SSE 流式 + fp16↔Q4 PPL (19.63→21.35)

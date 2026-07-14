@@ -1,0 +1,30 @@
+{
+  "random": {
+    "acc": 82.9,
+    "precision": 81.14,
+    "recall": 85.73,
+    "f1": 83.37,
+    "yes_ratio": 52.83,
+    "n": 3000,
+    "missing_img": 0
+  },
+  "popular": {
+    "acc": 76.1,
+    "precision": 71.88,
+    "recall": 85.73,
+    "f1": 78.2,
+    "yes_ratio": 59.63,
+    "n": 3000,
+    "missing_img": 0
+  },
+  "adversarial": {
+    "acc": 70.2,
+    "precision": 65.41,
+    "recall": 85.73,
+    "f1": 74.21,
+    "yes_ratio": 65.53,
+    "n": 3000,
+    "missing_img": 0
+  },
+  "avg_f1": 78.59
+}
