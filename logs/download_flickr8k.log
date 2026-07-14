@@ -1,0 +1,6 @@
+### START 11:45:34
+### done test-00000-of-00001-42a2661d12c73e48.parquet exit=0 size=131M 11:50:24
+### done validation-00000-of-00001-7025a2b596f14b7b.parquet exit=0 size=132M 11:54:03
+### done train-00000-of-00002-2f8f6bfa852eac4b.parquet exit=0 size=395M 12:01:31
+### done train-00001-of-00002-2173151d8cd6c7fb.parquet exit=0 size=396M 12:07:54
+### ALLDONE 12:07:54

@@ -1,0 +1,37 @@
+[env] device=cuda, dtype=bf16
+[model] projector trainable: 3.54M
+[data]  24 samples, batch=4, steps=30, lr=0.001
+[step   0] loss=3.8997  lr=3.33e-04  |grad|=268.000
+[step   1] loss=4.3525  lr=6.67e-04  |grad|=37.500
+[step   2] loss=2.7626  lr=1.00e-03  |grad|=19.125
+[step   3] loss=5.9791  lr=1.00e-03  |grad|=235.000
+[step   4] loss=7.1067  lr=9.97e-04  |grad|=73.000
+[step   5] loss=5.8154  lr=9.88e-04  |grad|=30.500
+[step   6] loss=4.1362  lr=9.73e-04  |grad|=7.438
+[step   7] loss=3.9296  lr=9.52e-04  |grad|=26.375
+[step   8] loss=3.4134  lr=9.26e-04  |grad|=8.125
+[step   9] loss=3.3598  lr=8.95e-04  |grad|=1.930
+[step  10] loss=2.5389  lr=8.59e-04  |grad|=2.438
+[step  11] loss=2.7891  lr=8.19e-04  |grad|=2.859
+[step  12] loss=2.9598  lr=7.75e-04  |grad|=25.875
+[step  13] loss=2.5869  lr=7.28e-04  |grad|=7.125
+[step  14] loss=2.9650  lr=6.79e-04  |grad|=1.977
+[step  15] loss=1.8450  lr=6.28e-04  |grad|=2.438
+[step  16] loss=1.8125  lr=5.76e-04  |grad|=1.789
+[step  17] loss=2.2329  lr=5.24e-04  |grad|=1.789
+[step  18] loss=2.1176  lr=4.72e-04  |grad|=2.297
+[step  19] loss=2.1121  lr=4.21e-04  |grad|=4.344
+[step  20] loss=2.0977  lr=3.72e-04  |grad|=1.727
+[step  21] loss=1.7107  lr=3.25e-04  |grad|=2.469
+[step  22] loss=1.5477  lr=2.81e-04  |grad|=1.602
+[step  23] loss=1.4361  lr=2.41e-04  |grad|=2.375
+[step  24] loss=1.4750  lr=2.05e-04  |grad|=2.000
+[step  25] loss=1.7274  lr=1.74e-04  |grad|=1.680
+[step  26] loss=1.5240  lr=1.48e-04  |grad|=1.906
+[step  27] loss=1.5951  lr=1.27e-04  |grad|=1.898
+[step  28] loss=1.3031  lr=1.12e-04  |grad|=4.469
+[step  29] loss=1.3082  lr=1.03e-04  |grad|=1.398
+[save] projector → checkpoints\projector_toy.pt
+[done] 30 steps in 6.3s (212 ms/step)
+[loss] 首 3 步均值 3.6716 → 末 3 步均值 1.4021  (下降 61.8%)
+[vram] 峰值 1395 MB

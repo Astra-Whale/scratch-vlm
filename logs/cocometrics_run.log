@@ -1,0 +1,19 @@
+[tok] PTBTokenizer 分词 1000 图 ...
+{'testlen': 9773, 'reflen': 9694, 'guess': [9773, 8773, 7773, 6773], 'correct': [7443, 4002, 1878, 818]}
+ratio: 1.0081493707446865
+
+========================================================
+标准 COCO 指标 · eval_flickr8k_test_1000.json · 1000 图
+========================================================
+  Bleu_1     = 76.16
+  Bleu_2     = 58.94
+  Bleu_3     = 43.78
+  Bleu_4     = 31.73
+  METEOR     = 0.2738
+  ROUGE_L    = 0.5636
+  CIDEr      = 0.9268
+
+注: BLEU_x 为 % (0-100); METEOR/ROUGE_L/SPICE 为 0-1; CIDEr 以 100 为基准的尺度。
+[save] logs/eval_flickr8k_test_1000_cocometrics.json
+PTBTokenizer tokenized 64178 tokens at 1081327.13 tokens per second.
+PTBTokenizer tokenized 11775 tokens at 299705.13 tokens per second.

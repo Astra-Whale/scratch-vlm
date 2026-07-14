@@ -1,0 +1,18 @@
+[env] device=cuda, dtype=bf16
+[model] projector trainable: 3.94M
+[data]  4500 samples, batch=4, steps=10, lr=0.001
+[train] grad_accum=4, 有效 batch=16
+[step   0] loss=6.1314  lr=3.33e-04  |grad|=19.250
+[step   1] loss=5.4044  lr=6.67e-04  |grad|=18.625
+[step   2] loss=7.3758  lr=1.00e-03  |grad|=342.000
+[step   3] loss=9.1232  lr=1.00e-03  |grad|=28.375
+[step   4] loss=7.2660  lr=9.55e-04  |grad|=17.250
+[step   5] loss=6.2580  lr=8.31e-04  |grad|=7.000
+[step   6] loss=5.8710  lr=6.50e-04  |grad|=4.281
+[step   7] loss=5.7995  lr=4.50e-04  |grad|=3.594
+[step   8] loss=5.5362  lr=2.69e-04  |grad|=3.547
+[step   9] loss=5.5086  lr=1.45e-04  |grad|=3.328
+[save] projector → checkpoints/_sanity_L14_qwen.pt
+[done] 10 steps in 12.2s (1224 ms/step)
+[loss] 首 3 步均值 6.3039 → 末 3 步均值 5.6147  (下降 10.9%)
+[vram] 峰值 9529 MB

@@ -1,0 +1,5 @@
+### 19:43:53 Qwen2.5-0.5B-Instruct 权重
+path=/home/l/.cache/huggingface/hub/models--Qwen--Qwen2.5-0.5B-Instruct/snapshots/7ae557604adf67be50417f59c2c2f167def9a775/model.safetensors
+### 配置/tokenizer
+path=/home/l/.cache/huggingface/hub/models--Qwen--Qwen2.5-0.5B-Instruct/snapshots/7ae557604adf67be50417f59c2c2f167def9a775
+### ALLDONE 19:47:33

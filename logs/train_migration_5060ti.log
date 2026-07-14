@@ -1,0 +1,367 @@
+[env] device=cuda, dtype=bf16
+[model] vision=/home/l/SKDWorks/米来/vlm/models/models/openai-mirror--clip-vit-base-patch32/snapshots/master
+[model] llm=HuggingFaceTB/SmolLM2-360M-Instruct
+[model] 加载耗时 1.5s
+[model] 可训参数 (projector): 3.54M
+[data] 4500 条样本 from data/flickr_1k/flickr_1k_train.jsonl
+[data] val: 500 samples from data/flickr_1k/flickr_1k_val.jsonl
+[env] device=cuda, dtype=bf16
+[model] projector trainable: 3.54M
+[data]  4500 samples, batch=8, steps=300, lr=0.001
+[step   0] loss=3.7875  lr=3.33e-04  |grad|=1056.000
+[step   1] loss=3.8851  lr=6.67e-04  |grad|=25.125
+[step   2] loss=4.3209  lr=1.00e-03  |grad|=16.750
+[step   3] loss=3.9551  lr=1.00e-03  |grad|=12.500
+[step   4] loss=3.3756  lr=1.00e-03  |grad|=4.750
+[step   5] loss=4.1050  lr=1.00e-03  |grad|=3.031
+[step   6] loss=3.5869  lr=1.00e-03  |grad|=2.234
+[step   7] loss=3.1723  lr=1.00e-03  |grad|=3.031
+[step   8] loss=3.2830  lr=9.99e-04  |grad|=2.438
+[step   9] loss=3.1509  lr=9.99e-04  |grad|=1.570
+[step  10] loss=3.1425  lr=9.99e-04  |grad|=0.844
+[step  11] loss=3.4344  lr=9.98e-04  |grad|=1.094
+[step  12] loss=3.2493  lr=9.98e-04  |grad|=1.164
+[step  13] loss=2.8476  lr=9.97e-04  |grad|=0.953
+[step  14] loss=3.1076  lr=9.97e-04  |grad|=1.039
+[step  15] loss=2.9737  lr=9.96e-04  |grad|=0.840
+[step  16] loss=3.7876  lr=9.96e-04  |grad|=1.102
+[step  17] loss=3.1710  lr=9.95e-04  |grad|=1.844
+[step  18] loss=2.9116  lr=9.94e-04  |grad|=1.109
+[step  19] loss=2.8949  lr=9.94e-04  |grad|=0.648
+[step  20] loss=2.7299  lr=9.93e-04  |grad|=0.625
+[step  21] loss=2.7698  lr=9.92e-04  |grad|=0.504
+[step  22] loss=2.7369  lr=9.91e-04  |grad|=0.918
+[step  23] loss=2.8673  lr=9.90e-04  |grad|=0.439
+[step  24] loss=2.6524  lr=9.89e-04  |grad|=0.848
+[step  25] loss=2.9687  lr=9.88e-04  |grad|=0.539
+[step  26] loss=2.9441  lr=9.87e-04  |grad|=0.602
+[step  27] loss=3.2221  lr=9.86e-04  |grad|=0.566
+[step  28] loss=2.8602  lr=9.84e-04  |grad|=0.293
+[step  29] loss=3.5425  lr=9.83e-04  |grad|=0.516
+[step  30] loss=2.6222  lr=9.82e-04  |grad|=0.455
+[step  31] loss=3.4597  lr=9.80e-04  |grad|=0.547
+[step  32] loss=2.8099  lr=9.79e-04  |grad|=0.479
+[step  33] loss=2.8382  lr=9.78e-04  |grad|=0.479
+[step  34] loss=2.7835  lr=9.76e-04  |grad|=0.408
+[step  35] loss=3.4378  lr=9.74e-04  |grad|=0.566
+[step  36] loss=2.6023  lr=9.73e-04  |grad|=0.314
+[step  37] loss=3.0377  lr=9.71e-04  |grad|=0.420
+[step  38] loss=2.8211  lr=9.70e-04  |grad|=0.270
+[step  39] loss=3.1731  lr=9.68e-04  |grad|=0.432
+[step  40] loss=3.2929  lr=9.66e-04  |grad|=0.303
+[step  41] loss=3.0764  lr=9.64e-04  |grad|=0.354
+[step  42] loss=2.8347  lr=9.62e-04  |grad|=0.467
+[step  43] loss=3.4996  lr=9.60e-04  |grad|=0.467
+[step  44] loss=2.8965  lr=9.58e-04  |grad|=0.494
+[step  45] loss=2.9749  lr=9.56e-04  |grad|=0.330
+[step  46] loss=3.1192  lr=9.54e-04  |grad|=0.531
+[step  47] loss=3.1453  lr=9.52e-04  |grad|=0.504
+[step  48] loss=3.1837  lr=9.50e-04  |grad|=0.590
+[step  49] loss=3.0856  lr=9.48e-04  |grad|=0.547
+           └ val_loss=2.9144 ← best
+[step  50] loss=3.1601  lr=9.46e-04  |grad|=0.449
+[step  51] loss=2.8525  lr=9.43e-04  |grad|=0.428
+[step  52] loss=2.8345  lr=9.41e-04  |grad|=0.285
+[step  53] loss=2.8470  lr=9.39e-04  |grad|=0.430
+[step  54] loss=3.2402  lr=9.36e-04  |grad|=0.363
+[step  55] loss=2.8416  lr=9.34e-04  |grad|=0.404
+[step  56] loss=2.9744  lr=9.31e-04  |grad|=0.586
+[step  57] loss=3.0321  lr=9.29e-04  |grad|=0.334
+[step  58] loss=3.0303  lr=9.26e-04  |grad|=0.297
+[step  59] loss=2.7311  lr=9.23e-04  |grad|=0.467
+[step  60] loss=3.0560  lr=9.21e-04  |grad|=0.367
+[step  61] loss=2.3066  lr=9.18e-04  |grad|=0.377
+[step  62] loss=2.9277  lr=9.15e-04  |grad|=0.295
+[step  63] loss=3.2416  lr=9.12e-04  |grad|=0.598
+[step  64] loss=2.8581  lr=9.10e-04  |grad|=0.385
+[step  65] loss=2.5895  lr=9.07e-04  |grad|=0.395
+[step  66] loss=2.5626  lr=9.04e-04  |grad|=0.461
+[step  67] loss=2.8708  lr=9.01e-04  |grad|=0.361
+[step  68] loss=2.7219  lr=8.98e-04  |grad|=0.490
+[step  69] loss=2.8798  lr=8.95e-04  |grad|=0.633
+[step  70] loss=2.9508  lr=8.92e-04  |grad|=0.365
+[step  71] loss=2.7417  lr=8.89e-04  |grad|=0.305
+[step  72] loss=3.0075  lr=8.85e-04  |grad|=0.307
+[step  73] loss=2.3789  lr=8.82e-04  |grad|=0.348
+[step  74] loss=2.7340  lr=8.79e-04  |grad|=0.531
+[step  75] loss=2.6796  lr=8.76e-04  |grad|=0.352
+[step  76] loss=3.2923  lr=8.72e-04  |grad|=0.363
+[step  77] loss=2.5350  lr=8.69e-04  |grad|=0.271
+[step  78] loss=3.0847  lr=8.66e-04  |grad|=0.352
+[step  79] loss=2.9353  lr=8.62e-04  |grad|=0.482
+[step  80] loss=3.1073  lr=8.59e-04  |grad|=0.439
+[step  81] loss=2.7311  lr=8.55e-04  |grad|=0.330
+[step  82] loss=2.6587  lr=8.52e-04  |grad|=0.434
+[step  83] loss=2.6017  lr=8.48e-04  |grad|=0.396
+[step  84] loss=2.8945  lr=8.45e-04  |grad|=0.449
+[step  85] loss=2.8913  lr=8.41e-04  |grad|=0.354
+[step  86] loss=2.9244  lr=8.37e-04  |grad|=0.381
+[step  87] loss=2.2940  lr=8.34e-04  |grad|=0.516
+[step  88] loss=2.6187  lr=8.30e-04  |grad|=0.414
+[step  89] loss=3.4352  lr=8.26e-04  |grad|=0.439
+[step  90] loss=3.1117  lr=8.23e-04  |grad|=0.383
+[step  91] loss=3.5016  lr=8.19e-04  |grad|=0.539
+[step  92] loss=3.5511  lr=8.15e-04  |grad|=0.416
+[step  93] loss=3.0386  lr=8.11e-04  |grad|=0.229
+[step  94] loss=3.2369  lr=8.07e-04  |grad|=1.781
+[step  95] loss=2.7752  lr=8.03e-04  |grad|=0.363
+[step  96] loss=2.3400  lr=7.99e-04  |grad|=0.393
+[step  97] loss=2.6944  lr=7.95e-04  |grad|=0.777
+[step  98] loss=3.0863  lr=7.91e-04  |grad|=0.344
+[step  99] loss=2.5836  lr=7.87e-04  |grad|=0.467
+           └ val_loss=2.8646 ← best
+[step 100] loss=2.9947  lr=7.83e-04  |grad|=0.270
+[step 101] loss=3.0985  lr=7.79e-04  |grad|=0.332
+[step 102] loss=2.7598  lr=7.75e-04  |grad|=0.279
+[step 103] loss=2.9894  lr=7.71e-04  |grad|=0.336
+[step 104] loss=3.2566  lr=7.67e-04  |grad|=0.508
+[step 105] loss=2.7449  lr=7.63e-04  |grad|=0.412
+[step 106] loss=2.5534  lr=7.58e-04  |grad|=0.235
+[step 107] loss=2.7841  lr=7.54e-04  |grad|=0.367
+[step 108] loss=3.0238  lr=7.50e-04  |grad|=0.275
+[step 109] loss=3.0117  lr=7.46e-04  |grad|=0.438
+[step 110] loss=2.5676  lr=7.41e-04  |grad|=0.475
+[step 111] loss=2.8795  lr=7.37e-04  |grad|=0.346
+[step 112] loss=2.7286  lr=7.33e-04  |grad|=0.559
+[step 113] loss=2.8387  lr=7.28e-04  |grad|=0.420
+[step 114] loss=2.5046  lr=7.24e-04  |grad|=0.420
+[step 115] loss=2.9330  lr=7.19e-04  |grad|=0.400
+[step 116] loss=3.2416  lr=7.15e-04  |grad|=0.559
+[step 117] loss=2.8120  lr=7.11e-04  |grad|=0.383
+[step 118] loss=2.7963  lr=7.06e-04  |grad|=0.301
+[step 119] loss=3.1772  lr=7.02e-04  |grad|=0.297
+[step 120] loss=2.6327  lr=6.97e-04  |grad|=0.457
+[step 121] loss=2.8218  lr=6.93e-04  |grad|=0.477
+[step 122] loss=2.8217  lr=6.88e-04  |grad|=0.486
+[step 123] loss=2.8681  lr=6.84e-04  |grad|=0.295
+[step 124] loss=2.8395  lr=6.79e-04  |grad|=0.326
+[step 125] loss=3.2776  lr=6.74e-04  |grad|=0.385
+[step 126] loss=2.9074  lr=6.70e-04  |grad|=0.340
+[step 127] loss=2.5837  lr=6.65e-04  |grad|=0.340
+[step 128] loss=3.1719  lr=6.61e-04  |grad|=0.447
+[step 129] loss=3.0111  lr=6.56e-04  |grad|=0.363
+[step 130] loss=2.8102  lr=6.51e-04  |grad|=0.490
+[step 131] loss=2.5300  lr=6.47e-04  |grad|=0.336
+[step 132] loss=2.6536  lr=6.42e-04  |grad|=0.326
+[step 133] loss=3.5065  lr=6.37e-04  |grad|=0.396
+[step 134] loss=2.7198  lr=6.33e-04  |grad|=0.305
+[step 135] loss=2.5967  lr=6.28e-04  |grad|=0.363
+[step 136] loss=2.7555  lr=6.23e-04  |grad|=0.363
+[step 137] loss=3.1321  lr=6.19e-04  |grad|=0.408
+[step 138] loss=3.0572  lr=6.14e-04  |grad|=0.447
+[step 139] loss=2.6618  lr=6.09e-04  |grad|=0.396
+[step 140] loss=2.6258  lr=6.05e-04  |grad|=0.352
+[step 141] loss=2.5879  lr=6.00e-04  |grad|=0.354
+[step 142] loss=2.8869  lr=5.95e-04  |grad|=0.381
+[step 143] loss=2.9593  lr=5.90e-04  |grad|=0.305
+[step 144] loss=3.3080  lr=5.86e-04  |grad|=1.117
+[step 145] loss=2.5856  lr=5.81e-04  |grad|=0.350
+[step 146] loss=2.7984  lr=5.76e-04  |grad|=0.354
+[step 147] loss=2.9697  lr=5.71e-04  |grad|=0.422
+[step 148] loss=2.5932  lr=5.67e-04  |grad|=0.355
+[step 149] loss=2.7013  lr=5.62e-04  |grad|=0.404
+           └ val_loss=2.9642
+[step 150] loss=3.0755  lr=5.57e-04  |grad|=0.428
+[step 151] loss=3.0672  lr=5.52e-04  |grad|=0.477
+[step 152] loss=2.7137  lr=5.48e-04  |grad|=0.367
+[step 153] loss=3.1970  lr=5.43e-04  |grad|=0.412
+[step 154] loss=3.1441  lr=5.38e-04  |grad|=0.342
+[step 155] loss=2.9605  lr=5.33e-04  |grad|=0.373
+[step 156] loss=3.1168  lr=5.29e-04  |grad|=0.359
+[step 157] loss=3.0144  lr=5.24e-04  |grad|=0.342
+[step 158] loss=2.7254  lr=5.19e-04  |grad|=0.334
+[step 159] loss=2.7068  lr=5.14e-04  |grad|=0.379
+[step 160] loss=2.8040  lr=5.10e-04  |grad|=0.455
+[step 161] loss=3.0895  lr=5.05e-04  |grad|=0.543
+[step 162] loss=2.7447  lr=5.00e-04  |grad|=0.330
+[step 163] loss=2.8271  lr=4.95e-04  |grad|=0.332
+[step 164] loss=2.6445  lr=4.91e-04  |grad|=0.480
+[step 165] loss=2.6263  lr=4.86e-04  |grad|=0.283
+[step 166] loss=3.7439  lr=4.81e-04  |grad|=0.475
+[step 167] loss=2.6642  lr=4.77e-04  |grad|=0.469
+[step 168] loss=2.7562  lr=4.72e-04  |grad|=0.235
+[step 169] loss=3.5895  lr=4.67e-04  |grad|=0.357
+[step 170] loss=3.2433  lr=4.63e-04  |grad|=0.598
+[step 171] loss=3.2322  lr=4.58e-04  |grad|=0.385
+[step 172] loss=2.4994  lr=4.53e-04  |grad|=0.311
+[step 173] loss=2.7756  lr=4.49e-04  |grad|=0.311
+[step 174] loss=2.8878  lr=4.44e-04  |grad|=0.354
+[step 175] loss=2.5829  lr=4.39e-04  |grad|=0.359
+[step 176] loss=2.9820  lr=4.35e-04  |grad|=0.570
+[step 177] loss=2.5215  lr=4.30e-04  |grad|=0.250
+[step 178] loss=2.8290  lr=4.26e-04  |grad|=0.266
+[step 179] loss=2.8011  lr=4.21e-04  |grad|=0.328
+[step 180] loss=2.6827  lr=4.16e-04  |grad|=0.361
+[step 181] loss=3.3771  lr=4.12e-04  |grad|=0.355
+[step 182] loss=3.0172  lr=4.07e-04  |grad|=0.283
+[step 183] loss=3.0408  lr=4.03e-04  |grad|=0.332
+[step 184] loss=2.6917  lr=3.98e-04  |grad|=0.336
+[step 185] loss=3.0087  lr=3.94e-04  |grad|=0.527
+[step 186] loss=3.0131  lr=3.89e-04  |grad|=0.605
+[step 187] loss=2.7314  lr=3.85e-04  |grad|=0.381
+[step 188] loss=2.9719  lr=3.81e-04  |grad|=0.469
+[step 189] loss=3.0717  lr=3.76e-04  |grad|=0.459
+[step 190] loss=2.8164  lr=3.72e-04  |grad|=0.344
+[step 191] loss=2.9969  lr=3.67e-04  |grad|=0.379
+[step 192] loss=2.8415  lr=3.63e-04  |grad|=0.354
+[step 193] loss=2.9028  lr=3.59e-04  |grad|=0.605
+[step 194] loss=2.3368  lr=3.54e-04  |grad|=0.428
+[step 195] loss=2.8485  lr=3.50e-04  |grad|=0.295
+[step 196] loss=2.2503  lr=3.46e-04  |grad|=0.352
+[step 197] loss=2.8507  lr=3.42e-04  |grad|=0.467
+[step 198] loss=2.7477  lr=3.37e-04  |grad|=0.387
+[step 199] loss=3.0496  lr=3.33e-04  |grad|=0.430
+           └ val_loss=2.8655
+[step 200] loss=2.8880  lr=3.29e-04  |grad|=0.420
+[step 201] loss=3.2987  lr=3.25e-04  |grad|=0.559
+[step 202] loss=2.8557  lr=3.21e-04  |grad|=0.475
+[step 203] loss=3.1254  lr=3.17e-04  |grad|=0.613
+[step 204] loss=2.4813  lr=3.13e-04  |grad|=0.391
+[step 205] loss=3.1430  lr=3.09e-04  |grad|=0.555
+[step 206] loss=3.2805  lr=3.05e-04  |grad|=0.859
+[step 207] loss=2.5417  lr=3.01e-04  |grad|=0.463
+[step 208] loss=2.8546  lr=2.97e-04  |grad|=0.459
+[step 209] loss=2.7596  lr=2.93e-04  |grad|=0.373
+[step 210] loss=3.1884  lr=2.89e-04  |grad|=0.490
+[step 211] loss=2.4223  lr=2.85e-04  |grad|=0.457
+[step 212] loss=2.9533  lr=2.81e-04  |grad|=0.467
+[step 213] loss=2.9765  lr=2.77e-04  |grad|=0.377
+[step 214] loss=2.5901  lr=2.74e-04  |grad|=0.480
+[step 215] loss=2.6798  lr=2.70e-04  |grad|=0.746
+[step 216] loss=2.8980  lr=2.66e-04  |grad|=0.346
+[step 217] loss=2.7889  lr=2.63e-04  |grad|=0.471
+[step 218] loss=2.8036  lr=2.59e-04  |grad|=0.449
+[step 219] loss=2.4311  lr=2.55e-04  |grad|=0.410
+[step 220] loss=2.5022  lr=2.52e-04  |grad|=0.422
+[step 221] loss=3.0488  lr=2.48e-04  |grad|=0.463
+[step 222] loss=2.8088  lr=2.45e-04  |grad|=0.451
+[step 223] loss=2.8541  lr=2.41e-04  |grad|=0.350
+[step 224] loss=2.9402  lr=2.38e-04  |grad|=0.340
+[step 225] loss=2.7222  lr=2.34e-04  |grad|=0.535
+[step 226] loss=2.7635  lr=2.31e-04  |grad|=0.402
+[step 227] loss=3.0975  lr=2.28e-04  |grad|=0.352
+[step 228] loss=3.1833  lr=2.24e-04  |grad|=0.445
+[step 229] loss=2.2028  lr=2.21e-04  |grad|=0.389
+[step 230] loss=2.3526  lr=2.18e-04  |grad|=0.367
+[step 231] loss=3.1195  lr=2.15e-04  |grad|=0.480
+[step 232] loss=2.5394  lr=2.11e-04  |grad|=0.398
+[step 233] loss=2.8620  lr=2.08e-04  |grad|=0.352
+[step 234] loss=2.6159  lr=2.05e-04  |grad|=0.543
+[step 235] loss=2.3608  lr=2.02e-04  |grad|=0.348
+[step 236] loss=2.7169  lr=1.99e-04  |grad|=0.324
+[step 237] loss=3.2919  lr=1.96e-04  |grad|=0.523
+[step 238] loss=2.9806  lr=1.93e-04  |grad|=0.848
+[step 239] loss=3.4291  lr=1.90e-04  |grad|=0.471
+[step 240] loss=2.8271  lr=1.88e-04  |grad|=0.355
+[step 241] loss=2.2782  lr=1.85e-04  |grad|=0.475
+[step 242] loss=2.7836  lr=1.82e-04  |grad|=0.412
+[step 243] loss=2.7280  lr=1.79e-04  |grad|=0.430
+[step 244] loss=2.8598  lr=1.77e-04  |grad|=0.352
+[step 245] loss=2.9031  lr=1.74e-04  |grad|=0.400
+[step 246] loss=2.6050  lr=1.71e-04  |grad|=0.393
+[step 247] loss=3.1364  lr=1.69e-04  |grad|=0.508
+[step 248] loss=2.4176  lr=1.66e-04  |grad|=0.414
+[step 249] loss=2.8723  lr=1.64e-04  |grad|=0.590
+           └ val_loss=2.8659
+[step 250] loss=2.4982  lr=1.61e-04  |grad|=0.527
+[step 251] loss=3.1156  lr=1.59e-04  |grad|=0.512
+[step 252] loss=2.7609  lr=1.57e-04  |grad|=0.439
+[step 253] loss=3.1324  lr=1.54e-04  |grad|=0.469
+[step 254] loss=2.8094  lr=1.52e-04  |grad|=0.479
+[step 255] loss=2.5924  lr=1.50e-04  |grad|=0.350
+[step 256] loss=3.2352  lr=1.48e-04  |grad|=0.543
+[step 257] loss=3.2138  lr=1.46e-04  |grad|=0.498
+[step 258] loss=3.0589  lr=1.44e-04  |grad|=0.445
+[step 259] loss=2.5886  lr=1.42e-04  |grad|=0.439
+[step 260] loss=2.7067  lr=1.40e-04  |grad|=0.422
+[step 261] loss=2.9808  lr=1.38e-04  |grad|=0.432
+[step 262] loss=2.7511  lr=1.36e-04  |grad|=0.445
+[step 263] loss=2.8736  lr=1.34e-04  |grad|=0.398
+[step 264] loss=2.9033  lr=1.32e-04  |grad|=0.594
+[step 265] loss=3.1927  lr=1.30e-04  |grad|=0.447
+[step 266] loss=3.4401  lr=1.29e-04  |grad|=0.641
+[step 267] loss=2.9659  lr=1.27e-04  |grad|=0.377
+[step 268] loss=2.9415  lr=1.26e-04  |grad|=0.381
+[step 269] loss=2.4759  lr=1.24e-04  |grad|=0.441
+[step 270] loss=2.7934  lr=1.22e-04  |grad|=0.512
+[step 271] loss=2.8428  lr=1.21e-04  |grad|=0.566
+[step 272] loss=2.9603  lr=1.20e-04  |grad|=0.404
+[step 273] loss=2.8722  lr=1.18e-04  |grad|=0.490
+[step 274] loss=3.0114  lr=1.17e-04  |grad|=0.400
+[step 275] loss=2.7742  lr=1.16e-04  |grad|=0.385
+[step 276] loss=2.4513  lr=1.14e-04  |grad|=0.365
+[step 277] loss=2.7861  lr=1.13e-04  |grad|=0.441
+[step 278] loss=2.9725  lr=1.12e-04  |grad|=0.469
+[step 279] loss=2.8081  lr=1.11e-04  |grad|=0.467
+[step 280] loss=2.5722  lr=1.10e-04  |grad|=0.551
+[step 281] loss=2.8497  lr=1.09e-04  |grad|=0.512
+[step 282] loss=2.6431  lr=1.08e-04  |grad|=0.459
+[step 283] loss=2.8655  lr=1.07e-04  |grad|=0.367
+[step 284] loss=2.5484  lr=1.06e-04  |grad|=0.406
+[step 285] loss=2.9112  lr=1.06e-04  |grad|=0.482
+[step 286] loss=3.1036  lr=1.05e-04  |grad|=0.527
+[step 287] loss=2.9004  lr=1.04e-04  |grad|=0.418
+[step 288] loss=2.9059  lr=1.04e-04  |grad|=0.473
+[step 289] loss=2.5836  lr=1.03e-04  |grad|=0.428
+[step 290] loss=2.7816  lr=1.03e-04  |grad|=0.645
+[step 291] loss=3.1000  lr=1.02e-04  |grad|=0.441
+[step 292] loss=2.6628  lr=1.02e-04  |grad|=0.416
+[step 293] loss=2.5967  lr=1.01e-04  |grad|=0.344
+[step 294] loss=2.6841  lr=1.01e-04  |grad|=0.346
+[step 295] loss=2.7461  lr=1.01e-04  |grad|=0.355
+[step 296] loss=2.4898  lr=1.00e-04  |grad|=0.367
+[step 297] loss=2.9617  lr=1.00e-04  |grad|=0.555
+[step 298] loss=2.7210  lr=1.00e-04  |grad|=0.508
+[step 299] loss=2.8529  lr=1.00e-04  |grad|=0.408
+           └ val_loss=3.0024
+[save] projector → checkpoints/projector_flickr1k_5060ti.pt
+[done] 300 steps in 28.2s (94 ms/step)
+[loss] 首 3 步均值 3.9978 → 末 3 步均值 2.8452  (下降 28.8%)
+[val] history:
+       step 49: 2.9144
+       step 99: 2.8646
+       step 149: 2.9642
+       step 199: 2.8655
+       step 249: 2.8659
+       step 299: 3.0024
+[val] best=2.8646 (checkpoint 存 checkpoints/projector_flickr1k_5060ti_best.pt)
+[vram] 峰值 2627 MB
+[log] 保存到 logs/train_run_20260713_204604.log
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 4598.33it/s]
+[transformers] [1mCLIPVisionModel LOAD REPORT[0m from: /home/l/SKDWorks/米来/vlm/models/models/openai-mirror--clip-vit-base-patch32/snapshots/master
+Key                                                          | Status     |  | 
+-------------------------------------------------------------+------------+--+-
+text_model.encoder.layers.{0...11}.mlp.fc1.bias              | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc2.bias              | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc1.weight            | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.q_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm1.bias          | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm1.weight        | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.k_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.out_proj.bias   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.v_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.q_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm2.weight        | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm2.bias          | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.v_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.out_proj.weight | UNEXPECTED |  | 
+text_model.embeddings.position_embedding.weight              | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.k_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc2.weight            | UNEXPECTED |  | 
+text_model.final_layer_norm.bias                             | UNEXPECTED |  | 
+visual_projection.weight                                     | UNEXPECTED |  | 
+logit_scale                                                  | UNEXPECTED |  | 
+text_model.embeddings.token_embedding.weight                 | UNEXPECTED |  | 
+text_model.final_layer_norm.weight                           | UNEXPECTED |  | 
+text_projection.weight                                       | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 290/290 [00:00<00:00, 13973.95it/s]
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+TRAIN_EXIT 0

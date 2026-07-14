@@ -1,0 +1,1410 @@
+{
+  "mode": "trained",
+  "ckpt": "checkpoints/projector_flickr1k.pt",
+  "num_samples": 100,
+  "avg_bleu4": 0.17152795074178337,
+  "avg_gen_len": 10.64,
+  "avg_ref_len": 13.52,
+  "samples": [
+    {
+      "image": "6312211170.jpg",
+      "gen": "Two girls are playing a game of soccer.",
+      "refs": [
+        "Soccer players dressed in bright blue and white uniforms are jumping in the air.",
+        "Two young men playing soccer on a sunny day are jumping for the soccer ball.",
+        "Soccer players in blue and white fight for the ball in midair.",
+        "Several football players on a field in action.",
+        "Three boys are playing soccer."
+      ],
+      "bleu": 0.13888095170058956,
+      "gen_len": 8,
+      "ref_len_avg": 10.8
+    },
+    {
+      "image": "6317293855.jpg",
+      "gen": "A man is sitting on a bench.",
+      "refs": [
+        "Am upset young boy is sitting on a skateboard, on some stairs, and is holding a phone.",
+        "Young man sitting on a skateboard, holding a cellphone, and posing on the escalator.",
+        "A boy in a gray striped shirt sitting on stairs with a skateboard.",
+        "A boy is sitting on an escalator holding a phone.",
+        "Boy sits on his skateboard on the elevators."
+      ],
+      "bleu": 0.39442436483275556,
+      "gen_len": 7,
+      "ref_len_avg": 12.4
+    },
+    {
+      "image": "6320815265.jpg",
+      "gen": "A woman in a red dress is standing on a street corner with a man in a blue shirt.",
+      "refs": [
+        "A female runner dressed in blue athletic wear is running in a competition, while spectators line the street.",
+        "A young woman is running a marathon in a light blue tank top and spandex shorts.",
+        "A lady dressed in blue running a marathon.",
+        "A woman who is running, with blue shorts.",
+        "Runner named Kim, running in the street."
+      ],
+      "bleu": 0.07200062223352652,
+      "gen_len": 19,
+      "ref_len_avg": 11.4
+    },
+    {
+      "image": "6337111139.jpg",
+      "gen": "A group of people are standing in a large room.",
+      "refs": [
+        "A group of men and women dressed is formal black dresses and suits holding their music books and singing.",
+        "This band is getting ready to perform in front of an audience at church.",
+        "A Choir wearing all black performing on a stage.",
+        "A group of young adults singing in a choir.",
+        "A choir of youths are singing."
+      ],
+      "bleu": 0.20556680845025987,
+      "gen_len": 10,
+      "ref_len_avg": 11.4
+    },
+    {
+      "image": "6338542128.jpg",
+      "gen": "A man is wearing a helmet and a jacket, and he is standing on the field.",
+      "refs": [
+        "On a sunny, dry day, wearing full football gear, a Texas A&amp;M football player tries to reach an Iowa State football player, for the football during the game.",
+        "An offensive player running with a football while a football player tries to stop him during a football game.",
+        "A football player from Iowa State blocks a player from Texas A&amp;M from taking the football from him.",
+        "The Iowa State football player blocks a Texas A&amp;M defenseman while running with the ball.",
+        "# 8 for Iowa State stiff arms a Texas AM player attempting to tackle him."
+      ],
+      "bleu": 0.03595661140581813,
+      "gen_len": 16,
+      "ref_len_avg": 20.0
+    },
+    {
+      "image": "6439261679.jpg",
+      "gen": "A man is standing on a dock, holding a fishing rod.",
+      "refs": [
+        "Two men with curling brushes are on an ice rink next to a curling rock, with a man in a red jacket nearby, and three other people in the background.",
+        "Two male curling players are on ice sweeping the path in front of polished rock, a small crowd watches.",
+        "A few men are playing some sort of game on what appears to be a hockey court.",
+        "Two sweepers work frantically as their curling teammates look on.",
+        "Two men are learning to how to play curling."
+      ],
+      "bleu": 0.09425159511373678,
+      "gen_len": 11,
+      "ref_len_avg": 17.0
+    },
+    {
+      "image": "6453399365.jpg",
+      "gen": "Two players are playing a game of basketball.",
+      "refs": [
+        "A determined soccer player kicks the soccer ball away from the opposing player, near a goal post, while the opposing player stays focused on the ball.",
+        "Man wearing teal jersey defending the soccer ball in the midst of soccer game on a rainy day.",
+        "Two dirty guys playing soccer in the grass with players in the background.",
+        "Men are playing soccer in muddy conditions.",
+        "Men play soccer on a muddy field."
+      ],
+      "bleu": 0.15106876986783843,
+      "gen_len": 8,
+      "ref_len_avg": 14.2
+    },
+    {
+      "image": "6474645169.jpg",
+      "gen": "Two players are in the middle of a game.",
+      "refs": [
+        "A basketball player from Penn State dribbles a ball while being surrounded by Lafayette players.",
+        "A basketball game showing Lafayette player number 32 and Penn State player number 23.",
+        "A basketball player in white squats while a player in red moves toward him.",
+        "Men from Lafayette and Penn State are playing basketball.",
+        "The two college basketball teams are playing a game."
+      ],
+      "bleu": 0.13042371500610725,
+      "gen_len": 9,
+      "ref_len_avg": 12.2
+    },
+    {
+      "image": "6486182665.jpg",
+      "gen": "A group of people are standing in a park.",
+      "refs": [
+        "A busy street scene shows several people walking under an archway.",
+        "A busy street filled with random people underneath a bridge.",
+        "Men, women and children walking up and down a street.",
+        "People walk through an arch in an old-looking city.",
+        "Men and women are walking in the street."
+      ],
+      "bleu": 0.07129384882260374,
+      "gen_len": 9,
+      "ref_len_avg": 9.8
+    },
+    {
+      "image": "6489895665.jpg",
+      "gen": "A man is driving a car in a race track.",
+      "refs": [
+        "Two race cars, one red and one blue, are driving side by side down a racetrack while being watched by several onlookers.",
+        "Two cars, one red and one blue, race each other in a very tight and competitive nature as fans stand by and watch.",
+        "Two cars are racing on a track while the audience watches from behind a fence.",
+        "Two Formula-1 cars are racing side by side on a track.",
+        "Two race cars burn rubber as spectators watch."
+      ],
+      "bleu": 0.11044795567078938,
+      "gen_len": 10,
+      "ref_len_avg": 16.0
+    },
+    {
+      "image": "6502187283.jpg",
+      "gen": "A man wearing a white shirt and black pants is standing on a field with a ball.",
+      "refs": [
+        "A football player dressed in a white uniform is preparing to throw the ball.",
+        "A football quarterback dropping back and planting his feet to throw a pass.",
+        "A football player in a white jersey readies himself to make a long throw.",
+        "A football player in a white uniform is holding a football.",
+        "A football player wearing white and green has a football."
+      ],
+      "bleu": 0.06468490584192432,
+      "gen_len": 17,
+      "ref_len_avg": 12.4
+    },
+    {
+      "image": "6503917545.jpg",
+      "gen": "A little girl is holding a small toy.",
+      "refs": [
+        "A male child with blond-hair, green eyes, and a sticky looking mouth wearing a multicolored t-shirt has his hand wrapped around a popsicle stick and is chewing and has it inserted into his mouth where you can see 4 bright white teeth on the bottom row.",
+        "A very young boy stares ahead as he is biting onto a small object.",
+        "A blond toddler is shown in closeup chewing on a popsicle stick.",
+        "A young child has a popsicle stick in his mouth.",
+        "Finishing a summer time treat, a popsicle."
+      ],
+      "bleu": 0.13134549472120793,
+      "gen_len": 8,
+      "ref_len_avg": 18.2
+    },
+    {
+      "image": "651277216.jpg",
+      "gen": "A group of people are sitting on a bench in a park.",
+      "refs": [
+        "A mother in blue and child walk down a sidewalk next to a brick street.",
+        "A mom and her child walking down the street hand in hand in town.",
+        "A woman and a little girl turning a corner on a city street.",
+        "A woman and a child are walking down a street.",
+        "A woman and child are walking."
+      ],
+      "bleu": 0.08201060181277788,
+      "gen_len": 12,
+      "ref_len_avg": 11.6
+    },
+    {
+      "image": "6514004309.jpg",
+      "gen": "A man is standing on a snow-covered ice rink.",
+      "refs": [
+        "A hockey game with several players playing their part in preventing or facilitating a goal.",
+        "A hockey game is being played with lots of people watching it.",
+        "Two hockey players trying to score in their opponents goal.",
+        "Four people playing hockey in an ice rink.",
+        "Hockey match between a white and red team."
+      ],
+      "bleu": 0.10552670315936319,
+      "gen_len": 10,
+      "ref_len_avg": 10.6
+    },
+    {
+      "image": "6515331737.jpg",
+      "gen": "A group of people are playing a game of soccer.",
+      "refs": [
+        "Multiple teenagers outdoors racing against each other while sitting on bouncing balls.",
+        "Three kids are bouncing on large rubber balls in a grass field as other people watch.",
+        "Spectators laugh as three people ride exercise balls down a field.",
+        "Three woman bouncing on balls in the grass.",
+        "A race between friends at the park."
+      ],
+      "bleu": 0.04996872151825359,
+      "gen_len": 10,
+      "ref_len_avg": 10.8
+    },
+    {
+      "image": "6556870225.jpg",
+      "gen": "A young boy wearing a blue shirt and blue shorts is playing soccer.",
+      "refs": [
+        "An African-American boy wearing blue shorts, a black and red shirt, and white sneakers, is playing tennis.",
+        "Young man running towards a tennis court while another is waiting in the other side of the net.",
+        "A kid in a black shirt on a tennis court running with a dark green background.",
+        "A young male is running while playing tennis against another person.",
+        "A young black boy is playing tennis."
+      ],
+      "bleu": 0.14147798141631757,
+      "gen_len": 13,
+      "ref_len_avg": 14.0
+    },
+    {
+      "image": "6563291133.jpg",
+      "gen": "A man and a woman are standing in front of a building.",
+      "refs": [
+        "A man and woman, dressed in white, embrace each other while their actions go unnoticed to the other people in the background.",
+        "An older man is hugging a younger woman in a dark room with people in the background.",
+        "An old man with glasses hugs a young woman at a gathering of quite a few people.",
+        "A man and a woman in white shirts are hugging each other.",
+        "The young lady is giving the old man a hug."
+      ],
+      "bleu": 0.36720562698935927,
+      "gen_len": 12,
+      "ref_len_avg": 15.6
+    },
+    {
+      "image": "6586954247.jpg",
+      "gen": "A group of children playing in a field.",
+      "refs": [
+        "An older man who appears to be in his sixty's, seems to be doing some type of magical form of play with three children and an adult female, being his targeted group.",
+        "A man talking to a family unit holding some sort of probing device as they look on and smile to be polite.",
+        "Family trying to be polite as street magician in trendy Merrell shoes approaches them.",
+        "Street magician showing an act to a group of 5 people in a city.",
+        "A man is giving some kind of magic presentation to a family."
+      ],
+      "bleu": 0.1640914928040473,
+      "gen_len": 8,
+      "ref_len_avg": 19.0
+    },
+    {
+      "image": "6589292543.jpg",
+      "gen": "A baby is playing with a ball.",
+      "refs": [
+        "A very tired little boy's taking advantage of bed setting in a department store to get some rest.",
+        "A child resting on a bed at a furniture store waiting for his mom to get done shopping.",
+        "A very young boy wearing a green long-sleeve shirt is laying on a bed at a store.",
+        "Very young boy in a green shirt laying face down on a white bed.",
+        "Tired little boy lays down on a display bed at a store."
+      ],
+      "bleu": 0.04231118166423695,
+      "gen_len": 7,
+      "ref_len_avg": 16.2
+    },
+    {
+      "image": "6693936663.jpg",
+      "gen": "A man is riding a bike on a dirt road.",
+      "refs": [
+        "A man is resting next to his upside down bicycle taking his glove off.",
+        "An extreme cyclist stops to rest as the sun sets in the background.",
+        "A cyclist checking his gear for his sunset bike ride.",
+        "A man rest against his bicycle as the sun sets.",
+        "A man relaxing after riding his bike."
+      ],
+      "bleu": 0.17747405280050263,
+      "gen_len": 10,
+      "ref_len_avg": 10.8
+    },
+    {
+      "image": "6699112713.jpg",
+      "gen": "A woman in a white coat is standing in a snowy field.",
+      "refs": [
+        "A woman smiles as she skis, wearing a white winter hat, a white coat, and a blue hoodie, while snow is in the background.",
+        "A young woman is smiling towards the camera as she attempts to pull herself up a hill while skiing.",
+        "A female skier holding two ski poles wearing a white knit hat.",
+        "A woman is skying in a snowy area wearing warm clothing.",
+        "A smiling lady is skiing in extremely cold weather."
+      ],
+      "bleu": 0.24808415001701817,
+      "gen_len": 12,
+      "ref_len_avg": 15.0
+    },
+    {
+      "image": "6775387932.jpg",
+      "gen": "A group of people are standing in a large room.",
+      "refs": [
+        "Several girls and one woman are working on a project in front of a table covered with many objects.",
+        "Several ladies gathered around a table engaged in an electronics project",
+        "Four girls and a lady learning how to do some crafts.",
+        "Four females are doing some crafts activity.",
+        "There are five people working at a table."
+      ],
+      "bleu": 0.05942315915709674,
+      "gen_len": 10,
+      "ref_len_avg": 11.2
+    },
+    {
+      "image": "6818129694.jpg",
+      "gen": "A man riding a horse in a ring.",
+      "refs": [
+        "A man with a striped shirt, blue jeans and a red kerchief in his pocket is being thrown off a brown irate horse while a brown and tan horse is buckling while the crowd is watching",
+        "A man in a black and white striped shirted tries to wrangle a horse at the rodeo while another man does the same just behind him.",
+        "A rodeo scene with a big crowd watching three men being thrown from bucking broncos.",
+        "A man wearing black and white stripes is trying to stop a horse.",
+        "A man at a rodeo who may have fell off the horse."
+      ],
+      "bleu": 0.11603020729676541,
+      "gen_len": 8,
+      "ref_len_avg": 20.4
+    },
+    {
+      "image": "6848969863.jpg",
+      "gen": "A woman is sitting on a bench with a man.",
+      "refs": [
+        "A woman presents a bar code for a smartphone so that a man can use his phone to find the location associated with the code.",
+        "The gentleman is scanning the image that the woman in the blue shirt is providing him.",
+        "A man with a beard checks his cellphone while a lady looks on.",
+        "A man is photographing a piece of paper with his smartphone.",
+        "Three people drinking and having a good time."
+      ],
+      "bleu": 0.14133288733111715,
+      "gen_len": 10,
+      "ref_len_avg": 14.6
+    },
+    {
+      "image": "6853360659.jpg",
+      "gen": "A woman is standing on a beach with a towel in her hand.",
+      "refs": [
+        "A woman with short red-hair is in some very cloudy water by a shoreline and only her head is above the water.",
+        "A lady with red-hair is submerged from the neck down in what looks like cold water.",
+        "A smiling young girl swimming in a lake or river that has murky water.",
+        "A woman with red-hair is neck deep in cloudy blue water.",
+        "Teen female enjoys going swimming."
+      ],
+      "bleu": 0.08450310992782928,
+      "gen_len": 13,
+      "ref_len_avg": 14.2
+    },
+    {
+      "image": "6887015851.jpg",
+      "gen": "A boy and a girl are playing in the yard.",
+      "refs": [
+        "Two young boys sitting on a sunlit floor smiling and holding a black lab puppy.",
+        "Two little boys smiling and holding a tiny, black puppy.",
+        "Two young boys pose with a puppy for a family picture.",
+        "Two little boys in polos, are holding a black lab.",
+        "Two children sitting with a black puppy."
+      ],
+      "bleu": 0.06274655310994738,
+      "gen_len": 10,
+      "ref_len_avg": 10.6
+    },
+    {
+      "image": "6889322961.jpg",
+      "gen": "A man is wearing a white shirt and a black jacket.",
+      "refs": [
+        "Several children are practicing martial arts moves in a room with a red floor.",
+        "Young children are performing karate moves while their teachers look on.",
+        "There are several kids practicing in a taekwondo class.",
+        "Four children practice karate while two adults watch.",
+        "A karate instructor observes his students."
+      ],
+      "bleu": 0.044568827606990644,
+      "gen_len": 11,
+      "ref_len_avg": 9.6
+    },
+    {
+      "image": "6897514777.jpg",
+      "gen": "A man is holding a large box.",
+      "refs": [
+        "A man tired on a couch just waiting to go home from work.",
+        "A man lounging on a couch surrounded by more furniture.",
+        "A man lounging in a red sectional sofa in home store.",
+        "A man lounges on a red sofa in a furniture showroom.",
+        "Laying on a couch in Ikea"
+      ],
+      "bleu": 0.14535768424205484,
+      "gen_len": 7,
+      "ref_len_avg": 10.2
+    },
+    {
+      "image": "6917718093.jpg",
+      "gen": "A group of people are sitting in a room.",
+      "refs": [
+        "A lady in a gray sweater has a conversation with three other people at the same table.",
+        "Several people are sitting at tables within a large classroom having a discussion.",
+        "There are tables full of people with paperwork who are discussing things.",
+        "A group of people talking at tables.",
+        "Students work together in groups."
+      ],
+      "bleu": 0.4671379777282001,
+      "gen_len": 9,
+      "ref_len_avg": 10.8
+    },
+    {
+      "image": "6918264972.jpg",
+      "gen": "A man and a woman are riding a horse and a horse-drawn cart.",
+      "refs": [
+        "Two horse racing jockeys, one in checkered blue and red and the other in orange and brown, are racing against a blurry background.",
+        "A jockey with a red helmet is riding a white horse, and a jockey with an orange helmet is riding a brown horse.",
+        "A jockey wearing a red and blue outfit is staring down a racetrack riding a gray horse.",
+        "A jockey riding his horse in a race, as another, losing jockey looks on.",
+        "Two jockeys on horses are racing down a track."
+      ],
+      "bleu": 0.1580743792244472,
+      "gen_len": 14,
+      "ref_len_avg": 17.2
+    },
+    {
+      "image": "6927762908.jpg",
+      "gen": "A car is driving on a track.",
+      "refs": [
+        "A racing car with man ads emblazoned on it rounds a corner on a racetrack with two cars close behind it.",
+        "Race car flies by, in the lead of the pack, closely followed by second and third places!",
+        "Hatchback red car racing around the track ahead of two trailing pray.",
+        "A red race car is rounding the corner, ahead of the other cars.",
+        "The red car is ahead of the two cars in the background."
+      ],
+      "bleu": 0.10063351655856652,
+      "gen_len": 7,
+      "ref_len_avg": 15.0
+    },
+    {
+      "image": "6956989138.jpg",
+      "gen": "A man is riding a horse in a ring.",
+      "refs": [
+        "A large bull targets a man, inches away, in a rodeo with his horns, while a rodeo clown runs to help.",
+        "Two men are trying to rope in a bull who is crashing down on one of them, in a contest at a corral.",
+        "A man is running towards another man who is being attacked by a bucking bull.",
+        "A man being hit by a bull during an event, as another man runs to help.",
+        "The bulls wins, but not before it is stopped in its tracks."
+      ],
+      "bleu": 0.1673594937001884,
+      "gen_len": 9,
+      "ref_len_avg": 17.4
+    },
+    {
+      "image": "697490420.jpg",
+      "gen": "A man is standing on a rock near a river.",
+      "refs": [
+        "A man in swimming trunks walking down to his belongings that are piled on a yellow canoe.",
+        "A man in swimming trunks walking toward bright yellow and orange kayaks.",
+        "A man in a bathing suit stands near a yellow kayak.",
+        "A shirtless man walks toward a yellow kayak.",
+        "Man prepares to take a kayak ride."
+      ],
+      "bleu": 0.13152507170126718,
+      "gen_len": 10,
+      "ref_len_avg": 11.0
+    },
+    {
+      "image": "6978881720.jpg",
+      "gen": "A man is holding a baseball bat.",
+      "refs": [
+        "A man with a gray jacket on that has a red and black stripe on the sleeve at a shooting range with multiple targets.",
+        "A boy firing a gun inside a shooting range",
+        "A boy at a gun range aims and shoots.",
+        "A boy aiming his gun at a target.",
+        "One boy at the shooting range."
+      ],
+      "bleu": 0.14535768424205484,
+      "gen_len": 7,
+      "ref_len_avg": 11.2
+    },
+    {
+      "image": "6995905943.jpg",
+      "gen": "A group of people are playing a game of basketball.",
+      "refs": [
+        "A team plays ball in the sand as a few spectators look on from the stands.",
+        "Two teams of boys playing football in the sand.",
+        "The team of men are playing a game in the sand.",
+        "A group of men playing a game of rugby.",
+        "Young men playing football."
+      ],
+      "bleu": 0.5253819788848316,
+      "gen_len": 10,
+      "ref_len_avg": 9.8
+    },
+    {
+      "image": "6999596517.jpg",
+      "gen": "A man and a woman are standing on a beach.",
+      "refs": [
+        "Two boys, one wearing a blue shirt, the other wearing a muscle shirt, facing each other on a brick wall, next to a culvert.",
+        "A child in blue and a child in white stand on a short concrete wall by a stream.",
+        "Two young boys stand on a low cement wall facing each other in a marshy area.",
+        "In this photo, two young boys are socializing by a pond.",
+        "Two kids are standing next to a small pond."
+      ],
+      "bleu": 0.15106876986783843,
+      "gen_len": 10,
+      "ref_len_avg": 15.6
+    },
+    {
+      "image": "7001949951.jpg",
+      "gen": "A woman with a white dress and a white hat is standing in front of a large wooden door.",
+      "refs": [
+        "Woman with yellow button up shirt and jeans is making beautiful pottery etchings into one of her works of art.",
+        "A young adult woman in a white shirt is working on a clay vase with white flowers on it.",
+        "A woman in a yellow shirt is hand-decorating a vase on a green turntable.",
+        "A woman paints a brown vase with white flowers.",
+        "A woman draws a floral design on a clay pot."
+      ],
+      "bleu": 0.08339775806898654,
+      "gen_len": 19,
+      "ref_len_avg": 14.6
+    },
+    {
+      "image": "7003919692.jpg",
+      "gen": "A man and woman are standing in a field.",
+      "refs": [
+        "Several young black people traverse a market street in a rather dilapidated section of town.",
+        "People are walking down a busy street in a foreign country.",
+        "Africans walking down a crowded alley during the day.",
+        "A family is at a market in a different country.",
+        "African marketplace on a hot summer day."
+      ],
+      "bleu": 0.11339582221952,
+      "gen_len": 9,
+      "ref_len_avg": 10.4
+    },
+    {
+      "image": "702083815.jpg",
+      "gen": "A man is wearing a helmet and a glove.",
+      "refs": [
+        "A baseball pitcher is halfway through his motion of throwing the ball.",
+        "A baseball pitcher prepares to pitch the ball to the batter.",
+        "A right-handed pitcher for the Saints is throwing a pitch.",
+        "A baseball player for the Saints is pitching the baseball.",
+        "A man throws a pitch during a baseball game."
+      ],
+      "bleu": 0.1199014838091355,
+      "gen_len": 9,
+      "ref_len_avg": 10.6
+    },
+    {
+      "image": "7034076961.jpg",
+      "gen": "A man and a woman are standing on a beach.",
+      "refs": [
+        "Two guys, one wearing a red costume and the other wearing a white top and black shorts, are playing beach volleyball.",
+        "Two men, one in black and white and one in red, are playing beach volleyball.",
+        "Two men, both with hats on, are playing volleyball on a beach.",
+        "A man on the beach jumps to hit a volleyball.",
+        "Two males playing volleyball on the beach."
+      ],
+      "bleu": 0.21364350319811704,
+      "gen_len": 10,
+      "ref_len_avg": 13.0
+    },
+    {
+      "image": "7037413229.jpg",
+      "gen": "A man is standing on a dock in a lake.",
+      "refs": [
+        "A man who wearing blue color jacket and light green color trouser is cleaning his fishing nets after went for fishing.",
+        "A fisherman untangles his fishing nets in his blue boat as it sits on the water.",
+        "A fisherman is handling a net on a small boat near a dock.",
+        "A man stands on a blue boat, handling fishing nets.",
+        "A man is standing in a boat holding some netting."
+      ],
+      "bleu": 0.38260294162784475,
+      "gen_len": 10,
+      "ref_len_avg": 14.0
+    },
+    {
+      "image": "7052724381.jpg",
+      "gen": "A man is swimming in a pool.",
+      "refs": [
+        "A surfer has just fallen off his surfboard and only his feet are visible above the water.",
+        "A surfer who fell off his surfboard in the ocean while trying to ride a wave.",
+        "The feet are shown of a person who just fell off of their surfboard.",
+        "Two feet and a surfboard emerging from a wave.",
+        "Only feet are visible above the water."
+      ],
+      "bleu": 0.08643019616048525,
+      "gen_len": 7,
+      "ref_len_avg": 12.6
+    },
+    {
+      "image": "7072093125.jpg",
+      "gen": "A man is holding a large metal box.",
+      "refs": [
+        "An individual wearing blue latex gloves is compressing foods into juice with the aid of an instrument.",
+        "A person wearing blue rubber gloves is loading a syringe with vegetables.",
+        "A syringe filled with vegetables is being compressed into a liquid.",
+        "Someone is filling a large syringe with vegetables.",
+        "A technician preparing a sample in the lab."
+      ],
+      "bleu": 0.13134549472120793,
+      "gen_len": 8,
+      "ref_len_avg": 11.2
+    },
+    {
+      "image": "7099368287.jpg",
+      "gen": "Two men are running in a field.",
+      "refs": [
+        "Two soccer players on different teams collide in midair while jumping towards the ball.",
+        "Two football players compete for the ball while another teammate looks on.",
+        "Two men are jumping and colliding in the air while two other men look on.",
+        "Soccer players are jumping in the air to hit the ball with their heads.",
+        "Two football players, jumping in attempt to win a header."
+      ],
+      "bleu": 0.18094495256969623,
+      "gen_len": 7,
+      "ref_len_avg": 13.0
+    },
+    {
+      "image": "7130336193.jpg",
+      "gen": "A boy and a girl are playing a game of tag.",
+      "refs": [
+        "Two children playing soccer on the field, one is wearing a blue shirt and the other is wearing a orange shirt.",
+        "One soccer player in an orange uniform getting hit in the face by a ball kicked by a player in blue.",
+        "A boy in a blue jersey kicks a soccer ball into the head of a boy in an orange jersey.",
+        "Two boys practicing passing a soccer ball.",
+        "Two boys play soccer against each other."
+      ],
+      "bleu": 0.10252286118120933,
+      "gen_len": 11,
+      "ref_len_avg": 15.2
+    },
+    {
+      "image": "7131011211.jpg",
+      "gen": "A man is walking on a street with a sign that says \"No Trespassing.\"",
+      "refs": [
+        "A person wearing a red coat is holding a beige and plaid umbrella while crossing the street.",
+        "An elderly person is crossing a street with an umbrella in their hands.",
+        "A person with an umbrella is crossing a street using a crosswalk.",
+        "Someone carrying an umbrella while crossing an intersection.",
+        "Old lady crossing street with an umbrella."
+      ],
+      "bleu": 0.12571192676522522,
+      "gen_len": 14,
+      "ref_len_avg": 11.4
+    },
+    {
+      "image": "7151070637.jpg",
+      "gen": "A group of people are standing in a field.",
+      "refs": [
+        "A crowd of people run a marathon in a cityscape with two skyscrapers in the background.",
+        "Multiple people in running outfits are running with a cityscape in the background.",
+        "A group of runners are running towards two identical skyscrapers.",
+        "A large group of people are running a marathon through a city.",
+        "Many people run in a marathon through a city."
+      ],
+      "bleu": 0.43167001068522526,
+      "gen_len": 9,
+      "ref_len_avg": 12.0
+    },
+    {
+      "image": "7187734520.jpg",
+      "gen": "A man is standing on a skateboard.",
+      "refs": [
+        "A skateboarder rides the bowl of a skate park while a man watches in the background.",
+        "A skateboarder rides up a concrete wall, nearly falling off as he tries a trick.",
+        "A man with long hair is skateboarding in a skate park surrounded by houses.",
+        "A young man with long hair practices skateboarding.",
+        "A long-haired male skateboarding."
+      ],
+      "bleu": 0.13540372457315736,
+      "gen_len": 7,
+      "ref_len_avg": 11.6
+    },
+    {
+      "image": "7194590496.jpg",
+      "gen": "A man is playing basketball.",
+      "refs": [
+        "Someone is lunging for a soccer ball near a net in a game of water soccer.",
+        "This captures two athletes playing a game of water Vally-ball.",
+        "There is a goalie in a swimming pool blocking the ball.",
+        "Two people are playing a water sport.",
+        "People playing a game in the pool."
+      ],
+      "bleu": 0.0942371657473343,
+      "gen_len": 5,
+      "ref_len_avg": 10.4
+    },
+    {
+      "image": "72008434.jpg",
+      "gen": "A man and a woman are standing in front of a building.",
+      "refs": [
+        "A guy kisses another surprised looking man on the ear.",
+        "A man kissing another man on the cheek.",
+        "A man gets a kiss on the cheek.",
+        "A guy give a kiss to a guy also",
+        "Two gay men in a room kissing."
+      ],
+      "bleu": 0.08516593018819643,
+      "gen_len": 12,
+      "ref_len_avg": 8.4
+    },
+    {
+      "image": "7249763658.jpg",
+      "gen": "A man and a woman are in a restaurant.",
+      "refs": [
+        "A group of people surrounding a man in a black and red striped shirt asking for his autograph.",
+        "Man with glasses and a red and black striped shirt, writing something down.",
+        "A man in a striped polo is signing autographs for children at a convention.",
+        "A man signs an autograph in a young boy's book.",
+        "A father showing his son something on paper."
+      ],
+      "bleu": 0.16515821590069035,
+      "gen_len": 9,
+      "ref_len_avg": 12.8
+    },
+    {
+      "image": "7292785488.jpg",
+      "gen": "A man is standing on a rock.",
+      "refs": [
+        "A man in a blue shirt rides a skateboard along a railing not far from a brick wall.",
+        "A young man in a blue shirt grinds a rail on a skateboard in an urban area.",
+        "A man in a blue shirt and jeans grinds down a rail on his skateboard.",
+        "A man in a blue shirt is skateboarding.",
+        "Man, skateboarding"
+      ],
+      "bleu": 0.17026116978186878,
+      "gen_len": 7,
+      "ref_len_avg": 12.0
+    },
+    {
+      "image": "7308070356.jpg",
+      "gen": "A man is standing in a field with a large number of cows.",
+      "refs": [
+        "A man sitting on railroad tracks eating something and selling something displayed on top of a crate.",
+        "Man sitting on a railroad track selling something with a scale in the picture.",
+        "Some type of snack food being eaten at what appears to be a railroad site.",
+        "An Asian man sits on the tracks with crates of peanuts.",
+        "A person sitting on train tracks is selling food."
+      ],
+      "bleu": 0.09305140252476224,
+      "gen_len": 13,
+      "ref_len_avg": 13.2
+    },
+    {
+      "image": "7329031116.jpg",
+      "gen": "A man wearing a white shirt and a black jacket is standing in front of a building.",
+      "refs": [
+        "A British gentleman, dressed in full military uniform, waving his hat with a background of people sitting back and looking out onto the waterway.",
+        "There is a man in a red uniform, with many medals, standing next to a crowd of people, some of which are holding British flags.",
+        "Man wearing red uniform holding a black hat in the air with his right hand.",
+        "A uniformed man standing and cheering while holding his hat in his hands.",
+        "A British military man is raising his hat."
+      ],
+      "bleu": 0.0921847194955832,
+      "gen_len": 17,
+      "ref_len_avg": 17.0
+    },
+    {
+      "image": "7330749240.jpg",
+      "gen": "A car is driving on a track.",
+      "refs": [
+        "Indy car, white, blue with a red mark on the roof, rounding a turn, in front of the white car.",
+        "Two race cars are going down a racetrack bend.",
+        "Two cars are driving on a racetrack.",
+        "The cars are racing around the track.",
+        "Two cars are on a racetrack."
+      ],
+      "bleu": 0.29071536848410967,
+      "gen_len": 7,
+      "ref_len_avg": 9.8
+    },
+    {
+      "image": "7333716086.jpg",
+      "gen": "A man wearing a helmet and gloves is riding a motorcycle.",
+      "refs": [
+        "A man in a black, white, and red uniform is holding yellow ski poles and racing or preparing to race.",
+        "A man in a black and white jersey is holding yellow ski poles and preparing to take off.",
+        "A man wearing a blue and white uniform clutching two yellow ski handles.",
+        "His eyes filled with joyous expectation, a skier prepares for a jump.",
+        "A smiling athlete in a black and red helmet holding ski poles."
+      ],
+      "bleu": 0.24640511033537818,
+      "gen_len": 11,
+      "ref_len_avg": 15.0
+    },
+    {
+      "image": "733965014.jpg",
+      "gen": "A woman with a dog in a brown coat and a brown hat.",
+      "refs": [
+        "Person in black shirt lying on top of person in red shirt in the grass.",
+        "A girl and a boy in a park kissing in the grass on a sunny day",
+        "Two people are laying down and kissing on a grassy lawn.",
+        "A young boy and girl cuddle in a grassy field.",
+        "A boy lays on top of a girl in a field."
+      ],
+      "bleu": 0.09669265690880861,
+      "gen_len": 13,
+      "ref_len_avg": 12.6
+    },
+    {
+      "image": "7348289414.jpg",
+      "gen": "A child is playing with a toy car.",
+      "refs": [
+        "A very young child in a denim baseball cap eats a green apple.",
+        "An infant wearing a hat, holding an apple in his right hand.",
+        "A young boy in a blue hat and bib eating a green apple.",
+        "A toddler eats a green apple in his playpen outside.",
+        "A young boy is eating an apple."
+      ],
+      "bleu": 0.07809849842300641,
+      "gen_len": 8,
+      "ref_len_avg": 11.0
+    },
+    {
+      "image": "7393977570.jpg",
+      "gen": "A man is wearing a helmet and a white shirt.",
+      "refs": [
+        "Two football players leap into the air as a player on the opposing team moves toward them.",
+        "Two defensive players jumping in the air to block a quarterback's pass.",
+        "Football players are celebrating as an opposing team member watches.",
+        "The football players are running to get the ball.",
+        "Four young football players in mid play."
+      ],
+      "bleu": 0.041961149062965476,
+      "gen_len": 10,
+      "ref_len_avg": 11.2
+    },
+    {
+      "image": "7438195398.jpg",
+      "gen": "A man in a black suit is playing a guitar.",
+      "refs": [
+        "Three musicians on a stage, two are guitarists, and one is wearing a hat, black striped pants, strumming a red electric guitar, and the other guitarist is strumming a white guitar while the other musician is wearing blue jeans and a black t-shirt and singing.",
+        "A man wearing striped pants and a black and white checked hat plays an electric guitar while a man holding a microphone and another man holding a guitar stand in the background.",
+        "A man in a black jacket and checkered hat wearing black and white striped pants plays an electric guitar on a stage with a singer and another guitar player in the background.",
+        "A rock band playing on stage with the lead guitarist wearing white striped pants and the lead singer in a black shirt and jeans with the bass player in the background.",
+        "At a rock concert a man dressed in black and white pants and a checked hat plays his red guitar while another man sings."
+      ],
+      "bleu": 0.11863723935473887,
+      "gen_len": 10,
+      "ref_len_avg": 33.0
+    },
+    {
+      "image": "7446693604.jpg",
+      "gen": "A man is riding a horse in a field.",
+      "refs": [
+        "A bull rider in a white shirt jumping the fence to avoid being hit by the bull.",
+        "A man is leaping through the air escaping the arena containing a bull.",
+        "A man in white jumps away from a bull in a bull-fighting ring.",
+        "A man is leaping over a barrier away from a bull.",
+        "A man jumping away from a bull."
+      ],
+      "bleu": 0.23356898886410005,
+      "gen_len": 9,
+      "ref_len_avg": 12.4
+    },
+    {
+      "image": "7468663062.jpg",
+      "gen": "A woman in a red dress is doing a push-up.",
+      "refs": [
+        "The back of a blond woman with braided hair playing tennis.",
+        "A woman in a blue shirt and white shorts playing tennis.",
+        "The young lady is hitting her tennis ball on the field.",
+        "She is hitting the tennis ball over the line.",
+        "A tennis player strikes the ball."
+      ],
+      "bleu": 0.24808415001701817,
+      "gen_len": 11,
+      "ref_len_avg": 9.6
+    },
+    {
+      "image": "7544009146.jpg",
+      "gen": "A man with a guitar playing a guitar.",
+      "refs": [
+        "A man in a white shirt and black pants is playing a large brown instrument.",
+        "Two older men with white shirts and black pants playing the cello.",
+        "Two upright bass players performing as a part of an orchestra.",
+        "Two concert base players are playing their instruments.",
+        "A man is playing an interment in a concert"
+      ],
+      "bleu": 0.17286039232097053,
+      "gen_len": 8,
+      "ref_len_avg": 11.0
+    },
+    {
+      "image": "7559183044.jpg",
+      "gen": "A man is standing in a field with a large number of people.",
+      "refs": [
+        "A man in a construction supply area, wearing blue jeans and bluish gray t-shirt, caries a bundle of metal on his shoulder",
+        "A man is carrying a large load of metal beams on his shoulder through a lumberyard.",
+        "A man carrying a large stack of metal poles over his shoulder.",
+        "A man is carrying metal beams in a supply yard.",
+        "A man carrying steel beams across a lumberyard."
+      ],
+      "bleu": 0.1747433570343175,
+      "gen_len": 13,
+      "ref_len_avg": 13.8
+    },
+    {
+      "image": "756521713.jpg",
+      "gen": "A woman with a dog in a brown and white collar.",
+      "refs": [
+        "A woman who is sitting in a field listening to music throws a frisbree for her brown dog.",
+        "The woman wearing the pink jacket has thrown a Frisbee for the dog to catch.",
+        "A seated woman with short hair and a camera throws a Frisbee to a brown dog.",
+        "Woman with camera is throwing a Frisbee for her brown dog to catch.",
+        "A woman is throwing a red Frisbee toward a brown dog."
+      ],
+      "bleu": 0.1543909476981724,
+      "gen_len": 11,
+      "ref_len_avg": 14.6
+    },
+    {
+      "image": "7567712136.jpg",
+      "gen": "A man and a woman are standing in front of a building.",
+      "refs": [
+        "There is an outline of a male and female observing a bonfire or other large burning wooden object.",
+        "Two figures, a male and a female, are blacked out and standing in front of a building on fire.",
+        "Two people, a man and a woman, are looking at a structure being burned down.",
+        "Two people, a male and a female, are watching a very large fire.",
+        "A silhouette of a man and woman stand in front of a wall of fire."
+      ],
+      "bleu": 0.7677331684336531,
+      "gen_len": 12,
+      "ref_len_avg": 16.0
+    },
+    {
+      "image": "76485985.jpg",
+      "gen": "A woman and a man are standing in a pool of water.",
+      "refs": [
+        "Two girls wearing pink have their hands in or near a fountain in a shopping complex where people throw coins in it.",
+        "Two girls both dressed in different shades of pink play in the water of a fountain.",
+        "A girl in a long pink jacket reaching into a pool of water filled with change.",
+        "Two young girls dressed in pink reach into wishing fountain at mall.",
+        "Two girls dipping their hands in a fountain as people walk by."
+      ],
+      "bleu": 0.2620251007173263,
+      "gen_len": 12,
+      "ref_len_avg": 15.6
+    },
+    {
+      "image": "766061382.jpg",
+      "gen": "A little girl is playing in the water.",
+      "refs": [
+        "A topless boy with long hair who is drenched in water, is flexing his muscles whilst smiling.",
+        "A child with shoulder-length brown hair is playing in water outdoors.",
+        "A wet, smiling child without a shirt poses with arms raised.",
+        "A young boy with long hair plays in the water.",
+        "A bare chested smiling child plays in water."
+      ],
+      "bleu": 0.34572078464194106,
+      "gen_len": 8,
+      "ref_len_avg": 11.6
+    },
+    {
+      "image": "7670346004.jpg",
+      "gen": "A man and a woman are standing in a field.",
+      "refs": [
+        "A martial artist wearing a white Gi and a black belt is pinning another man in a blue Gi to the ground.",
+        "A judo player in white attempts to submit a judo player in blue while on a yellow and red mat.",
+        "A man in a white martial arts robe attempts to submit his opponent wearing a blue robe.",
+        "Two men, one wearing white and the other wearing blue, are wrestling.",
+        "Two young men wrestling competitively."
+      ],
+      "bleu": 0.1236846477204597,
+      "gen_len": 10,
+      "ref_len_avg": 15.2
+    },
+    {
+      "image": "7694340978.jpg",
+      "gen": "A woman in a red dress is doing a push-up.",
+      "refs": [
+        "A woman dressed in a red bikini is jumping up in the sand to reach the volleyball hitting it with the palm of her hand while people in the arena watch.",
+        "A woman in a red bikini jumping to hit a ball while playing volleyball at a beach.",
+        "A woman in a serving motion playing beach volleyball.",
+        "A female beach volleyball player serving the ball.",
+        "A volleyball player hitting a ball on the beach."
+      ],
+      "bleu": 0.39458812555917666,
+      "gen_len": 11,
+      "ref_len_avg": 14.8
+    },
+    {
+      "image": "771048251.jpg",
+      "gen": "A dog is playing with a ball.",
+      "refs": [
+        "A blond child is being bitten on the nose by a little orange kitten.",
+        "An orange striped kitten is biting a girl on the nose.",
+        "Orange striped kitten biting blond girl on the nose",
+        "A orange kitten biting the nose of a child.",
+        "A cat bites a human's nose."
+      ],
+      "bleu": 0.08643019616048525,
+      "gen_len": 7,
+      "ref_len_avg": 10.0
+    },
+    {
+      "image": "7738684358.jpg",
+      "gen": "A man with a white apron and a white shirt is standing near a large kitchen counter.",
+      "refs": [
+        "Woman standing in front of a large pot holding the lid and wearing a yellow apron.",
+        "A woman, wearing a yellow apron, is taking the lid off of a large pot.",
+        "An asian woman demonstrating cooking with margarine in a public place",
+        "A woman is cooking with a large pot.",
+        "Lady in a red shirt cooking."
+      ],
+      "bleu": 0.08133696300152865,
+      "gen_len": 17,
+      "ref_len_avg": 11.2
+    },
+    {
+      "image": "77587237.jpg",
+      "gen": "A young girl and her mother are sitting on a rock, looking at a lake.",
+      "refs": [
+        "Two children walk over a stone bridge in the country to meet their parent.",
+        "Two children in warm jackets stand on a stone bridge over a small stream.",
+        "Two children in a meadow standing on a little rock bridge over a creek.",
+        "Two children cross a small brook using a stone bridge.",
+        "Kids playing on a rock looking at mud."
+      ],
+      "bleu": 0.2676032275663791,
+      "gen_len": 15,
+      "ref_len_avg": 12.0
+    },
+    {
+      "image": "7764093618.jpg",
+      "gen": "A woman is riding a motorcycle in a city.",
+      "refs": [
+        "Two women sit on a brown scooter, one is wearing blue jeans and a brown jacket, the other is carrying a bag and has on black pants and a black top with a green hat.",
+        "Two African american females ride on a moped down a city street that appears to be in a well congested area of a large city area.",
+        "Two Black women in a brown motorcycle amidst many other motorcycles with the woman in the rear giving a smile to the camera.",
+        "Two African American women without helmets are riding on a scooter, the passenger is waving to the camera.",
+        "Two women riding on a vespa, sadly only one is enjoying herself."
+      ],
+      "bleu": 0.1183410328913505,
+      "gen_len": 9,
+      "ref_len_avg": 22.8
+    },
+    {
+      "image": "783994497.jpg",
+      "gen": "A man and a woman are standing in a restaurant.",
+      "refs": [
+        "A group of people are getting fountain drinks at a convenience store.",
+        "Several adults are filling their cups and a drink machine.",
+        "Two guys getting a drink at a store counter.",
+        "Two boys in front of a soda machine.",
+        "People get their slushies."
+      ],
+      "bleu": 0.10552670315936319,
+      "gen_len": 10,
+      "ref_len_avg": 8.6
+    },
+    {
+      "image": "7890007278.jpg",
+      "gen": "A man is riding a motorcycle on a mountain road.",
+      "refs": [
+        "A mountain bike rider wearing a helmet rides down a mountain trail with trees and a mountain ridge in the background.",
+        "Bicycle rider wearing black, riding down a dirt trail in a mountain bike.",
+        "Against a backdrop of scenic snowcapped mountains, a bike rider appears.",
+        "A man rides his mountain bike with mountains in the background.",
+        "A man is riding a bike on a steep tilt."
+      ],
+      "bleu": 0.488923022434901,
+      "gen_len": 10,
+      "ref_len_avg": 13.2
+    },
+    {
+      "image": "7900347098.jpg",
+      "gen": "A woman with a red dress and a red hat is standing in front of a large building.",
+      "refs": [
+        "A girl with orange hair and tattoos takes a picture of a painting with her phone.",
+        "A lady with tattoos is taking a picture of a painting with her smartphone.",
+        "A woman with body art takes a picture of art that is up for display.",
+        "A woman with a tattoo and a cellphone stands in front of a picture.",
+        "Girl with tattoos looking a painting."
+      ],
+      "bleu": 0.3026300230972924,
+      "gen_len": 18,
+      "ref_len_avg": 13.0
+    },
+    {
+      "image": "7988586396.jpg",
+      "gen": "A woman riding a bike on a mountain road.",
+      "refs": [
+        "A woman cyclist wearing a white helmet, sunglasses, black long-sleeved shirt and black and pink biking shorts pedals straight toward the camera lens.",
+        "A woman in a mostly black outfit and white helmet riding a bike with blurred trees in the background.",
+        "Female bicyclist wearing black and red bicycle shorts and top and wearing white helmet.",
+        "A woman rides her bike with her white helmet and her biking shorts and top.",
+        "A woman in a cycling jersey rides a bicycle."
+      ],
+      "bleu": 0.23356898886410005,
+      "gen_len": 9,
+      "ref_len_avg": 16.2
+    },
+    {
+      "image": "8016751611.jpg",
+      "gen": "A group of people are standing on a motorcycle and are riding in a circle.",
+      "refs": [
+        "Five cyclists, all wearing the same uniforms, are riding one behind the other in a bicycle race.",
+        "A line of cyclists in identical clothing pedal on a curve in a race as spectators watch.",
+        "A line of bicyclists in a race rode past interested spectators a mere few feet away.",
+        "A team of cyclists rounds a bend while nearby spectators cheer and take photographs.",
+        "Four bicyclists in turquoise and striped tops are riding in a competition."
+      ],
+      "bleu": 0.21651956746181053,
+      "gen_len": 15,
+      "ref_len_avg": 15.2
+    },
+    {
+      "image": "8052387530.jpg",
+      "gen": "Two men are fighting in the water.",
+      "refs": [
+        "Four football players in black are tackling the opposing team's player, shown in white, while it is raining.",
+        "Three members of an opposing football team are tackling an opponent to the ground during a rainy football game.",
+        "Football players tackle a member of the opposing team on a water drenched field.",
+        "A football player being tackled on a rainy day.",
+        "Young men playing football."
+      ],
+      "bleu": 0.07379782263475773,
+      "gen_len": 7,
+      "ref_len_avg": 13.0
+    },
+    {
+      "image": "8052397902.jpg",
+      "gen": "A player is being hit by a ball.",
+      "refs": [
+        "Young defensive football players executing a tackle on a member of the opposite team during a football game.",
+        "Two football players wearing blue jerseys tackle the opposing team's football player.",
+        "Two American football players in blue are tackling a football player in red.",
+        "A runner scrambles for yardage while being brought down by two tacklers.",
+        "The ball carrier is being tackled by a group of opposing players."
+      ],
+      "bleu": 0.10896448003321568,
+      "gen_len": 8,
+      "ref_len_avg": 13.6
+    },
+    {
+      "image": "8132535710.jpg",
+      "gen": "A man is standing on a soccer field with a ball in his hand.",
+      "refs": [
+        "At a men's basketball game, number 55, in white and yellow, tries desperately to prevent number ten, in black and gray, from making a shot while the rest of the players watch frozen on the court.",
+        "The basketball player in the white uniform with the number 55 on it is guarding the player in the black uniform with the number 10 on it.",
+        "A player either fielding a high pass or going up for a shot while being defended on the basketball court.",
+        "A basketball is in progress with a man in white and gold attempting to block a shot from a man in black.",
+        "The basketball player tries to block an opposing player."
+      ],
+      "bleu": 0.09552040806823771,
+      "gen_len": 14,
+      "ref_len_avg": 23.0
+    },
+    {
+      "image": "8183107966.jpg",
+      "gen": "A man in a black suit and a white shirt is standing in front of a building.",
+      "refs": [
+        "A man talking on his cellphone while holding a cigarette and wearing a blue shirt and navy blue jacket with a car in the background.",
+        "Man on cellphone walking in front of silver car next to green grass.",
+        "A man is talking on his cellphone across the street from a cafe.",
+        "A man is talking on a cellphone outside.",
+        "Have a quick chat and smoke break."
+      ],
+      "bleu": 0.13036888055421322,
+      "gen_len": 17,
+      "ref_len_avg": 13.2
+    },
+    {
+      "image": "821071719.jpg",
+      "gen": "A man wearing a white shirt and black pants is standing on the field of a football stadium.",
+      "refs": [
+        "A man dressed in orange t-shirt is trying to hit a baseball, with a few people looking at them and a keeper behind trying to catch the ball.",
+        "Two people are playing baseball while another team watches off from the sideline.",
+        "Professional baseball players during the All Star game watch an opponent at bat.",
+        "A baseball player taking a swing at the plate.",
+        "A player swings at a ball."
+      ],
+      "bleu": 0.06074588070876682,
+      "gen_len": 18,
+      "ref_len_avg": 14.0
+    },
+    {
+      "image": "8220955383.jpg",
+      "gen": "A man riding a motorcycle in a field.",
+      "refs": [
+        "A young, active man wearing a full helmet turning a corner on his mountain bike in the woods.",
+        "A dirt biker with a helmet and black, white, and red shirt on rounding a curb",
+        "A person in the woods on a muddy trail rounds a corner on a bike.",
+        "Dirt biker makes a sloping turn in a forest during the fall.",
+        "A dirt biker riding on a familiar trail."
+      ],
+      "bleu": 0.14535768424205484,
+      "gen_len": 8,
+      "ref_len_avg": 13.8
+    },
+    {
+      "image": "8234387593.jpg",
+      "gen": "A man and a woman are standing on a field with a ball in the air.",
+      "refs": [
+        "A player in a white and red uniform goes for a layup, while the player with a red and black uniform blocks the attempted shot.",
+        "3 basketball players vying for the ball and one in red jersey trying to take ball from guy in white jersey.",
+        "Four white guys playing basketball and looks like the white jersey is about to score over the red jersey.",
+        "Two young men playing basketball, one defending the other attempting to make a basket.",
+        "Two young men, one in a white jersey and one in a red jersey, playing basketball."
+      ],
+      "bleu": 0.07123894400805074,
+      "gen_len": 16,
+      "ref_len_avg": 19.0
+    },
+    {
+      "image": "829798661.jpg",
+      "gen": "A man is wearing a red shirt and a blue jacket.",
+      "refs": [
+        "A young boy is either jumping on a trampoline or skateboarding and he is serious about it on a beautiful summer day.",
+        "This is a young boy looking to be jumping on the trampoline in a very beautiful neighborhood.",
+        "A guy is jumping and grabbing his foot with a house in the background.",
+        "A boy grimaces as he jumps high in the air.",
+        "A boy grabs his leg as he jumps in the air."
+      ],
+      "bleu": 0.05604233375480576,
+      "gen_len": 11,
+      "ref_len_avg": 14.8
+    },
+    {
+      "image": "83292701.jpg",
+      "gen": "A man and a woman are standing in a field.",
+      "refs": [
+        "Two children wearing striped sweaters and black pants tussle outdoors near a play set.",
+        "Two boys in black pants are in contact with each with a slide in the background.",
+        "Two young boys playing in a dirt top playground.",
+        "Two boys playing together at a playground.",
+        "Two young boys play together at a park."
+      ],
+      "bleu": 0.09980099403873663,
+      "gen_len": 10,
+      "ref_len_avg": 10.8
+    },
+    {
+      "image": "83493458.jpg",
+      "gen": "A man with a white shirt and a black hat is standing in a field.",
+      "refs": [
+        "A boy is pushing an object with a handle while wearing sunglasses by a building with a blue and white striped awning.",
+        "A man is riding a scooter in front of a store.",
+        "A man wearing sunglasses is riding a scooter.",
+        "A boy riding his scooter with sunglasses on.",
+        "A man with sunglasses rides a scooter."
+      ],
+      "bleu": 0.1462806365365753,
+      "gen_len": 15,
+      "ref_len_avg": 11.2
+    },
+    {
+      "image": "85519095.jpg",
+      "gen": "A young boy is playing with a ball.",
+      "refs": [
+        "A young boy, dressed in a gray and blue baseball uniform, preparing to hit the ball off of the t-ball stand while onlookers watch from behind a chain link fence.",
+        "A small boy wearing baseball regalia holds a bat behind his head with a baseball mounted in front of him.",
+        "The little boy lifts his leg and swings the bat in an attempt to hit the ball.",
+        "A boy wearing a cubs uniform winds up to hit a ball on a tee.",
+        "A young boy about to hit a baseball off of the tee."
+      ],
+      "bleu": 0.17632778423526835,
+      "gen_len": 8,
+      "ref_len_avg": 19.0
+    },
+    {
+      "image": "86120845.jpg",
+      "gen": "A group of people are standing in a field.",
+      "refs": [
+        "Six men are sitting or laying on a patch of earth in a wooded area.",
+        "A group of workers sitting in a field take a break from work.",
+        "A group of men are sitting in the farm fields taking a break",
+        "Six men sit in a field of crops containing wooden crates.",
+        "Pickers working out on a farm."
+      ],
+      "bleu": 0.24839003933972575,
+      "gen_len": 9,
+      "ref_len_avg": 11.6
+    },
+    {
+      "image": "861661418.jpg",
+      "gen": "A dog with a big head and a big body.",
+      "refs": [
+        "A dog with big ears is holding a small stick in its mouth.",
+        "A brown dog picks up a twig from a stone surface.",
+        "A puppy with big ears chewing on a stick.",
+        "A brown puppy chewing on a stick.",
+        "A puppy has a stick in its mouth."
+      ],
+      "bleu": 0.18575057999133596,
+      "gen_len": 10,
+      "ref_len_avg": 9.6
+    },
+    {
+      "image": "862560775.jpg",
+      "gen": "A man is riding a horse in a field.",
+      "refs": [
+        "A man in a yellow jacket with the number twelve on his back uses a rod to pull a horse, as people behind a Bud Light sign watch.",
+        "A man in a yellow shirt and wearing the number 12 is pulling on a rope that is tied to the front of a horse.",
+        "A man is wearing a yellow jacket is wrangling an out of control horse in an outdoor stadium.",
+        "A male wearing a number 12 shirt, is maintaining the horse steady.",
+        "This is a man dressed in yellow holding the reign of a brown horse"
+      ],
+      "bleu": 0.19762834701061488,
+      "gen_len": 9,
+      "ref_len_avg": 19.4
+    },
+    {
+      "image": "86256551.jpg",
+      "gen": "A man with a white shirt and a black suit is standing in a restaurant.",
+      "refs": [
+        "An Asian man is cooking in a restaurant with several large pieces of roasted meat hanging in the background.",
+        "Gentleman business owner loves green aprons and roast duck.",
+        "A man in a white shirt and apron cuts up a bird.",
+        "A man with an apron and hat cooking.",
+        "The chef is preparing a meal."
+      ],
+      "bleu": 0.3113878808075066,
+      "gen_len": 15,
+      "ref_len_avg": 10.8
+    },
+    {
+      "image": "86350713.jpg",
+      "gen": "A woman is holding a large box of food.",
+      "refs": [
+        "There is lady with the white apron has an utensil standing over a wok, a man in blue shorts and blue shirt sitting down, a person in a pink shirt and others are in the background all in one place.",
+        "A lady attired in an apron stands over a kettle, preparing food, while patrons sit, chat, and dine in the background.",
+        "Woman with white apron cooks food, large group of people sitting at tables behind her.",
+        "A hispanic woman is using a outdoors wok to cook.",
+        "An Asian woman is cooking in an outdoor kitchen."
+      ],
+      "bleu": 0.13042371500610725,
+      "gen_len": 9,
+      "ref_len_avg": 19.0
+    },
+    {
+      "image": "900144365.jpg",
+      "gen": "A woman is wearing a red dress and a red hat.",
+      "refs": [
+        "Marathon runners are racing on a city street, with other people standing around.",
+        "Two women runners in athletic shorts and bras going down a city street.",
+        "Runners who are competing sprint down the street.",
+        "A girl in black clothes leads the way in a race.",
+        "Runners in a race run down a busy street"
+      ],
+      "bleu": 0.04932351569489709,
+      "gen_len": 11,
+      "ref_len_avg": 10.8
+    },
+    {
+      "image": "94024624.jpg",
+      "gen": "A young girl is riding a bike.",
+      "refs": [
+        "An oriental woman wearing a hat riding down the street on a bicycle.",
+        "An asian woman wearing a traditional hat is riding the bicycle.",
+        "Asian woman wearing a sunhat while riding a bike.",
+        "A woman wearing a hat is riding a bike.",
+        "A Asian woman riding a bike."
+      ],
+      "bleu": 0.4347208719449915,
+      "gen_len": 7,
+      "ref_len_avg": 9.6
+    },
+    {
+      "image": "95758790.jpg",
+      "gen": "A man is standing on a mountain with a large sign that says \"Mountain\" in large letters.",
+      "refs": [
+        "Young boys are hanging out on the sidewalk next to trees, while one boy is exploring the dirt around the tree.",
+        "Some children are outside playing in the dirt where two trees are.",
+        "A child watches another play in the dirt near the street.",
+        "There are kids playing in the dirt beside the road.",
+        "A child is watching his friend by the tree."
+      ],
+      "bleu": 0.025561481296359424,
+      "gen_len": 17,
+      "ref_len_avg": 12.6
+    },
+    {
+      "image": "97233789.jpg",
+      "gen": "A man is standing in a restaurant.",
+      "refs": [
+        "A man, who is wearing the tan coat, is gambling at a casino slot machine.",
+        "And older man is playing a slot machine at a casino type environment.",
+        "An older man is playing a video arcade game.",
+        "An old man playing a game at the casino.",
+        "Man playing slots in a casino."
+      ],
+      "bleu": 0.21736043597249577,
+      "gen_len": 7,
+      "ref_len_avg": 10.4
+    },
+    {
+      "image": "97234558.jpg",
+      "gen": "A child is playing in the water near a beach.",
+      "refs": [
+        "A young girl wades out into the water wearing safety floatation devices on her arms.",
+        "The baby walks on the gold and sandy-colored beach with water splashing behind him.",
+        "A girl at the shore of a beach with a mountain in the distance.",
+        "Little girl in arm floaties exploring the coast line.",
+        "A child playing in the ocean."
+      ],
+      "bleu": 0.25098621243978964,
+      "gen_len": 10,
+      "ref_len_avg": 11.8
+    }
+  ]
+}

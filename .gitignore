@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+
+# 模型权重
+*.pt
+*.bin
+*.safetensors
+*.gguf
+
+# 数据/缓存/输出
+.cache/
+# data/ 下:忽略数据 blob(图像/jsonl/csv/parquet/子目录),但保留 .py 准备脚本
+/data/*
+!/data/*.py
+checkpoints/
+runs/
+outputs/
+*.log
+
+# 本地模型缓存 (605MB CLIP + potential future weights)
+models/
+
+# ONNX 导出产物 (大文件, 由 benchmark/export_onnx.py 生成)
+onnx/
+*.onnx
+*.onnx.data
+
+# 训练日志保留 (小文件, 作为进度凭证提交)
+!logs/
+!logs/*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
