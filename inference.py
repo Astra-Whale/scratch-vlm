@@ -1,11 +1,11 @@
 """
-Week 2 D2 · 推理脚本
+单图推理脚本
 
 功能:
     加载 projector checkpoint + 一张图 → 生成描述
 
 用法:
-    # 用 toy 训完的 projector, 对第 0 张 toy 图跑一次
+    # 默认旗舰 ckpt + 默认 flickr8k 图
     python inference.py
 
     # 指定图和 prompt
@@ -25,14 +25,6 @@ import os
 import sys
 import argparse
 from pathlib import Path
-
-# Windows 控制台 UTF-8
-if sys.platform == "win32":
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-        sys.stderr.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
 
 import torch
 from PIL import Image

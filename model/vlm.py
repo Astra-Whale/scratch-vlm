@@ -241,9 +241,8 @@ class ScratchVLM(nn.Module):
         attn = torch.ones(embeds.shape[:2], dtype=torch.long, device=device)
 
         # 生成
-        # ChatML 回合结束符 <|im_end|>: base 模型 (如 Qwen2.5-0.5B base) 默认 eos
-        # 只有 <|endoftext|>, 不含 <|im_end|>。不显式设置会导致生成越过 caption
-        # 继续吐垃圾 token, 严重拖低 BLEU (precision 被稀释)。
+        # ChatML 回合结束符 <|im_end|>: 部分 base 模型默认 eos 只有 <|endoftext|>,
+        # 不含 <|im_end|>。不显式设置会导致生成越过 caption 继续吐 token, 拖低 BLEU。
         stop_ids = []
         if self.tokenizer.eos_token_id is not None:
             stop_ids.append(self.tokenizer.eos_token_id)

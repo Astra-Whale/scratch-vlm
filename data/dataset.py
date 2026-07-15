@@ -3,7 +3,7 @@ MVP Caption Dataset · 通用图文对 loader
 
 数据格式 (JSONL, 每行):
     {"image": "path/to/image.png", "caption": "A caption."}
-image 可为相对路径 (相对于 data/toy_images/ 或指定的 image_root) 或绝对路径。
+image 可为相对路径 (相对于指定的 image_root) 或绝对路径。
 
 单样本构造流程:
     1. 加载图 → CLIP image_processor → pixel_values [3, 224, 224]
@@ -76,7 +76,7 @@ class MVPCaptionDataset(Dataset):
         )["pixel_values"][0]  # [3, H, W]
 
         # 2. 构造 prompt (前半, 不算 loss) 和 answer (=caption, 算 loss)
-        # 使用 SmolLM2 / ChatML 兼容格式, Instruct 模型必须走 chat 结构否则会秒 EOS
+        # 使用 ChatML 格式, Instruct 模型必须走 chat 结构否则会秒 EOS
         prompt = (
             f"<|im_start|>user\n{self.image_token}\n{self.question}<|im_end|>\n"
             f"<|im_start|>assistant\n"

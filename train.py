@@ -1,17 +1,11 @@
 """
-Week 2 D2 · Projector 训练脚本
+stage-1 · Projector 对齐训练
 
-只训 MLP Projector, 其他全部冻结。用于验证:
-    (1) 训练闭环 pipeline 通
-    (2) toy 数据上 loss 明显下降 (证明 projector 在学 vision→language 对齐)
-    (3) checkpoint 保存/加载正常
+只训 MLP Projector, CLIP 与 LLM 全部冻结。
 
 用法:
-    # 用默认 toy 数据训 30 步
-    python train.py
-
-    # 自定义
-    python train.py --data data/toy.jsonl --steps 60 --batch 4 --lr 1e-3
+    python train.py --data data/flickr8k/train.jsonl --val-data data/flickr8k/val.jsonl \
+        --image-root data/flickr8k/images --steps 3000 --batch 4 --grad-accum 4 --lr 2e-4
 
 期望输出:
     - stdout 打印每步 loss
@@ -25,14 +19,6 @@ import argparse
 import time
 from pathlib import Path
 from datetime import datetime
-
-# Windows 控制台 UTF-8
-if sys.platform == "win32":
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-        sys.stderr.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
 
 import torch
 from torch.utils.data import DataLoader

@@ -35,13 +35,6 @@ import time
 from pathlib import Path
 from collections import Counter, defaultdict
 
-if sys.platform == "win32":
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-        sys.stderr.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
-
 import torch
 from PIL import Image
 
@@ -199,9 +192,6 @@ def parse_args():
                    help="覆盖 vision 模型路径 (默认从 ckpt 读; 跨平台迁移时用来覆盖 ckpt 里的旧绝对路径)")
     p.add_argument("--llm", type=str, default=None,
                    help="覆盖 llm (默认从 ckpt 读)")
-    p.add_argument("--quant", type=str, default="none", choices=["none", "int8", "int4"],
-                   help="对 LLM 做 torchao weight-only 量化 (Orin 兼容; 禁 bitsandbytes)。"
-                        "int8 near-lossless; int4 在 torchao 0.17 需非便携 kernel(mslk), 默认排除")
     return p.parse_args()
 
 
@@ -281,23 +271,7 @@ def main():
         print(f"[ckpt] projector 权重加载完成")
     print(f"[model] setup 耗时 {time.time() - t0:.1f}s")
 
-    # 可选: torchao weight-only 量化 LLM (Orin 兼容路径, 禁 bitsandbytes)
-    if args.quant != "none":
-        import torch.nn as nn
-        from torchao.quantization import quantize_, Int8WeightOnlyConfig, Int4WeightOnlyConfig
-        if args.quant == "int8":
-            cfg = Int8WeightOnlyConfig()
-        else:
-            # int4: 用 tinygemm 的 tile_packed_to_4d packing (aten::_convert_weight_to_int4pack)。
-            # 这是 Ampere sm_80+ 原生路径, Orin 兼容; torchao 0.17 的默认 packing 需非便携的 mslk kernel。
-            cfg = Int4WeightOnlyConfig(group_size=128, int4_packing_format="tile_packed_to_4d")
-        # 排除 lm_head: Qwen tie_word_embeddings=True, 量化 tied lm_head 会打破与 embedding 的
-        # 权重共享, 凭空新增一份量化副本(int8 +~136MB), 抵消一半收益。保持 lm_head bf16(与 embedding 共享)。
-        quantize_(model.llm, cfg,
-                  filter_fn=lambda mod, fqn: isinstance(mod, nn.Linear) and "lm_head" not in fqn)
-        print(f"[quant] LLM 已量化: {args.quant} (torchao weight-only, 排除 tied lm_head)")
-
-    # 权重常驻显存 (用于量化体积对比)
+    # 权重常驻显存
     resident_mb = None
     if device == "cuda":
         torch.cuda.empty_cache(); torch.cuda.synchronize()
@@ -393,7 +367,6 @@ def main():
             json.dump({
                 "mode": "baseline" if args.baseline else "trained",
                 "ckpt": str(args.ckpt) if not args.baseline else None,
-                "quant": args.quant,
                 "weights_resident_mb": resident_mb,
                 "num_samples": n,
                 "corpus_bleu4": corpus_b,

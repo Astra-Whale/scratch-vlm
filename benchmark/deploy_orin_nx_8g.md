@@ -116,4 +116,3 @@ tegrastats --interval 1000 | tee logs/tegrastats_orin.log
 | PyTorch | x86 `torch 2.11+cu128` → Jetson aarch64 wheel(路径 B 才需) |
 | llama.cpp | 重编 `-DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=87` |
 | GGUF / mmproj / projector 产物 | 硬件无关,直接拷贝 |
-| torchao | 端侧不需要(GGUF 已覆盖量化) |

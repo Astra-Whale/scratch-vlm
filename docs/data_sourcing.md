@@ -212,7 +212,6 @@ done
 |---|---|---|---|
 | 0 | `Qwen/Qwen3-0.6B` | config/tokenizer 实测已下,权重 1.4GB 已探测 | **推荐**,ChatML 原生兼容 |
 | 1(镜像) | `hf-mirror.com/Qwen/Qwen3-0.6B` 或 ModelScope `Qwen/Qwen3-0.6B` | hf-mirror 实测与直连同速(~160KB/s) | 若直连拉权重慢可切镜像,格式完全一致 |
-| 2(兜底) | `Qwen/Qwen2.5-0.5B` | 早期轨,已归档 | 同 ChatML、无 thinking 负担;仅作退路 |
 
 ---
 

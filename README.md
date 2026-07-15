@@ -93,7 +93,7 @@ CLIP + projector 打包为 llama.cpp mmproj GGUF(590MB),与合并 LoRA 后的 Qw
 scratch-vlm/
 ├── train.py               # stage-1 projector 训练
 ├── train_sft.py           # stage-2 LoRA + projector SFT
-├── evaluate.py            # captioning BLEU 评测 (支持 --quant int8/int4)
+├── evaluate.py            # captioning BLEU 评测 (corpus + sentence)
 ├── inference.py           # 单图推理
 ├── app.py                 # Gradio demo
 ├── model/                 # vision_encoder(CLIP) · projector(MLP) · vlm(拼装+forward+generate)

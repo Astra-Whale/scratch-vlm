@@ -1,5 +1,5 @@
 """
-Week 1 D1 里程碑验收测试
+前向验证测试
 
 目标:
 1. 加载 CLIP + Projector + Qwen 拼装 VLM 无报错
@@ -8,21 +8,11 @@ Week 1 D1 里程碑验收测试
 4. shape 对齐、loss 有值
 5. VRAM 占用符合预期 (<6GB)
 
-预期运行时间:
-- 首次: 3-8 分钟 (下载 CLIP 1.6GB + Qwen 1GB)
-- 之后: 30-60 秒 (加载 + 前向)
+首次运行需下载 CLIP-L/14@336 (~1.7GB) + Qwen3-0.6B (~1.2GB)。
 """
 import os
 import sys
 import time
-
-# Windows GBK 控制台无法直接输出 unicode 符号 (✓, ✗ 等), 强制走 UTF-8
-if sys.platform == "win32":
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-        sys.stderr.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
 
 import torch
 
@@ -41,7 +31,7 @@ def _banner(msg: str, char: str = "=", width: int = 60):
 
 
 def test_shapes_and_forward():
-    _banner("Week 1 D1 · scratch-vlm 前向验证测试")
+    _banner("scratch-vlm 前向验证测试")
 
     # ============ [env] 环境自检 ============
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -135,7 +125,7 @@ def test_shapes_and_forward():
 
     # ============ 结果 ============
     print()
-    _banner("✓ Week 1 D1 里程碑达成: 前向 pipeline 通过", char="=", width=60)
+    _banner("✓ 前向 pipeline 通过", char="=", width=60)
 
 
 if __name__ == "__main__":
