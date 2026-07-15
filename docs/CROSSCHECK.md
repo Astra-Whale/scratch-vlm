@@ -97,9 +97,9 @@ python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_qwen3_test_1000.
 ## 8 · 未完成 / 暂缓 / 待人工
 
 - **S2 航拍领域适配**:**已撤销**(2026-07-14 用户决定不做);历史 spec 仍留 `docs/process/s2_aerial_plan.md` 备查,不再作为待办。
-- **git 身份是占位** `徐悦 <xuyue@localhost>`(本地配置),需改真实邮箱。
-- **SOTA ckpt gitignored**(`*.pt`);若要开箱可跑可 `git add -f checkpoints/projector_stage1_qwen3_best.pt`(8.4MB)。
-- **无 git remote**;未推送。
+- **git 身份**:`XuYue <AstraWhale@gmail.com>`(全历史已重写统一;2026-07-15)。
+- **SOTA ckpt**:旗舰 `checkpoints/projector_stage1_qwen3_best.pt`(8.4MB)已 `git add -f` 入库(Tier B);其余权重 gitignored。
+- **remote**:已推送 GitHub public → `https://github.com/Astra-Whale/scratch-vlm`(origin/main)。
 - **SPICE 未跑**(需大内存 Java、1000 图易卡);CIDEr 已是主指标。
 - **COCO 同轴对标未做**(需 COCO 训练,大成本且注定不 competes SOTA;结论:不比数字,比范式+效率,见 `docs/benchmark_landscape.md`)。
 
