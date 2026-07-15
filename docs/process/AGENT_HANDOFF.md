@@ -3,7 +3,7 @@
 **Date:** 2026-07-13
 **给谁看:** 在 Ubuntu / RTX 5060 Ti 16G 上接手本项目的 Claude Code Agent
 **你的第一件事:** 读完本文件 → 按 §5 完成迁移验证 → 汇报结果给用户
-**前置阅读:** 本文件后可选读 [`MIGRATE_TO_UBUNTU.md`](MIGRATE_TO_UBUNTU.md)（详细命令 checklist）+ [`README.md`](README.md)（项目门面）+ [`benchmark/migration_analysis.md`](benchmark/migration_analysis.md)（硬件对比）
+**前置阅读:** 本文件后可选读 [`MIGRATE_TO_UBUNTU.md`](MIGRATE_TO_UBUNTU.md)（详细命令 checklist）+ [`README.md`](../../README.md)（项目门面）+ [`benchmark/migration_analysis.md`](../../benchmark/migration_analysis.md)（硬件对比）
 
 ---
 
@@ -29,7 +29,7 @@
 
 ### 目标岗位
 
-**DJI 端侧 AI 系统工程师** (2027 提前批, 上海) · [reports/015-dji-edge-ai-2026-07-01.md](../27提前批和秋招/career-ops-试跑/reports/015-dji-edge-ai-2026-07-01.md)
+**DJI 端侧 AI 系统工程师** (2027 提前批, 上海) · [reports/015-dji-edge-ai-2026-07-01.md](../../../27提前批和秋招/career-ops-试跑/reports/015-dji-edge-ai-2026-07-01.md)
 
 **JD 关键条款**（决定本项目的所有技术选择）:
 - 深度学习编译器 · 混合精度量化 · 异构调度运行时 · 算子性能调优 · 端侧大模型

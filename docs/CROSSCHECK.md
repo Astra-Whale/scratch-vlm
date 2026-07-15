@@ -1,7 +1,7 @@
 # AGENT_CROSSCHECK · 项目状态与交叉检查手册
 
 **Date:** 2026-07-14
-**用途:** 供其他 agent **独立交叉检查**本项目的现状与每一条硬数据。本文件强调:(a) 每个数字**从哪来、怎么复核**;(b) 易混淆点;(c) 已知坑。规划见 [`ROADMAP.md`](ROADMAP.md),历史迁移见 [`AGENT_HANDOFF.md`](AGENT_HANDOFF.md)。
+**用途:** 供其他 agent **独立交叉检查**本项目的现状与每一条硬数据。本文件强调:(a) 每个数字**从哪来、怎么复核**;(b) 易混淆点;(c) 已知坑。规划见 [`process/ROADMAP.md`](process/ROADMAP.md),历史迁移见 [`process/AGENT_HANDOFF.md`](process/AGENT_HANDOFF.md)。
 
 ---
 
@@ -15,7 +15,7 @@ python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_qwen3_test_1000.
 ```
 应复现:**CIDEr 0.9403 · BLEU-4 32.91 · BLEU-1 75.77 · METEOR 0.2763 · ROUGE-L 0.5727**。
 这直接验证了旗舰指标,不依赖 checkpoint 或 flickr8k 图像(两者都 gitignored)。
-> 旧 Qwen2.5 轨的 `logs/eval_flickr8k_test_1000.json`(CIDEr 0.9268 / BLEU-4 31.73)仍在仓库作历史对照,但**旗舰口径已迁 Qwen3**;Qwen2.5/SmolLM2 ckpt 已归档 `checkpoints/_archive_non_spec/`。
+> 旧 Qwen2.5 轨的 eval JSON(CIDEr 0.9268 / BLEU-4 31.73)已随试错日志归档到本地 `logs/_archive/eval_flickr8k_test_1000.json`(移出 git 跟踪);**旗舰口径已迁 Qwen3**;Qwen2.5/SmolLM2 ckpt 已归档 `checkpoints/_archive_non_spec/`。
 
 ---
 
@@ -52,7 +52,7 @@ python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_qwen3_test_1000.
 | bf16 | 20.59% | 1536 MB |
 | int8(排除 lm_head) | 20.04% | 1191 MB (-22%) |
 | int4(排除 lm_head,tinygemm) | 18.33% | 1057 MB (-31%) |
-- 混合精度:只压 Qwen transformer Linear,CLIP/projector/lm_head 守 bf16。详见 [`docs/quantization_plan.md`](docs/quantization_plan.md)。
+- 混合精度:只压 Qwen transformer Linear,CLIP/projector/lm_head 守 bf16。详见 [`quantization_plan.md`](quantization_plan.md)。
 
 ### 3d · latency / 迁移(arch-dev ckpt)
 - 推理 batch=1:**1.6 GB**;视觉编码 15.3ms(一次性)+ prefill 14.1ms + decode 7.29ms/tok = **137 tok/s**(`logs/latency_profile.json`)。
@@ -73,7 +73,7 @@ python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_qwen3_test_1000.
 ## 5 · 文件地图
 
 **代码**:`model/`(vlm/vision_encoder/projector)· `train.py`(--grad-accum / --init-projector)· `evaluate.py`(corpus+sentence BLEU / --quant int8|int4 / 路径 fallback)· `inference.py` · `app.py`(Gradio)· `data/*.py`(prepare_flickr8k 等)· `benchmark/`(profile_latency / export_onnx / eval_coco_metrics)
-**文档**:`ROADMAP.md` · `docs/`(quantization_plan / benchmark_landscape / competitor_benchmark / talkshop_qa / pitch / cv_entry / s2_aerial_plan)· `benchmark/migration_analysis.md`
+**文档**:`README.md`(根)· `docs/`(CROSSCHECK / ALIGN_SELFSPEC / quantization_plan / benchmark_landscape / competitor_benchmark / talkshop_qa / pitch / cv_entry / data_sourcing / llamacpp_pipeline)· `docs/process/`(ROADMAP / AGENT_HANDOFF / MIGRATE_TO_UBUNTU / setup_env / s2_aerial_plan,试错/迁移/规划归档)· `benchmark/migration_analysis.md`
 **证据**:`logs/`(训练日志 + 各 eval JSON,已提交)
 **gitignored**:`checkpoints/`(权重)· `data/` blob · `models/`(缓存)· `onnx/`
 
@@ -96,7 +96,7 @@ python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_qwen3_test_1000.
 
 ## 8 · 未完成 / 暂缓 / 待人工
 
-- **S2 航拍领域适配**:**已撤销**(2026-07-14 用户决定不做);历史 spec 仍留 `docs/s2_aerial_plan.md` 备查,不再作为待办。
+- **S2 航拍领域适配**:**已撤销**(2026-07-14 用户决定不做);历史 spec 仍留 `docs/process/s2_aerial_plan.md` 备查,不再作为待办。
 - **git 身份是占位** `徐悦 <xuyue@localhost>`(本地配置),需改真实邮箱。
 - **SOTA ckpt gitignored**(`*.pt`);若要开箱可跑可 `git add -f checkpoints/projector_stage1_qwen3_best.pt`(8.4MB)。
 - **无 git remote**;未推送。

@@ -7,7 +7,7 @@ import os, sys
 from pathlib import Path
 os.environ.setdefault("HF_HUB_OFFLINE", "1")
 import torch
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 from model.vlm import ScratchVLM
 
 OUT = Path("models/qwen3_stage2_merged")

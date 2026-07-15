@@ -1,5 +1,0 @@
-### 18:33:20 Qwen model.safetensors (988MB)
-path=/home/l/.cache/huggingface/hub/models--Qwen--Qwen2.5-0.5B/snapshots/060db6499f32faf8b98477b0a26969ef7d8b9987/model.safetensors
-### 18:36:07 CLIP-L pytorch_model.bin (1712MB)
-path=/home/l/.cache/huggingface/hub/models--openai--clip-vit-large-patch14-336/snapshots/ce19dc912ca5cd21c8a653c79e251e808ccabcd1/pytorch_model.bin
-### ALLDONE 18:40:17

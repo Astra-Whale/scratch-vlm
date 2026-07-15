@@ -27,13 +27,13 @@ CLIP + MLP-Projector + LLM 的极简 VLM,重点展示端侧 AI 全流程能力
 - [x] **对齐 · D4.5** · **mmproj 多模态集成**(CLIP+projector→llama.cpp,`llama-mtmd-cli` 端到端图文推理跑通)（2026-07-15）
 - [ ] **对齐 · D4.6** · Xavier NX 实机部署(**不做**,硬件未到手 —— 保留 5060Ti baseline + 迁移分析)
 
-> **selfspec 对齐**:见下方「selfspec 对齐结果」段与 [`ALIGN_SELFSPEC.md`](ALIGN_SELFSPEC.md) §0/§2、[`AGENT_CROSSCHECK.md`](AGENT_CROSSCHECK.md) §10。
+> **selfspec 对齐**:见下方「selfspec 对齐结果」段与 [`docs/ALIGN_SELFSPEC.md`](docs/ALIGN_SELFSPEC.md) §0/§2、[`docs/CROSSCHECK.md`](docs/CROSSCHECK.md) §10。
 
 ## selfspec 对齐结果 · 两阶段训练 + POPE + llama.cpp(Qwen3-0.6B)
 
 > 本段是按简历 selfspec 逐条补齐的对齐结果,LLM 全线统一为 **Qwen3-0.6B**(hidden 1024)。
 > Flickr8k captioning 旗舰同样已迁到 Qwen3(见下方 SOTA 段,BLEU-4 **32.91** / CIDEr **94.0**,略胜旧 Qwen2.5 轨)。
-> 旧 Qwen2.5 / SmolLM2 产物已归档至 `checkpoints/_archive_non_spec/`,不再作对标口径。硬数据与复核见 [`AGENT_CROSSCHECK.md`](AGENT_CROSSCHECK.md) §10。
+> 旧 Qwen2.5 / SmolLM2 产物已归档至 `checkpoints/_archive_non_spec/`,不再作对标口径。硬数据与复核见 [`docs/CROSSCHECK.md`](docs/CROSSCHECK.md) §10。
 
 ### 两阶段训练(LLaVA v1.5 配方)
 
@@ -322,27 +322,30 @@ CLIP-ViT-L/14@336 (~1.7 GB) · Qwen3-0.6B (~1.2 GB)。CLIP-B/32 & SmolLM2-360M /
 
 ```
 vlm/
-├── README.md             # 本文件
-├── requirements.txt      # 依赖清单
-├── setup_env.md          # 环境详情
-├── .gitignore
-├── model/
-│   ├── __init__.py
-│   ├── vision_encoder.py # CLIP-ViT 视觉塔 (冻结, 分辨率/维度按加载的模型自适应)
-│   ├── projector.py      # 2 层 MLP (唯一可训层, 维度从 vision/llm config 自动对齐)
-│   └── vlm.py            # 三段拼装 + forward + generate (ChatML eos 含 <|im_end|>)
-├── tests/
-│   └── test_forward.py   # 前向验证
-├── data/                 # Flickr1K 真数据 + toy 合成数据 (.gitignore)
-├── checkpoints/          # 权重存档 (.gitignore)
-├── train.py              # projector 训练 (支持 --grad-accum / --init-projector 微调)
-├── evaluate.py           # corpus + sentence BLEU-4 评测
-└── inference.py          # 单图推理
+├── README.md               # 项目门面 (唯一根级文档)
+├── requirements.txt · .gitignore
+├── train.py                # stage-1 · projector 对齐训练
+├── train_sft.py            # stage-2 · LoRA(q/v)+ projector 联合 SFT
+├── evaluate.py             # captioning corpus/sentence BLEU 评测
+├── inference.py            # 单图推理
+├── app.py                  # Gradio demo
+├── model/                  # vision_encoder(CLIP) · projector(MLP) · vlm(三段拼装)
+├── data/                   # dataset · sft_dataset · prepare_flickr8k · fetch_coco_images
+│   └── _archive/           # 废弃数据集 prep 脚本 (flickr30k / flickr / toy)
+├── benchmark/              # eval_coco_metrics · evaluate_pope · export_onnx · profile_latency · migration_analysis.md
+├── tools/                  # merge_lora (合并 LoRA→GGUF 前置)
+├── tests/                  # test_forward
+├── docs/                   # CROSSCHECK · ALIGN_SELFSPEC · 评测/面试文档 (benchmark_landscape / pitch / talkshop_qa / quantization_plan / llamacpp_pipeline / ...)
+│   └── process/            # 试错/迁移/规划归档 (ROADMAP / AGENT_HANDOFF / MIGRATE_TO_UBUNTU / setup_env / s2_aerial_plan)
+├── logs/                   # 当前 evidence JSON/日志 (POPE / Flickr8k / PPL / latency)
+│   └── _archive/           # 试错日志归档 (.gitignore, 仅本地)
+├── checkpoints/            # 权重 (.gitignore); _archive_non_spec/ = 归档的 Qwen2.5/SmolLM2 轨
+├── models/ · thirdparty/ · onnx/   # HF/GGUF 缓存 · llama.cpp · ONNX 产物 (.gitignore)
 ```
 
 ## 关键决策 (面试可讲)
 
-见规划文档第七章 "面试 talk shop 备料"。核心 5 问：
+完整备料见 [`docs/talkshop_qa.md`](docs/talkshop_qa.md) 与 [`docs/pitch.md`](docs/pitch.md)。核心 5 问：
 
 1. **为什么 2 层 MLP 不用 Q-Former?** LLaVA v1.5 消融证明 MLP 优于 Q-Former, 参数少 10x, 训练成本低 10x
 2. **为什么冻结 CLIP + LLM?** CLIP 已对齐语言语义, projector 只学线性映射; LLM 冻结保通用能力
