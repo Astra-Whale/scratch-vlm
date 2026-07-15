@@ -221,3 +221,17 @@ llama.cpp 的 mmproj GGUF，与 **LoRA 合并后**的 Qwen3 GGUF 组合，在量
 - **不要**加 `--clip-model-is-vision`：openai CLIP 仓库 config 是嵌套的 `vision_config`/`text_config`，
   该 flag 会把整个 config 误当 vision hparams；走默认路（加载完整 `CLIPModel` 读 `vision_config`）。
 - mmproj 的 projector 输出维度必须 = LLM `n_embd`（Qwen3-0.6B = **1024**），本项目 projector 已自动对齐。
+
+---
+
+## 在 Jetson Orin (sm_87) 上构建 GPU 版
+
+本机 dev 构建是 CPU-only（`-DGGML_CUDA=OFF`）用于 PPL/server 验证。部署到 Orin NX 8GB 要 CUDA 加速版:
+
+```bash
+bash tools/build_llama_orin.sh          # 就地编 ./thirdparty/llama.cpp
+# 等价于: cmake -B build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=87 -DGGML_CUDA_F16=ON
+```
+
+运行时加 `-ngl 99` 把所有层 offload 到 GPU(Jetson 统一内存,比 CPU 快 2–4×)。
+GGUF / mmproj 产物硬件无关,从开发机直接拷贝。完整部署 runbook 见 [`../benchmark/deploy_orin_nx_8g.md`](../benchmark/deploy_orin_nx_8g.md)。

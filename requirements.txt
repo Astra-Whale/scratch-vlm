@@ -1,3 +1,7 @@
+# x86 开发机 (RTX 5060 Ti / Blackwell): torch>=2.7 + CUDA 12.6+ 从 pytorch.org。
+# Jetson Orin (aarch64): torch/torchvision 必须用 NVIDIA Jetson 专用 wheel
+#   (JetPack 6.2 → torch 2.5-2.6 / CUDA 12.6 / py3.10, 需 numpy==1.26.1 + cuSPARSELt),
+#   pytorch.org 通用轮子在 Jetson 无 GPU 加速。见 benchmark/deploy_orin_nx_8g.md。
 torch>=2.6.0
 torchvision>=0.21.0
 transformers>=4.44.0
