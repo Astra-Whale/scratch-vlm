@@ -1,12 +1,12 @@
 {
   "device": "NVIDIA GeForce RTX 5060 Ti",
   "dtype": "bf16",
-  "vision_encode_ms": 15.3,
-  "generate_1tok_ms": 21.4,
-  "generate_16tok_ms": 131.2,
-  "generate_32tok_ms": 248.3,
-  "prefill_ms_incl_576visual_prompt": 14.1,
-  "decode_per_token_ms": 7.29,
-  "decode_tok_per_s": 137.1,
-  "vision_share_of_32tok_pct": 6.2
+  "vision_encode_ms": 14.8,
+  "generate_1tok_ms": 31.3,
+  "generate_16tok_ms": 191.6,
+  "generate_32tok_ms": 363.6,
+  "prefill_ms_incl_576visual_prompt": 20.7,
+  "decode_per_token_ms": 10.64,
+  "decode_tok_per_s": 94.0,
+  "vision_share_of_32tok_pct": 4.1
 }

@@ -48,3 +48,10 @@ logs/_archive/
 
 # 私有文档 (面试话术/简历对齐/agent 交接, 本地保留不公开)
 docs/_private/
+
+# 废弃数据集 prep 脚本 (本地留存不公开)
+data/_archive/
+
+# ONNX 导出工具 (备用部署路, 本地留存)
+benchmark/export_onnx.py
+onnx/

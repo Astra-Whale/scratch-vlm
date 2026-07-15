@@ -55,26 +55,15 @@ def test_shapes_and_forward():
 
     # ============ [1] 加载 VLM ============
     # ============ 模型选型 ============
-    # D1 里程碑仅验证前向 pipeline, 用小模型省下载:
-    # - Vision: CLIP-B/32 via modelscope openai-mirror (~350MB, 本地拉到 weights/ 下)
-    # - LLM:    SmolLM2-360M-Instruct (HF cache 已有, 零下载)
-    #
-    # 训练/评测阶段切换到 LLaVA v1.5 官方选型: CLIP-ViT-L/14 + Qwen2.5-0.5B
+    # 默认用当前架构: CLIP-ViT-L/14@336 + Qwen3-0.6B。
     # 通过环境变量 VLM_VISION / VLM_LLM 可覆盖默认。
-    # 用正斜杠路径 (Windows 上 transformers 校验 repo_id 会把 \ 当成非法字符)
-    from pathlib import Path
-    _clip_base = (Path(_ROOT) / "models" / "models" / "openai-mirror--clip-vit-base-patch32")
-    _ms_snapshot = _clip_base / "snapshots" / "master"
-    if _ms_snapshot.is_dir():
-        default_vision = _ms_snapshot.as_posix()
-    else:
-        default_vision = _clip_base.as_posix()
+    _local_qwen3 = os.path.join(_ROOT, "weights", "Qwen3-0.6B")
+    default_llm = _local_qwen3 if os.path.isdir(_local_qwen3) else "Qwen/Qwen3-0.6B"
 
-    vision_name = os.environ.get("VLM_VISION", default_vision)
-    llm_name = os.environ.get("VLM_LLM", "HuggingFaceTB/SmolLM2-360M-Instruct")
+    vision_name = os.environ.get("VLM_VISION", "openai/clip-vit-large-patch14-336")
+    llm_name = os.environ.get("VLM_LLM", default_llm)
 
     print(f"\n[1] 加载 VLM (vision={vision_name}, llm={llm_name})...")
-    print(f"    (D1 默认用 CLIP-B/32 加速下载; 训练阶段换 L/14)")
     t0 = time.time()
     model = ScratchVLM(
         vision_model_name=vision_name,

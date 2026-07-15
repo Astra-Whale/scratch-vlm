@@ -1,14 +1,14 @@
 """
 VLM 评测脚本 · BLEU-4 + baseline 对比
 
-对 val set (default: data/flickr_1k/flickr_1k_val.jsonl) 每张图:
+对 val set (default: data/flickr8k/test.jsonl) 每张图:
     1. 生成 caption (greedy, max 30 tokens)
     2. 与该图的 5 条 GT caption 算 max BLEU-4
     3. 汇总 corpus 平均 BLEU-4
 
 支持 baseline 模式 (--baseline):
     不加载 projector 权重, 用随机初始化 projector 跑一遍,
-    对比 "训后 vs 未训" 效果差异, 证明训练确���有价值。
+    对比 "训后 vs 未训" 效果差异, 证明训练确实有价值。
 
 BLEU-4 手工实现 (免第三方依赖):
     - Modified n-gram precision (1..4)
@@ -17,13 +17,13 @@ BLEU-4 手工实现 (免第三方依赖):
 
 用法:
     # 评测训好的 projector
-    python evaluate.py --ckpt checkpoints/projector_flickr1k.pt
+    python evaluate.py --ckpt checkpoints/projector_stage1_qwen3_best.pt
 
     # 未训基线对比
     python evaluate.py --baseline
 
     # 前 20 张图快速试
-    python evaluate.py --ckpt checkpoints/projector_flickr1k.pt --max-samples 20
+    python evaluate.py --ckpt checkpoints/projector_stage1_qwen3_best.pt --max-samples 20
 """
 import os
 import sys
@@ -179,14 +179,14 @@ def corpus_bleu4(results: list):
 # ==========================================================
 def parse_args():
     p = argparse.ArgumentParser()
-    p.add_argument("--ckpt", type=str, default="checkpoints/projector_flickr1k.pt",
+    p.add_argument("--ckpt", type=str, default="checkpoints/projector_stage1_qwen3_best.pt",
                    help="projector checkpoint")
-    p.add_argument("--data", type=str, default="data/flickr_1k/flickr_1k_val.jsonl",
-                   help="val JSONL")
-    p.add_argument("--image-root", type=str, default="data/flickr_1k/images",
+    p.add_argument("--data", type=str, default="data/flickr8k/test.jsonl",
+                   help="val/test JSONL")
+    p.add_argument("--image-root", type=str, default="data/flickr8k/images",
                    help="图像根目录")
-    p.add_argument("--max-samples", type=int, default=100,
-                   help="评测多少张 unique 图 (val 一共 100 张)")
+    p.add_argument("--max-samples", type=int, default=1000,
+                   help="评测多少张 unique 图")
     p.add_argument("--max-new-tokens", type=int, default=30)
     p.add_argument("--dtype", type=str, default="bf16", choices=["fp16", "bf16", "fp32"])
     p.add_argument("--baseline", action="store_true",
@@ -243,11 +243,8 @@ def main():
         print(f"[ckpt] {ckpt_path}: trained_steps={ckpt.get('trained_steps')}, "
               f"final_loss={ckpt.get('final_loss')}")
     else:
-        default_vision = (_ROOT / "weights" / "models" /
-                          "openai-mirror--clip-vit-base-patch32" /
-                          "snapshots" / "master").as_posix()
-        vision_name = default_vision
-        llm_name = "HuggingFaceTB/SmolLM2-360M-Instruct"
+        vision_name = "openai/clip-vit-large-patch14-336"
+        llm_name = "Qwen/Qwen3-0.6B"
         print("[baseline] 未加载 projector, 用随机初始化跑基线")
 
     # ---- CLI 覆盖 (跨平台迁移: ckpt 里可能存的是旧机器的绝对路径) ----
@@ -265,13 +262,8 @@ def main():
         or (len(vision_name) > 1 and vision_name[1] == ":")
     )
     if _is_local_path and not Path(vision_name).exists():
-        _local_default = (_ROOT / "weights" / "models" /
-                          "openai-mirror--clip-vit-base-patch32" /
-                          "snapshots" / "master")
-        if _local_default.is_dir():
-            print(f"[warn] ckpt 记录的 vision 路径不存在 ({vision_name}), "
-                  f"回退到本地默认 CLIP: {_local_default.as_posix()}")
-            vision_name = _local_default.as_posix()
+        print(f"[warn] ckpt 记录的 vision 路径不存在 ({vision_name}), 回退到 openai/clip-vit-large-patch14-336")
+        vision_name = "openai/clip-vit-large-patch14-336"
 
     # 加载 model
     print(f"[model] vision={vision_name}")

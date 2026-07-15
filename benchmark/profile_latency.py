@@ -12,7 +12,7 @@
 输出 stdout + logs/latency_profile.json。
 
 用法:
-  python benchmark/profile_latency.py --ckpt checkpoints/projector_L14_qwenInstruct_ft_best.pt
+  python benchmark/profile_latency.py --ckpt checkpoints/projector_stage1_qwen3_best.pt
 """
 import os
 import sys
@@ -31,8 +31,8 @@ from model.vlm import ScratchVLM, IMAGE_TOKEN
 
 def parse_args():
     p = argparse.ArgumentParser()
-    p.add_argument("--ckpt", type=str, default="checkpoints/projector_L14_qwenInstruct_ft_best.pt")
-    p.add_argument("--image", type=str, default="data/flickr_1k/images/6317293855.jpg")
+    p.add_argument("--ckpt", type=str, default="checkpoints/projector_stage1_qwen3_best.pt")
+    p.add_argument("--image", type=str, default="data/flickr8k/images/001225fa28936c2df2fa611779f80bc2.jpg")
     p.add_argument("--dtype", type=str, default="bf16", choices=["bf16", "fp16"])
     p.add_argument("--iters", type=int, default=8, help="每个测点重复次数取均值")
     p.add_argument("--out", type=str, default="logs/latency_profile.json")
@@ -47,7 +47,7 @@ def main():
     ck = torch.load(args.ckpt, map_location="cpu", weights_only=False)
     model = ScratchVLM(
         vision_model_name=ck.get("vision_name", "openai/clip-vit-large-patch14-336"),
-        llm_model_name=ck.get("llm_name", "Qwen/Qwen2.5-0.5B-Instruct"),
+        llm_model_name=ck.get("llm_name", "weights/Qwen3-0.6B"),
         dtype=dtype, device=device,
     ).to(device)
     model.eval()

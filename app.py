@@ -24,7 +24,7 @@ _ROOT = Path(__file__).parent
 sys.path.insert(0, str(_ROOT))
 from model.vlm import ScratchVLM, IMAGE_TOKEN
 
-CKPT = os.environ.get("VLM_CKPT", "checkpoints/projector_L14_qwenInstruct_ft_best.pt")
+CKPT = os.environ.get("VLM_CKPT", "checkpoints/projector_stage1_qwen3_best.pt")
 PROMPT = (f"<|im_start|>user\n{IMAGE_TOKEN}\nDescribe this image.<|im_end|>\n"
           f"<|im_start|>assistant\n")
 
@@ -39,7 +39,7 @@ def load_model(quant: str):
     ck = torch.load(CKPT, map_location="cpu", weights_only=False)
     m = ScratchVLM(
         vision_model_name=ck.get("vision_name", "openai/clip-vit-large-patch14-336"),
-        llm_model_name=ck.get("llm_name", "Qwen/Qwen2.5-0.5B-Instruct"),
+        llm_model_name=ck.get("llm_name", "weights/Qwen3-0.6B"),
         dtype=torch.bfloat16, device=device,
     ).to(device)
     m.projector.load_state_dict(ck["projector_state_dict"])
@@ -83,8 +83,8 @@ def build_ui():
     with gr.Blocks(title="scratch-vlm · 端侧 VLM demo") as demo:
         gr.Markdown(
             "# scratch-vlm · 散装端侧 VLM\n"
-            "CLIP-ViT-L/14@336 (冻结) + MLP projector (3.94M, 唯一可训) + "
-            "Qwen2.5-0.5B-Instruct (冻结)。上传图片生成描述,观察端侧显存/延迟。"
+            "CLIP-ViT-L/14@336 (冻结) + MLP projector (4.20M, 唯一可训) + "
+            "Qwen3-0.6B (冻结)。上传图片生成描述,观察端侧显存/延迟。"
         )
         with gr.Row():
             with gr.Column():
@@ -97,7 +97,7 @@ def build_ui():
                 out_text = gr.Textbox(label="生成的 caption", lines=3)
                 out_metrics = gr.Textbox(label="端侧指标", lines=2)
         btn.click(caption, inputs=[img, quant, mnt], outputs=[out_text, out_metrics])
-        ex_dir = _ROOT / "data" / "flickr_1k" / "images"
+        ex_dir = _ROOT / "data" / "flickr8k" / "images"
         if ex_dir.is_dir():
             exs = [str(p) for p in sorted(ex_dir.glob("*.jpg"))[:6]]
             if exs:

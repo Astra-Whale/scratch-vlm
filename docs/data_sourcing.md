@@ -204,7 +204,7 @@ done
 - **好消息:drop-in 兼容**。本项目 `data/dataset.py` 现已用 ChatML(`<|im_start|>user\n<image>\n{q}<|im_end|>\n<|im_start|>assistant\n` + `{answer}<|im_end|>`),Qwen3 正是这套 ChatML,`eos=<|im_end|>` 也一致,**无需改模板结构**。
 - **必做:SFT 时关掉 thinking**。VLM captioning/VQA 不需要推理段,且 LLaVA 数据的 gpt turn 里没有 `<think>`。应在 apply chat template 时传 `enable_thinking=False`(或手动在 assistant 起始拼空 `<think>\n\n</think>\n\n`),否则训练目标与推理格式不一致、且浪费 token。
 - **注意 eos**:训练/推理都用 `<|im_end|>`(151645)作为 turn 结束;`generation_config` 把 `<|endoftext|>`(151643)也列为 eos,自定义生成循环时两者都要当停止符。
-- 现仓库用的是 `Qwen2.5-0.5B`(`weights/weights/Qwen--Qwen2.5-0.5B`),同为 ChatML + `<|im_end|>`,换到 Qwen3-0.6B 只需增加 thinking 关闭处理。
+- 仓库现用 `Qwen3-0.6B`(本地 `weights/Qwen3-0.6B`),ChatML + `<|im_end|>`,SFT 已按需关闭 thinking。
 
 ### 降级阶梯(C)
 
@@ -212,7 +212,7 @@ done
 |---|---|---|---|
 | 0 | `Qwen/Qwen3-0.6B` | config/tokenizer 实测已下,权重 1.4GB 已探测 | **推荐**,ChatML 原生兼容 |
 | 1(镜像) | `hf-mirror.com/Qwen/Qwen3-0.6B` 或 ModelScope `Qwen/Qwen3-0.6B` | hf-mirror 实测与直连同速(~160KB/s) | 若直连拉权重慢可切镜像,格式完全一致 |
-| 2(已有) | `Qwen/Qwen2.5-0.5B`(仓库现用) | 本地已有 | 兜底,同 ChatML,无 thinking 负担 |
+| 2(兜底) | `Qwen/Qwen2.5-0.5B` | 早期轨,已归档 | 同 ChatML、无 thinking 负担;仅作退路 |
 
 ---
 

@@ -16,7 +16,7 @@ Week 2 D2 · Projector 训练脚本
 期望输出:
     - stdout 打印每步 loss
     - 训练日志写到 logs/train_run_YYYYMMDD_HHMMSS.log
-    - projector 权重保存到 checkpoints/projector_toy.pt
+    - projector 权重保存到 checkpoints/projector_stage1_qwen3.pt
 """
 import os
 import sys
@@ -51,19 +51,16 @@ from data.dataset import MVPCaptionDataset, collate_fn
 def parse_args():
     p = argparse.ArgumentParser(description="train MLP projector for scratch-vlm")
     # 数据
-    p.add_argument("--data", type=str, default="data/toy.jsonl",
+    p.add_argument("--data", type=str, default="data/flickr8k/train.jsonl",
                    help="JSONL 数据集路径")
-    p.add_argument("--image-root", type=str, default="data/toy_images",
+    p.add_argument("--image-root", type=str, default="data/flickr8k/images",
                    help="图像根目录 (相对路径解析基准)")
     p.add_argument("--question", type=str, default="Describe this image.",
                    help="固定问句 (放在 <image> 之后)")
     # 模型
-    p.add_argument("--vision", type=str,
-                   default=str((_ROOT / "models" / "models" /
-                                "openai-mirror--clip-vit-base-patch32" /
-                                "snapshots" / "master").as_posix()),
+    p.add_argument("--vision", type=str, default="openai/clip-vit-large-patch14-336",
                    help="CLIP 模型 (本地路径或 HF repo id)")
-    p.add_argument("--llm", type=str, default="HuggingFaceTB/SmolLM2-360M-Instruct",
+    p.add_argument("--llm", type=str, default="weights/Qwen3-0.6B",
                    help="LLM (HF repo id 或本地路径)")
     p.add_argument("--init-projector", type=str, default=None,
                    help="从已有 checkpoint 载入 projector 权重作为初始化 (微调/续训); "
@@ -86,7 +83,7 @@ def parse_args():
     p.add_argument("--val-batches", type=int, default=4,
                    help="每次 val 采样多少 batch (快速估算, 不遍历全部 val)")
     # 输出
-    p.add_argument("--out", type=str, default="checkpoints/projector_toy.pt",
+    p.add_argument("--out", type=str, default="checkpoints/projector_stage1_qwen3.pt",
                    help="保存 projector 权重的路径")
     p.add_argument("--log-dir", type=str, default="logs", help="日志目录")
     p.add_argument("--seed", type=int, default=42)

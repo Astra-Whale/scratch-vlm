@@ -85,7 +85,7 @@ CLIP + projector 打包为 llama.cpp mmproj GGUF(590MB),与合并 LoRA 后的 Qw
 
 ### 推理开销
 
-batch=1 推理显存峰值 ~1.6GB;profile 见 `logs/latency_profile.json`,脚本 `benchmark/profile_latency.py`。
+5060 Ti · bf16 · batch=1 实测:视觉编码 14.8ms(一次性)+ prefill 20.7ms + decode **94 tok/s**(memory-bandwidth-bound)。视觉编码仅占 32-token 生成的 4.1%。`logs/latency_profile.json` / `benchmark/profile_latency.py`。
 
 ## 目录结构
 
@@ -98,7 +98,7 @@ scratch-vlm/
 ├── app.py                 # Gradio demo
 ├── model/                 # vision_encoder(CLIP) · projector(MLP) · vlm(拼装+forward+generate)
 ├── data/                  # dataset · sft_dataset · prepare_flickr8k · fetch_coco_images
-├── benchmark/             # eval_coco_metrics · evaluate_pope · export_onnx · profile_latency · deploy_orin_nx_8g.md
+├── benchmark/             # eval_coco_metrics · evaluate_pope · profile_latency · deploy_orin_nx_8g.md
 ├── tools/                 # merge_lora (合并 LoRA→导 GGUF 前置) · build_llama_orin.sh
 ├── tests/                 # test_forward
 ├── docs/                  # 技术笔记 (llamacpp_pipeline · benchmark_landscape · data_sourcing)

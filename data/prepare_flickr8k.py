@@ -87,7 +87,7 @@ if __name__ == "__main__":
     print("\n[done] 训练 + 标准 test 评测:")
     print("  python train.py --data data/flickr8k/train.jsonl --val-data data/flickr8k/val.jsonl \\")
     print("     --image-root data/flickr8k/images --vision openai/clip-vit-large-patch14-336 \\")
-    print("     --llm Qwen/Qwen2.5-0.5B-Instruct --init-projector checkpoints/projector_L14_qwenInstruct_ft_best.pt \\")
+    print("     --llm weights/Qwen3-0.6B --init-projector checkpoints/projector_stage1_qwen3_best.pt \\")
     print("     --steps 2000 --batch 4 --grad-accum 4 --lr 2e-4 --warmup 20 --val-every 100 \\")
     print("     --out checkpoints/projector_flickr8k.pt")
     print("  python evaluate.py --ckpt checkpoints/projector_flickr8k.pt \\")

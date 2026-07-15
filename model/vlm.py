@@ -33,7 +33,7 @@ class ScratchVLM(nn.Module):
     def __init__(
         self,
         vision_model_name: str = "openai/clip-vit-large-patch14",
-        llm_model_name: str = "Qwen/Qwen2.5-0.5B",
+        llm_model_name: str = "Qwen/Qwen3-0.6B",
         dtype: torch.dtype = torch.float16,
         device: str = "cuda",
     ):
