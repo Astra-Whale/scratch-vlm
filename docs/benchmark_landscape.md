@@ -1,22 +1,17 @@
-# 图像 Captioning 性能 Baseline 全谱坐标系
+# 图像 Captioning 性能 Baseline 坐标系
 
-**Date**: 2026-07-14
-**Owner**: 徐悦
-**Purpose**: 为 scratch-vlm 建立 captioning 性能对标的**完整坐标系**(数据集 × 指标 × 时代),把本项目 **Flickr8k 标准 test corpus BLEU-4 = 31.76%** 诚实地放进去,并回答"是否应补报 CIDEr/METEOR/SPICE"。
+captioning 性能对标的坐标系(数据集 × 指标 × 时代),用于给本项目的 Flickr8k 结果(BLEU-4 32.91 / CIDEr 0.940)定位。
 
-> **与已有文档的分工(避免重复)**:
-> - `docs/competitor_benchmark.md` 已覆盖**同类极简 / 端侧项目定位**(nanoVLM / TinyLLaVA / MobileVLM / Moondream)和 corpus-vs-sentence BLEU 铁律 —— 本文不重复,只做**增量**。
-> - 本文增量 = ①三大数据集规模表 ②五大指标对比表(重点讲 **CIDEr 是现代主指标、BLEU-4 已相对过时**)③**按时代的模型 × 数据集 × 指标大表(补齐 CIDEr 维度)** ④ 31.76% 的坐标定位 ⑤补 CIDEr 的成本/价值建议。
-> - **诚实原则**:所有数字带来源 URL;二手/转引或拿不准的一律标 **[待核]**;跨数据集 / 跨 tokenizer / corpus-vs-sentence **不可直接比较**。
+> 标注约定:数字带来源 URL;二手/转引或拿不准的标 **[待核]**;跨数据集 / 跨 tokenizer / corpus-vs-sentence **不可直接比较**。
 
 ---
 
 ## 零、TL;DR(先读这个)
 
 1. **现代 captioning 主指标是 CIDEr(不是 BLEU-4)**。2015 年 CIDEr 提出后,所有主流 leaderboard(COCO Karpathy)以 CIDEr-D 为**首要排序键**,BLEU-4/METEOR/ROUGE/SPICE 为辅。BLEU-4 仍报,但**已不是 SOTA 竞争维度**。
-2. **我们只报了 BLEU-4,没报 CIDEr —— 相对现代坐标系是"缺了主轴"**。这不是错误(BLEU-4 依然是合法的 corpus 指标),但对标现代工作时"不在同一根轴上"。
-3. **31.76% 是 Flickr8k 的 BLEU-4,不能和 COCO 的 40+ 直接比**:数据集不同、指标不同(BLEU vs CIDEr)、赛道不同(冻结主干 + 3.94M adapter vs 十亿级全量微调)。
-4. **建议补 CIDEr/METEOR/SPICE(用 pycocoevalcap)** —— **零训练成本、纯 eval、预估半天**,价值高:让本项目的数字落到现代主轴上,面试时"我报了 CIDEr"比"我只有 BLEU-4"专业得多。
+2. **本项目已用 pycocoevalcap 补齐 CIDEr/BLEU/METEOR/ROUGE**(Flickr8k:CIDEr 0.940 / BLEU-4 32.91),落在现代主轴上。
+3. **32.91 是 Flickr8k 的 BLEU-4,不能和 COCO 的 40+ 直接比**:数据集不同、指标不同(BLEU vs CIDEr)、规模不同(冻结主干 + 4.20M adapter vs 十亿级全量微调)。
+4. **量纲提醒**:CIDEr 以 100 为基准(COCO SOTA 130–155),BLEU-4 以 100% 为基准 —— 两者不可相减。
 
 ---
 
@@ -50,16 +45,16 @@
 | **CIDEr / CIDEr-D** (2015) | **专为 captioning 设计** | **TF-IDF 加权 1–4 gram 余弦相似度**,先 stemming;IDF 压低跨图高频泛词、TF 突出该图显著词 | **通常 >1,以 100 为量纲**(COCO SOTA ~130–155) | ✅ **现代首要主指标** | ①量纲和 BLEU 完全不同(不要混淆 40 vs 130)②对词序敏感 ③会过度加权琐碎细节 ④需多参考才有意义 |
 | **SPICE** (2016) | 专为 captioning 设计 | 解析成**场景图**(对象/属性/关系三元组)算 F 值,**语义级** | 0–1 或 %(COCO ~20–27) | 辅助(与 CIDEr 互补) | ①需依存句法解析 + Java ②对重复句处理差 ③与人类判断相关性最高(0.88 vs CIDEr 0.43 vs METEOR 0.53)但计算重 |
 
-**核心结论(面试可讲)**:
+**核心结论**:
 - **为什么 CIDEr 取代 BLEU-4 成为主指标**:BLEU 源自机器翻译,只算 n-gram 精度、对"哪些词对这张图重要"无感;CIDEr 用 TF-IDF **突出该图独有的显著内容、压低"a/the/man"这类跨图泛词**,天然契合"一图多参考"的 captioning 场景,与人类判断相关性更高。所以 2016 年后论文表以 **CIDEr-D 为首要排序键**,并列时依次看 SPICE → METEOR → ROUGE → BLEU。
-- **量纲陷阱(最容易翻车)**:BLEU-4 是 0–100% 尺度(SOTA 约 40),CIDEr 是以 100 为基准的尺度(SOTA 约 130–155)。**"我 31.76"和"SOTA 140"不是一个量纲,不能相减**。
+- **量纲陷阱**:BLEU-4 是 0–100% 尺度(SOTA 约 40),CIDEr 是以 100 为基准的尺度(SOTA 约 130–155),两者不能相减。
 - **SPIDEr** = CIDEr + SPICE 的线性组合,兼顾流畅度与语义,部分 RL 工作用它做 reward。
 
 来源:
 - CIDEr:<https://ar5iv.labs.arxiv.org/html/1411.5726>(arXiv 1411.5726, Vedantam et al. 2015)
 - SPICE:<https://panderson.me/images/SPICE.pdf> · <https://link.springer.com/chapter/10.1007/978-3-319-46454-1_24>(SPICE vs CIDEr vs METEOR 与人判相关性 0.88/0.43/0.53)
 - METEOR / ROUGE / BLEU 机制与陷阱:<https://arxiv.org/pdf/2008.12009>(NLG 指标综述)· COCO 评测协议:<https://arxiv.org/pdf/1504.00325>
-- corpus vs sentence / 多参考陷阱:见 `docs/competitor_benchmark.md` 第三章"三条铁律"(不重复)
+- corpus vs sentence BLEU 不等价、多参考陷阱:NLG 指标综述 <https://arxiv.org/pdf/2008.12009>
 
 ---
 
@@ -76,7 +71,7 @@
 | Show-Attend-Tell soft/hard | Flickr30k | ~19.1 / 19.9 | ~0.49–0.53(旧尺度)**[待核]** | |
 | Show-Attend-Tell hard | COCO | ~25.0 | — | |
 
-> **本项目直接对标锚点**:我们 Flickr8k 标准 test **corpus BLEU-4 = 31.76%**,同数据集 Show-Attend-Tell 是 **~19.5–21.3** → **明显超出**(约 +10 个 BLEU 点)。这是**同数据集、同指标(BLEU-4)、同参考数(5)** 的干净对比,可辩护性最强。
+> **同数据集对标锚点**:本项目 Flickr8k 标准 test BLEU-4 = **32.91**,同数据集 Show-Attend-Tell 是 **~19.5–21.3**(同指标、同 5 参考)。
 
 ### 3.2 注意力 + 强化学习时代(2016–2018)
 
@@ -141,73 +136,35 @@
 
 ---
 
-## 四、把本项目 31.76% 放进坐标系(诚实定位)
+## 四、把本项目结果放进坐标系
 
-### 4.1 我们的数字落在哪
+### 4.1 数字落点
 
 - **数据集**:Flickr8k 标准 test(1,000 图,5 参考)
-- **指标**:corpus BLEU-4 = **31.76%**(n-gram 0.762 / 0.457 / 0.242 / 0.121,带 BP,regex 分词)
+- **指标**(pycocoevalcap 官方):CIDEr **0.940** / BLEU-4 **32.91** / METEOR 0.276 / ROUGE-L 0.573
 - **训练**:从零训练于 Flickr8k train(5,999 图),train/test 不相交、无泄漏
-- **架构**:冻结 CLIP-ViT-L/14@336 + 冻结 Qwen2.5-0.5B-Instruct + 只训 3.94M MLP projector(0.49%)
+- **架构**:冻结 CLIP-ViT-L/14@336 + 冻结 Qwen3-0.6B + 只训 4.20M MLP projector(0.46%)
 
 ### 4.2 与谁可比 / 不可比(一张判断表)
 
 | 对比对象 | 可比? | 理由 |
 |---------|-------|------|
-| **Show-Attend-Tell @ Flickr8k(~19.5–21.3 B4)** | ✅ **最可比** | 同数据集、同指标(B4)、同参考数(5)。我们 31.76 **明显超出** |
+| **Show-Attend-Tell @ Flickr8k(~19.5–21.3 B4)** | ✅ **最可比** | 同数据集、同指标(B4)、同参考数(5);本项目 32.91 高出约 11–13 点 |
 | Show-Attend-Tell @ Flickr30k/COCO | ⚠️ 半可比 | 同指标不同数据集,只能说"同量级/超出",不能声称追平 |
 | COCO SOTA BLEU-4(40–45) | ❌ 不可比 | **不同数据集**(COCO≫Flickr8k)+ 十亿参数全量微调 + 百万级数据 |
 | **任何 CIDEr 数字(114–155)** | ❌ **完全不可比** | **不同指标 + 不同量纲**。CIDEr 以 100 为基准,BLEU-4 以 100% 为基准,**不能相减/类比** |
 | ClipCap / BLIP-2(冻结主干思路) | ⚠️ 血缘可比 | 架构理念同源(冻结+小 adapter),但数据集/规模差太多,只能讲"同一方法论谱系" |
 
-### 4.3 四条最该注意的对标陷阱(针对我们)
+### 4.3 四条对标陷阱
 
-1. **量纲陷阱**:别把 31.76(BLEU-4)和 SOTA 的 140(CIDEr)放一起 —— 不是一根轴。
-2. **数据集陷阱**:31.76 是 Flickr8k,COCO 的 40+ 不能直接压过来(COCO 大 15×、难度分布不同)。
-3. **tokenizer 陷阱**:我们用 regex 分词,论文标准是 PTBTokenizer(pycocoevalcap),**同一模型可差 ±1–2 BLEU 点** —— 已在 README 诚实标注。
-4. **赛道陷阱**:我们是冻结主干 + 3.94M adapter + 0.5~几个 epoch;SOTA 是全量微调 + 十亿参数 + 百万级数据。**"数字差距 ≠ 能力差距,是做的另一件事"**。
+1. **量纲陷阱**:BLEU-4(32.91)与 CIDEr(SOTA 140)不在一根轴,不能相减。
+2. **数据集陷阱**:32.91 是 Flickr8k,COCO 的 40+ 不能直接压过来(COCO 大 15×、难度分布不同)。
+3. **tokenizer 陷阱**:regex 分词与论文标准 PTBTokenizer 同一模型可差 ±1–2 BLEU 点(本项目官方指标已用 pycocoevalcap 的 PTBTokenizer)。
+4. **规模陷阱**:冻结主干 + 4.20M adapter vs SOTA 全量微调 + 十亿参数 + 百万级数据,是不同规模的工作。
 
-### 4.4 面试如何诚实陈述(话术)
+## 五、CIDEr / METEOR / ROUGE 补报
 
-> "我报的是 **Flickr8k 标准 test 的 corpus BLEU-4 = 31.76%**,方法学干净:从零训练、5 参考、train/test 无泄漏。同数据集上经典的 Show-Attend-Tell 大约 19–21,我明显超出 —— 这靠的是站在 CLIP-L + Qwen2.5 预训练主干肩上、只训 3.94M projector,正好证明'现代预训练 + 微型 adapter'的杠杆。
->
-> 我很清楚**现代 captioning 主指标是 CIDEr 不是 BLEU-4**,而且 COCO SOTA 的 CIDEr 在 130–155 —— 但那是不同数据集、不同指标、十亿参数全量微调,和我'冻结主干 + 0.49% 可训'不是一个赛道。BLEU-4 在我这里是'对齐已学到'的验证信号,不是 KPI;我的交付物是端侧可部署性(1.6GB 推理显存、Orin 兼容、量化曲线)。
->
-> 如果需要 apples-to-apples 对标现代工作,我可以用 pycocoevalcap 补报 CIDEr/METEOR/SPICE —— 纯 eval、半天就能出。"
+用 `pycocoevalcap`(PTBTokenizer)在 Flickr8k 1000-test 上一次跑齐:**CIDEr 0.940 / BLEU-4 32.91 / BLEU-1 75.8 / METEOR 0.276 / ROUGE-L 0.573**。脚本 `benchmark/eval_coco_metrics.py`,结果 JSON `logs/eval_flickr8k_qwen3_test_1000.json`。
 
----
-
-## 五、是否补报 CIDEr / METEOR / SPICE(建议:补,优先级中)
-
-### 5.1 结论:**建议补,用 `pycocoevalcap`,优先级排在量化/迁移之后但值得做**
-
-### 5.2 成本
-
-| 项 | 成本 | 说明 |
-|----|------|------|
-| 训练 | **0** | 纯 eval,不动模型、不用重训 |
-| 依赖 | 低 | `pip install pycocoevalcap`(自带 BLEU/METEOR/ROUGE/CIDEr/SPICE)|
-| 环境坑 | 中 | **SPICE 需要 Java(JRE)+ Stanford CoreNLP**;METEOR 也依赖 Java。CIDEr/BLEU/ROUGE 是纯 Python 无坑 |
-| 工程量 | **~半天** | 把 evaluate.py 的生成结果转成 pycocoevalcap 的 `{img_id: [caption]}` 格式,喂 `COCOEvalCap` |
-| 顺带收益 | — | pycocoevalcap 用 **PTBTokenizer**,可**同时消除 4.3 的 tokenizer 陷阱**,拿到与论文完全同工具链的 BLEU-4 |
-
-### 5.3 价值
-
-- **落到现代主轴**:CIDEr 是现代首要指标,报了它,本项目的数字才"在图上有坐标",而非只在 2015 年的 BLEU 轴上。
-- **一次性四指标**:pycocoevalcap 一次跑出 BLEU-1/4 + METEOR + ROUGE-L + CIDEr + SPICE,**双报都省了**。
-- **可辩护性**:面试被问"为什么不报 CIDEr"时,"我报了"远胜于"我只有 BLEU-4"。
-- **顺带修 tokenizer 陷阱**:换成 PTBTokenizer 后,BLEU-4 变成与论文严格同工具链,31.76 这个数就更硬。
-
-### 5.4 落地建议
-
-1. **最小动作(推荐先做)**:只接 pycocoevalcap 的 **CIDEr + BLEU(PTBTokenizer)** —— 纯 Python 无 Java 坑,半天内出;把 README 里 "corpus BLEU-4 31.76%" 升级成 "BLEU-4 xx.x / CIDEr xx.x(pycocoevalcap 标准工具链)"。
-2. **完整动作(有余力再做)**:装 Java 补齐 METEOR + SPICE,凑齐现代五指标。
-3. **预期**:Flickr8k 上 CIDEr 落点预估在 **60–90** 区间 **[待核,需实跑]**(Flickr8k 参考少、图简单,CIDEr 通常低于 COCO;不要拿去和 COCO 130+ 比)。
-4. **诚实标注**:补报后仍须注明"Flickr8k ≠ COCO,CIDEr 不跨数据集比"。
-
----
-
-## 六、给 ROADMAP 的一句话反哺
-
-- **补 CIDEr 是"低成本高性价比"项**:不烧 GPU、半天工程,却能把项目从"只有 2015 年 BLEU 轴"拉到"现代 CIDEr 主轴",建议插入到量化(P2)之后、作为一个独立小任务(P2.5)。
-- **对标叙事定稿**:对外一律讲"Flickr8k 标准 test、同数据集超越 Show-Attend-Tell、现代主指标是 CIDEr(我可补报)、我的赛道是端侧全流程不是刷榜" —— 这套话术准确、可辩护、且主动暴露了对现代指标体系的认知(加分)。
+- CIDEr/BLEU/ROUGE 为纯 Python;METEOR/SPICE 需 Java(本项目未跑 SPICE)。
+- Flickr8k 的 CIDEr 0.940 与 COCO 的 130–155 不跨数据集比(参考少、图简单、语料 TF-IDF 不同)。

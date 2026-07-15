@@ -98,10 +98,10 @@ scratch-vlm/
 ├── app.py                 # Gradio demo
 ├── model/                 # vision_encoder(CLIP) · projector(MLP) · vlm(拼装+forward+generate)
 ├── data/                  # dataset · sft_dataset · prepare_flickr8k · fetch_coco_images
-├── benchmark/             # eval_coco_metrics · evaluate_pope · export_onnx · profile_latency · migration_analysis.md
-├── tools/                 # merge_lora (合并 LoRA→导 GGUF 前置)
+├── benchmark/             # eval_coco_metrics · evaluate_pope · export_onnx · profile_latency · deploy_orin_nx_8g.md
+├── tools/                 # merge_lora (合并 LoRA→导 GGUF 前置) · build_llama_orin.sh
 ├── tests/                 # test_forward
-├── docs/                  # 设计/评测/迁移笔记 (llamacpp_pipeline · quantization_plan · benchmark_landscape · CROSSCHECK · ...)
+├── docs/                  # 技术笔记 (llamacpp_pipeline · benchmark_landscape · data_sourcing)
 ├── logs/                  # 评测/训练 evidence (POPE / Flickr8k / PPL / latency 的 JSON+日志)
 ├── checkpoints/           # 权重 (gitignored;旗舰 projector_stage1_qwen3_best.pt 已入库)
 └── weights/               # HF/GGUF/合并模型缓存 (gitignored)

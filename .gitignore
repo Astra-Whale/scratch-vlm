@@ -45,3 +45,6 @@ onnx/
 
 # 试错日志归档 (移出跟踪, 仅本地保留)
 logs/_archive/
+
+# 私有文档 (面试话术/简历对齐/agent 交接, 本地保留不公开)
+docs/_private/

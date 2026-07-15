@@ -214,7 +214,7 @@ llama.cpp 的 mmproj GGUF，与 **LoRA 合并后**的 Qwen3 GGUF 组合，在量
 | `Is there a train in the image?` | `Yes` | ✅ 正确 |
 
 **结论**：自训 CLIP+projector+Qwen3(LoRA 合并) 全链路在 llama.cpp **Q4_K_M 量化运行时**里正确工作，
-视觉 grounding 穿过量化 LLM 保持准确。这打通了 selfspec 的"CLIP+projector 打包 + 端侧多模态推理"链路。
+视觉 grounding 穿过量化 LLM 保持准确。
 
 ### 关键坑
 - legacy 脚本不在 path 里带 `gguf` 模块 → 需 `PYTHONPATH=<llama.cpp>/gguf-py`。
