@@ -91,7 +91,7 @@ vlm/
 ├── MIGRATE_TO_UBUNTU.md          ← 迁移到 Ubuntu 的详细 checklist（原始指令）
 ├── AGENT_HANDOFF.md              ← 本文件
 ├── requirements.txt              ← 依赖清单（版本未 pin）
-├── .gitignore                    ← 忽略 data/ checkpoints/ models/ 等大文件
+├── .gitignore                    ← 忽略 data/ checkpoints/ weights/ 等大文件
 
 ├── model/                        ← 三段模型拼装
 │   ├── __init__.py
@@ -130,7 +130,7 @@ vlm/
 │   ├── eval_baseline_100.json    ← 100 张 val 详细结果
 │   └── eval_trained_100.json
 
-└── models/models/openai-mirror--clip-vit-base-patch32/
+└── weights/weights/openai-mirror--clip-vit-base-patch32/
     └── snapshots/master/          ← 605MB 本地 CLIP-B/32（用户已复制过来, 无需重新下）
         ├── pytorch_model.bin (605MB)
         └── config.json / preprocessor_config.json / tokenizer* / ...

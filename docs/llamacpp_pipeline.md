@@ -5,9 +5,9 @@
 
 - 日期：2026-07-14
 - 平台：Linux x86_64（Ubuntu 6.8 内核），24 核 CPU，31G 内存
-- 输入模型：`/home/l/SKDWorks/米来/vlm/models/Qwen3-0.6B/`（HF 格式，`Qwen3ForCausalLM`，hidden=1024，28 层，596M 参数，原生 ChatML）
+- 输入模型：`/home/l/SKDWorks/米来/vlm/weights/Qwen3-0.6B/`（HF 格式，`Qwen3ForCausalLM`，hidden=1024，28 层，596M 参数，原生 ChatML）
 - llama.cpp 源码：`/home/l/SKDWorks/米来/vlm/thirdparty/llama.cpp`（commit `657e011`，ggml 0.16.0）
-- GGUF 产物：`/home/l/SKDWorks/米来/vlm/models/gguf/`
+- GGUF 产物：`/home/l/SKDWorks/米来/vlm/weights/gguf/`
 
 ---
 
@@ -45,8 +45,8 @@ cmake --build build --config Release -j 24 \
 ```bash
 cd "/home/l/SKDWorks/米来/vlm/thirdparty/llama.cpp"
 CUDA_VISIBLE_DEVICES="" PYTHONPATH="gguf-py" conda run -n dl python convert_hf_to_gguf.py \
-  "/home/l/SKDWorks/米来/vlm/models/Qwen3-0.6B/" \
-  --outfile "/home/l/SKDWorks/米来/vlm/models/gguf/qwen3-0.6b-f16.gguf" \
+  "/home/l/SKDWorks/米来/vlm/weights/Qwen3-0.6B/" \
+  --outfile "/home/l/SKDWorks/米来/vlm/weights/gguf/qwen3-0.6b-f16.gguf" \
   --outtype f16
 ```
 
@@ -63,8 +63,8 @@ env `dl` 为 torch 2.11.0+cu128、transformers 5.13.1、python 3.11；虽是 CUD
 ```bash
 cd "/home/l/SKDWorks/米来/vlm/thirdparty/llama.cpp"
 ./build/bin/llama-quantize \
-  "/home/l/SKDWorks/米来/vlm/models/gguf/qwen3-0.6b-f16.gguf" \
-  "/home/l/SKDWorks/米来/vlm/models/gguf/qwen3-0.6b-q4_k_m.gguf" Q4_K_M
+  "/home/l/SKDWorks/米来/vlm/weights/gguf/qwen3-0.6b-f16.gguf" \
+  "/home/l/SKDWorks/米来/vlm/weights/gguf/qwen3-0.6b-q4_k_m.gguf" Q4_K_M
 ```
 
 **结果**：量化 **约 4.3 秒** 完成。日志内部统计：
@@ -94,11 +94,11 @@ head -c 90000 /tmp/wikitext-2-raw/wiki.test.raw > /tmp/wiki.slice.raw
 
 # f16 PPL
 cd "/home/l/SKDWorks/米来/vlm/thirdparty/llama.cpp"
-./build/bin/llama-perplexity -m "/home/l/SKDWorks/米来/vlm/models/gguf/qwen3-0.6b-f16.gguf" \
+./build/bin/llama-perplexity -m "/home/l/SKDWorks/米来/vlm/weights/gguf/qwen3-0.6b-f16.gguf" \
   -f /tmp/wiki.slice.raw -c 512 -t 12
 
 # Q4_K_M PPL（同切片同参数）
-./build/bin/llama-perplexity -m "/home/l/SKDWorks/米来/vlm/models/gguf/qwen3-0.6b-q4_k_m.gguf" \
+./build/bin/llama-perplexity -m "/home/l/SKDWorks/米来/vlm/weights/gguf/qwen3-0.6b-q4_k_m.gguf" \
   -f /tmp/wiki.slice.raw -c 512 -t 12
 ```
 
@@ -122,7 +122,7 @@ cd "/home/l/SKDWorks/米来/vlm/thirdparty/llama.cpp"
 # 起 server：加载 Q4_K_M，-ngl 0 强制 0 层上 GPU（纯 CPU），CUDA_VISIBLE_DEVICES="" 双保险
 cd "/home/l/SKDWorks/米来/vlm/thirdparty/llama.cpp"
 CUDA_VISIBLE_DEVICES="" ./build/bin/llama-server \
-  -m "/home/l/SKDWorks/米来/vlm/models/gguf/qwen3-0.6b-q4_k_m.gguf" \
+  -m "/home/l/SKDWorks/米来/vlm/weights/gguf/qwen3-0.6b-q4_k_m.gguf" \
   --host 127.0.0.1 --port 8099 -c 2048 -t 12 -ngl 0
 # 日志：srv llama_server: listening on http://127.0.0.1:8099
 ```
@@ -173,8 +173,8 @@ data: {"index":0,"content":" capital","...}
 | 用途 | 路径 |
 |---|---|
 | 源码/构建 | `/home/l/SKDWorks/米来/vlm/thirdparty/llama.cpp/build/bin/` |
-| f16 GGUF | `/home/l/SKDWorks/米来/vlm/models/gguf/qwen3-0.6b-f16.gguf` |
-| Q4_K_M GGUF | `/home/l/SKDWorks/米来/vlm/models/gguf/qwen3-0.6b-q4_k_m.gguf` |
+| f16 GGUF | `/home/l/SKDWorks/米来/vlm/weights/gguf/qwen3-0.6b-f16.gguf` |
+| Q4_K_M GGUF | `/home/l/SKDWorks/米来/vlm/weights/gguf/qwen3-0.6b-q4_k_m.gguf` |
 | PPL 语料切片 | `/tmp/wiki.slice.raw`（源自 wikitext-2-raw `wiki.test.raw` 前 90KB） |
 
 ## 复现要点 / 注意
@@ -193,15 +193,15 @@ llama.cpp 的 mmproj GGUF，与 **LoRA 合并后**的 Qwen3 GGUF 组合，在量
 
 ### 步骤
 
-1. **合并 stage-2 LoRA 进 Qwen3**（`tools_merge_lora.py`）→ 完整 HF 模型 `models/qwen3_stage2_merged/`
+1. **合并 stage-2 LoRA 进 Qwen3**（`tools_merge_lora.py`）→ 完整 HF 模型 `weights/qwen3_stage2_merged/`
    （用 `ScratchVLM` 保证 `<image>` token resize 与训练一致，再 `merge_and_unload`）。
 2. **merged → GGUF f16 → Q4_K_M**：`convert_hf_to_gguf.py` + `llama-quantize`
-   → `models/gguf/qwen3-stage2-merged-q4_k_m.gguf`（**372 MiB**）。
+   → `weights/gguf/qwen3-stage2-merged-q4_k_m.gguf`（**372 MiB**）。
 3. **CLIP + projector → mmproj GGUF**（legacy `convert_image_encoder_to_gguf.py`）：
    - 构造 `llava.projector`：本项目 projector 的 `linear1→mm.0`、`linear2→mm.2`（对应 LLaVA `Sequential(Linear, GELU, Linear)` 索引 0/1/2）。
    - `--projector-type mlp`，`--model-dir` 指向完整 CLIP-L/14@336 HF 快照，`PYTHONPATH=gguf-py`。
    - 脚本默认**丢弃 CLIP 最后一层**（到 `blk.22`），正好对应本项目 `VisionEncoder(select_layer=-2)`，**特征层严格一致**。
-   → `models/gguf/mmproj-model-f16.gguf`（**590 MB**，CLIP-L f16 + projector）。
+   → `weights/gguf/mmproj-model-f16.gguf`（**590 MB**，CLIP-L f16 + projector）。
 4. **构建**：`cmake --build build --target llama-mtmd-cli`。
 
 ### 端到端验证（`llama-mtmd-cli`，`--temp 0`，纯 CPU）

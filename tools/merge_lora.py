@@ -10,10 +10,10 @@ import torch
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from model.vlm import ScratchVLM
 
-OUT = Path("models/qwen3_stage2_merged")
+OUT = Path("weights/qwen3_stage2_merged")
 LORA = "checkpoints/vlm_stage2_mix2/lora_adapter"
 
-model = ScratchVLM("openai/clip-vit-large-patch14-336", "models/Qwen3-0.6B",
+model = ScratchVLM("openai/clip-vit-large-patch14-336", "weights/Qwen3-0.6B",
                    dtype=torch.float16, device="cpu")
 from peft import PeftModel
 model.llm = PeftModel.from_pretrained(model.llm, LORA)

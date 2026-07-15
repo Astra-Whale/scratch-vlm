@@ -14,7 +14,7 @@
 
 **当前对齐总览**:19 项 claim 中,**纯代码 workstream 已基本全部对齐**:
 
-- ✅ **#4 Qwen3-0.6B**:已换,本地 `models/Qwen3-0.6B/`,`<think>` 已在 `vlm.py` 剥离。
+- ✅ **#4 Qwen3-0.6B**:已换,本地 `weights/Qwen3-0.6B/`,`<think>` 已在 `vlm.py` 剥离。
 - ✅ **#6/#8/#9/#10 两阶段训练**:stage-1 projector 对齐(Flickr8k)+ stage-2 LoRA(q/v)联合 projector SFT(LLaVA-Instruct + 平衡 VQAv2)。
 - ✅ **#12/#13/#15 GGUF Q4_K_M + llama.cpp + llama-server 流式**:Qwen3 GGUF Q4_K_M 0.48GB/3.12×,SSE 流式跑通(`docs/llamacpp_pipeline.md`)。
 - ✅ **#16/#17 POPE + 幻觉边际收益**:avg F1 **78.59**(random 83.4/popular 78.2/adversarial 74.2),并得**数据配比消融链**(见 CROSSCHECK §10 更新3)。
@@ -57,7 +57,7 @@
 | 1 | LLaVA v1.5 架构 | CLIP-L/14 + MLP + Qwen-Instruct 三段, ChatML 对齐 | ✅ 完全命中 |
 | 2 | CLIP-ViT-L/14 | CLIP-ViT-L/14 @ 336px | ✅ 命中(且更精细,336 是 v1.5 官方选) |
 | 3 | 2 层 MLP projector | Linear(1024→2048)+GELU+Linear(2048→896), 3.94M | ✅ 命中 |
-| 4 | **Qwen3-0.6B** | **Qwen3-0.6B**(本地 `models/Qwen3-0.6B/`,`<think>` 剥离) | ✅ 已对齐(2026-07-14) |
+| 4 | **Qwen3-0.6B** | **Qwen3-0.6B**(本地 `weights/Qwen3-0.6B/`,`<think>` 剥离) | ✅ 已对齐(2026-07-14) |
 | 5 | 多模态输入拼接 · chat template | ChatML wrapping · `<image>` token 替换逻辑 | ✅ 命中 |
 | 6 | 两阶段训练 | stage-1 projector 对齐 + stage-2 LoRA 联合 projector SFT | ✅ 已对齐 |
 | 7 | **LLaVA-Pretrain 子集** 训 projector | pretrain 用 Flickr8k;SFT 用 LLaVA-Instruct+VQAv2 | ⚠️ pretrain 数据集换(诚实叙事,方案D) |

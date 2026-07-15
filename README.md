@@ -290,7 +290,7 @@ python train.py --data data/flickr8k/train.jsonl \
                 --val-data data/flickr8k/val.jsonl \
                 --image-root data/flickr8k/images \
                 --vision openai/clip-vit-large-patch14-336 \
-                --llm models/Qwen3-0.6B \
+                --llm weights/Qwen3-0.6B \
                 --steps 3000 --batch 4 --grad-accum 4 --lr 2e-4 \
                 --dtype bf16 --val-every 50 \
                 --out checkpoints/projector_stage1_qwen3.pt
@@ -298,7 +298,7 @@ python train.py --data data/flickr8k/train.jsonl \
 # stage-2 · LoRA(q/v)+ projector 联合 SFT (LLaVA-Instruct + 平衡 VQAv2)
 python train_sft.py --data data/llava_instruct/sft_mix2.json \
                 --image-root data/coco/train2014 \
-                --vision openai/clip-vit-large-patch14-336 --llm models/Qwen3-0.6B \
+                --vision openai/clip-vit-large-patch14-336 --llm weights/Qwen3-0.6B \
                 --init-projector checkpoints/projector_stage1_qwen3_best.pt \
                 --steps 700 --batch 1 --grad-accum 16 --lr 2e-4 --lora-rank 16 \
                 --out checkpoints/vlm_stage2_mix2
@@ -311,12 +311,20 @@ python benchmark/evaluate_pope.py --projector-ckpt checkpoints/vlm_stage2_mix2/p
                    --pope-dir data/pope --image-root data/coco/val2014
 
 # 端侧多模态推理 (llama.cpp mmproj, 见 docs/llamacpp_pipeline.md)
-llama-mtmd-cli -m models/gguf/qwen3-stage2-merged-q4_k_m.gguf \
-               --mmproj models/gguf/mmproj-model-f16.gguf --image <img>.jpg -p "Describe this image."
+llama-mtmd-cli -m weights/gguf/qwen3-stage2-merged-q4_k_m.gguf \
+               --mmproj weights/gguf/mmproj-model-f16.gguf --image <img>.jpg -p "Describe this image."
 ```
 
 **模型首次需从 HuggingFace 下载**(之后 `~/.cache/huggingface/` 复用):
 CLIP-ViT-L/14@336 (~1.7 GB) · Qwen3-0.6B (~1.2 GB)。CLIP-B/32 & SmolLM2-360M / Qwen2.5 为早期归档轨。
+
+### 权重与复现
+
+重型资产(数据集、HF/GGUF 缓存、LoRA adapter)均 **gitignored**,仓库只含代码+文档+evidence。
+
+- **无 GPU 即可复核旗舰指标**:`python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_qwen3_test_1000.json --no-spice` → 复现 CIDEr 0.940 / BLEU-4 32.91(仅用已提交 JSON)。
+- **旗舰 projector 已入库**(`checkpoints/projector_stage1_qwen3_best.pt`,8.4MB,`git add -f`):下载 CLIP-L + Qwen3 后即可跑 `evaluate.py` captioning,无需重训。
+- **其余权重**:stage-2 LoRA adapter(~600MB)/ GGUF / 合并模型体积大,不入库 —— 按 [`docs/CROSSCHECK.md`](docs/CROSSCHECK.md) §4 与 [`docs/llamacpp_pipeline.md`](docs/llamacpp_pipeline.md) 重建,或另行索取。
 
 ## 目录结构
 
@@ -340,7 +348,7 @@ vlm/
 ├── logs/                   # 当前 evidence JSON/日志 (POPE / Flickr8k / PPL / latency)
 │   └── _archive/           # 试错日志归档 (.gitignore, 仅本地)
 ├── checkpoints/            # 权重 (.gitignore); _archive_non_spec/ = 归档的 Qwen2.5/SmolLM2 轨
-├── models/ · thirdparty/ · onnx/   # HF/GGUF 缓存 · llama.cpp · ONNX 产物 (.gitignore)
+├── weights/ · thirdparty/ · onnx/   # HF/GGUF 缓存 · llama.cpp · ONNX 产物 (.gitignore)
 ```
 
 ## 关键决策 (面试可讲)

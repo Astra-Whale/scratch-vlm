@@ -185,10 +185,10 @@ curl -L -o benchmark/pope/images/COCO_val2014_000000310196.jpg \
 ```bash
 BASE=https://huggingface.co/Qwen/Qwen3-0.6B/resolve/main
 for f in config.json tokenizer_config.json generation_config.json tokenizer.json; do
-  curl -L -o models/qwen3-0.6b/$f "$BASE/$f"
+  curl -L -o weights/qwen3-0.6b/$f "$BASE/$f"
 done
 # 全量权重(后续执行步,约 1.4GB):
-# hf download Qwen/Qwen3-0.6B --local-dir models/qwen3-0.6b
+# hf download Qwen/Qwen3-0.6B --local-dir weights/qwen3-0.6b
 ```
 
 ### Chat template / thinking mode 兼容性(**已下 tokenizer_config.json 实测**)
@@ -204,7 +204,7 @@ done
 - **好消息:drop-in 兼容**。本项目 `data/dataset.py` 现已用 ChatML(`<|im_start|>user\n<image>\n{q}<|im_end|>\n<|im_start|>assistant\n` + `{answer}<|im_end|>`),Qwen3 正是这套 ChatML,`eos=<|im_end|>` 也一致,**无需改模板结构**。
 - **必做:SFT 时关掉 thinking**。VLM captioning/VQA 不需要推理段,且 LLaVA 数据的 gpt turn 里没有 `<think>`。应在 apply chat template 时传 `enable_thinking=False`(或手动在 assistant 起始拼空 `<think>\n\n</think>\n\n`),否则训练目标与推理格式不一致、且浪费 token。
 - **注意 eos**:训练/推理都用 `<|im_end|>`(151645)作为 turn 结束;`generation_config` 把 `<|endoftext|>`(151643)也列为 eos,自定义生成循环时两者都要当停止符。
-- 现仓库用的是 `Qwen2.5-0.5B`(`models/models/Qwen--Qwen2.5-0.5B`),同为 ChatML + `<|im_end|>`,换到 Qwen3-0.6B 只需增加 thinking 关闭处理。
+- 现仓库用的是 `Qwen2.5-0.5B`(`weights/weights/Qwen--Qwen2.5-0.5B`),同为 ChatML + `<|im_end|>`,换到 Qwen3-0.6B 只需增加 thinking 关闭处理。
 
 ### 降级阶梯(C)
 

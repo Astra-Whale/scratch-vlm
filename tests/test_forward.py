@@ -56,7 +56,7 @@ def test_shapes_and_forward():
     # ============ [1] 加载 VLM ============
     # ============ 模型选型 ============
     # D1 里程碑仅验证前向 pipeline, 用小模型省下载:
-    # - Vision: CLIP-B/32 via modelscope openai-mirror (~350MB, 本地拉到 models/ 下)
+    # - Vision: CLIP-B/32 via modelscope openai-mirror (~350MB, 本地拉到 weights/ 下)
     # - LLM:    SmolLM2-360M-Instruct (HF cache 已有, 零下载)
     #
     # 训练/评测阶段切换到 LLaVA v1.5 官方选型: CLIP-ViT-L/14 + Qwen2.5-0.5B

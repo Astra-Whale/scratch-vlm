@@ -124,7 +124,7 @@ scp <windows_user>@<windows_ip>:/d/SKDWorks/米来/vlm/{requirements.txt,.gitign
 ### 方式 C · 只拷代码 + 到 Ubuntu 侧重新下模型/数据（省 U 盘容量）
 - Windows 侧只拷 **代码 + checkpoint** (~15 MB)：`model/`、`data/dataset.py`、`data/split_flickr.py`、`data/prepare_flickr.py`、`data/toy_dataset.py`、`tests/`、`train.py`、`inference.py`、`evaluate.py`、`README.md`、`benchmark/`、`checkpoints/`
 - Ubuntu 侧重新下：
-  - CLIP-B/32：`curl -L -o models/models/openai-mirror--clip-vit-base-patch32/snapshots/master/pytorch_model.bin ...`（原始 modelscope URL）
+  - CLIP-B/32：`curl -L -o weights/weights/openai-mirror--clip-vit-base-patch32/snapshots/master/pytorch_model.bin ...`（原始 modelscope URL）
   - SmolLM2-360M-Instruct：`huggingface-cli download HuggingFaceTB/SmolLM2-360M-Instruct`（走代理，HF API 直连应能过）
   - Flickr1K：`curl -L -o data/flickr_1k/images_flickr_1k_test.zip https://hf-mirror.com/datasets/nlphuji/flickr_1k_test_image_text_retrieval/resolve/main/images_flickr_1k_test.zip` + 跑 `python data/prepare_flickr.py`
 

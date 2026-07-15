@@ -243,7 +243,7 @@ def main():
         print(f"[ckpt] {ckpt_path}: trained_steps={ckpt.get('trained_steps')}, "
               f"final_loss={ckpt.get('final_loss')}")
     else:
-        default_vision = (_ROOT / "models" / "models" /
+        default_vision = (_ROOT / "weights" / "models" /
                           "openai-mirror--clip-vit-base-patch32" /
                           "snapshots" / "master").as_posix()
         vision_name = default_vision
@@ -265,7 +265,7 @@ def main():
         or (len(vision_name) > 1 and vision_name[1] == ":")
     )
     if _is_local_path and not Path(vision_name).exists():
-        _local_default = (_ROOT / "models" / "models" /
+        _local_default = (_ROOT / "weights" / "models" /
                           "openai-mirror--clip-vit-base-patch32" /
                           "snapshots" / "master")
         if _local_default.is_dir():

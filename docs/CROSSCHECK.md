@@ -27,7 +27,7 @@ python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_qwen3_test_1000.
 
 - conda env **`dl`**:Python 3.11,**torch 2.11+cu128**,transformers 5.13,torchao 0.17,pycocoevalcap,pyarrow。
 - 硬件:RTX 5060 Ti 16G(Blackwell **sm_120**)。Blackwell 需 torch ≥ 2.7 / CUDA 12.6+。
-- 离线跑加 `HF_HUB_OFFLINE=1`。模型:CLIP-L/14@336(HF cache)、**Qwen3-0.6B 本地 `models/Qwen3-0.6B/`**;(归档轨)Qwen2.5-0.5B-Instruct、CLIP-B/32、SmolLM2-360M。
+- 离线跑加 `HF_HUB_OFFLINE=1`。模型:CLIP-L/14@336(HF cache)、**Qwen3-0.6B 本地 `weights/Qwen3-0.6B/`**;(归档轨)Qwen2.5-0.5B-Instruct、CLIP-B/32、SmolLM2-360M。
 - `conda run -n dl` 会缓冲 stdout;要实时日志加 `PYTHONUNBUFFERED=1`。
 
 ## 3 · 权威硬数据(⚠️ 注意每行来自哪个数据集/ckpt)
@@ -75,7 +75,7 @@ python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_qwen3_test_1000.
 **代码**:`model/`(vlm/vision_encoder/projector)· `train.py`(--grad-accum / --init-projector)· `evaluate.py`(corpus+sentence BLEU / --quant int8|int4 / 路径 fallback)· `inference.py` · `app.py`(Gradio)· `data/*.py`(prepare_flickr8k 等)· `benchmark/`(profile_latency / export_onnx / eval_coco_metrics)
 **文档**:`README.md`(根)· `docs/`(CROSSCHECK / ALIGN_SELFSPEC / quantization_plan / benchmark_landscape / competitor_benchmark / talkshop_qa / pitch / cv_entry / data_sourcing / llamacpp_pipeline)· `docs/process/`(ROADMAP / AGENT_HANDOFF / MIGRATE_TO_UBUNTU / setup_env / s2_aerial_plan,试错/迁移/规划归档)· `benchmark/migration_analysis.md`
 **证据**:`logs/`(训练日志 + 各 eval JSON,已提交)
-**gitignored**:`checkpoints/`(权重)· `data/` blob · `models/`(缓存)· `onnx/`
+**gitignored**:`checkpoints/`(权重)· `data/` blob · `weights/`(缓存)· `onnx/`
 
 ## 6 · 易混淆点(交叉检查重点核对)
 
@@ -111,7 +111,7 @@ Agent 记忆库(`.claude/.../memory/`)有 `vlm-strategy-constraints`(8GB 上限 
 
 ## 10 · selfspec 对齐执行状态(2026-07-14 · 压缩前快照)
 
-**已完成**:#4 换 Qwen3-0.6B(本地 `models/Qwen3-0.6B/`,curl 续传绕过 hf-xet 挂死);stage-1 projector 对齐(`checkpoints/projector_stage1_qwen3_best.pt`,Flickr8k,eval caption 干净、`<think>` 已在 vlm.py 剥离);#26 窄核心(llama.cpp Qwen3 GGUF **Q4_K_M 0.48GB/3.12×**,PPL f16 19.63→Q4 21.35,llama-server SSE 流式跑通,见 `docs/llamacpp_pipeline.md`)。
+**已完成**:#4 换 Qwen3-0.6B(本地 `weights/Qwen3-0.6B/`,curl 续传绕过 hf-xet 挂死);stage-1 projector 对齐(`checkpoints/projector_stage1_qwen3_best.pt`,Flickr8k,eval caption 干净、`<think>` 已在 vlm.py 剥离);#26 窄核心(llama.cpp Qwen3 GGUF **Q4_K_M 0.48GB/3.12×**,PPL f16 19.63→Q4 21.35,llama-server SSE 流式跑通,见 `docs/llamacpp_pipeline.md`)。
 
 **进行中**:stage-2 LoRA SFT(`train_sft.py`,batch=2/accum=8/steps=300,输出 `checkpoints/vlm_stage2_lora/{projector.pt, lora_adapter/}`)。注:batch=4 会 OOM,必须 batch≤2。
 
@@ -171,7 +171,7 @@ python benchmark/evaluate_pope.py --projector-ckpt checkpoints/vlm_stage2_lora/p
 
 ### §10 更新 4(mmproj 多模态集成端到端跑通)· 2026-07-15
 - **#11 CLIP+projector 打包 + 端侧多模态推理达成**:自训视觉栈打包成 llama.cpp mmproj GGUF,与 LoRA 合并后 Qwen3 GGUF 组合,端到端图文推理跑通。
-- **产物**:`models/gguf/qwen3-stage2-merged-q4_k_m.gguf`(372MiB,LoRA 已合并)+ `models/gguf/mmproj-model-f16.gguf`(590MB,CLIP-L f16 + projector);工具 `tools_merge_lora.py`。
+- **产物**:`weights/gguf/qwen3-stage2-merged-q4_k_m.gguf`(372MiB,LoRA 已合并)+ `weights/gguf/mmproj-model-f16.gguf`(590MB,CLIP-L f16 + projector);工具 `tools_merge_lora.py`。
 - **方法**:LoRA merge_and_unload → GGUF → Q4_K_M;CLIP+projector 走 legacy `convert_image_encoder_to_gguf.py`(projector `linear1→mm.0`/`linear2→mm.2`,`--projector-type mlp`)。脚本默认丢 CLIP 末层到 `blk.22`,与 `VisionEncoder(select_layer=-2)` **特征层严格一致**。
 - **验证**(`llama-mtmd-cli`,纯 CPU,`--temp 0`,火车图 COCO_val2014_000000001171):"Describe"→ 准确描述黑色火车+树,无幻觉;"Is there a train?"→ `Yes` 正确。
 - **坑**:legacy 脚本需 `PYTHONPATH=gguf-py`;**勿加** `--clip-model-is-vision`(CLIP config 嵌套);projector 输出维须 = LLM n_embd(1024)。详见 `docs/llamacpp_pipeline.md` mmproj 专节。
