@@ -8,38 +8,41 @@
 ## 0 · 交叉检查者请先读这条
 
 **最省事的验证路径(无需 GPU / 模型 / 重新下载数据):**
-仓库已提交 `logs/eval_flickr8k_test_1000.json`(1000 条 `{image, gen, refs}`)。直接:
+仓库已提交 `logs/eval_flickr8k_qwen3_test_1000.json`(Qwen3 旗舰,1000 条 `{image, gen, refs}`)。直接:
 ```bash
 conda activate dl
-python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_test_1000.json --no-spice
+python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_qwen3_test_1000.json --no-spice
 ```
-应复现:**CIDEr 0.9268 · BLEU-4 31.73 · BLEU-1 76.16 · METEOR 0.2738 · ROUGE-L 0.5636**。
+应复现:**CIDEr 0.9403 · BLEU-4 32.91 · BLEU-1 75.77 · METEOR 0.2763 · ROUGE-L 0.5727**。
 这直接验证了旗舰指标,不依赖 checkpoint 或 flickr8k 图像(两者都 gitignored)。
+> 旧 Qwen2.5 轨的 `logs/eval_flickr8k_test_1000.json`(CIDEr 0.9268 / BLEU-4 31.73)仍在仓库作历史对照,但**旗舰口径已迁 Qwen3**;Qwen2.5/SmolLM2 ckpt 已归档 `checkpoints/_archive_non_spec/`。
 
 ---
 
 ## 1 · 项目一句话
 
-面向 **DJI 端侧 AI 系统工程师岗** 的作品级 demo。LLaVA v1.5 风格:**冻结** CLIP-ViT-L/14@336 + **冻结** Qwen2.5-0.5B-Instruct + **可训** 2 层 MLP projector(1024→2048→896,**3.94M,占总 ~801M 的 0.49%**)。卖点是端侧全流程(训练→推理→量化→迁移)+ 参数效率,不是刷 captioning 榜。
+面向 **DJI 端侧 AI 系统工程师岗** 的作品级 demo。LLaVA v1.5 风格:**冻结** CLIP-ViT-L/14@336 + **冻结** Qwen3-0.6B + **可训** 2 层 MLP projector(1024→2048→1024,**4.20M,占总 ~904M 的 0.46%**)。卖点是端侧全流程(训练→推理→量化→迁移)+ 参数效率,不是刷 captioning 榜。(Qwen2.5/SmolLM2 早期轨已归档 `checkpoints/_archive_non_spec/`。)
 
 ## 2 · 环境
 
 - conda env **`dl`**:Python 3.11,**torch 2.11+cu128**,transformers 5.13,torchao 0.17,pycocoevalcap,pyarrow。
 - 硬件:RTX 5060 Ti 16G(Blackwell **sm_120**)。Blackwell 需 torch ≥ 2.7 / CUDA 12.6+。
-- 离线跑加 `HF_HUB_OFFLINE=1`。模型在 HF cache:CLIP-L/14@336、Qwen2.5-0.5B-Instruct、(基线用)CLIP-B/32 本地 `models/`、SmolLM2-360M。
+- 离线跑加 `HF_HUB_OFFLINE=1`。模型:CLIP-L/14@336(HF cache)、**Qwen3-0.6B 本地 `models/Qwen3-0.6B/`**;(归档轨)Qwen2.5-0.5B-Instruct、CLIP-B/32、SmolLM2-360M。
 - `conda run -n dl` 会缓冲 stdout;要实时日志加 `PYTHONUNBUFFERED=1`。
 
 ## 3 · 权威硬数据(⚠️ 注意每行来自哪个数据集/ckpt)
 
-### 3a · 旗舰:干净可对标(Flickr8k proper split)
-- **ckpt**:`checkpoints/projector_flickr8k_best.pt`(**从零训练**于 Flickr8k train 5999 图,非 init)
-- **eval**:标准 Flickr8k **test 1000 图 × 5 参考**
-- **官方 pycocoevalcap**:**CIDEr 0.927(×100=92.7) · BLEU-4 31.73 · BLEU-1 76.2 · METEOR 0.274 · ROUGE-L 0.564**
-- 手写 corpus BLEU-4 **31.76%**(与官方 31.73 差 0.03 → 手写口径已被官方复核)
-- 对标:Show-Attend-Tell Flickr8k BLEU-4 ~19.5/21.3 → **超出约 10 点**(同数据集/指标/参考数)
+### 3a · 旗舰:干净可对标(Flickr8k proper split)· **Qwen3-0.6B**
+- **ckpt**:`checkpoints/projector_stage1_qwen3_best.pt`(**从零训练**于 Flickr8k train 5999 图,非 init;LLM=Qwen3-0.6B)
+- **eval**:标准 Flickr8k **test 1000 图 × 5 参考**(`logs/eval_flickr8k_qwen3_test_1000.json`)
+- **官方 pycocoevalcap**:**CIDEr 0.940(×100=94.0) · BLEU-4 32.91 · BLEU-1 75.77 · METEOR 0.276 · ROUGE-L 0.573**
+- 手写 corpus BLEU-4 **32.93%**(与官方 32.91 差 0.02 → 手写口径已被官方复核)
+- 对标:Show-Attend-Tell Flickr8k BLEU-4 ~19.5/21.3 → **超出约 11-13 点**(同数据集/指标/参考数)
+- 归档对照:旧 Qwen2.5 轨(`_archive_non_spec/projector_flickr8k_best.pt`)同口径 CIDEr 0.927/BLEU-4 31.73;Qwen3 hidden 1024>896 略增容量后小幅提升。
 
-### 3b · 架构开发期(⚠️ Flickr30k test-1k 子集,train-on-test,已被 3a 取代作对标)
-- **ckpt**:`checkpoints/projector_L14_qwenInstruct_ft_best.pt`
+### 3b · 架构开发期(⚠️ Flickr30k test-1k 子集,train-on-test,已被 3a 取代作对标;Qwen2.5,**已归档**)
+> §3b/3c/3d 均为 **Qwen2.5-0.5B-Instruct arch-dev 轨**,ckpt 已移入 `checkpoints/_archive_non_spec/`。量化的 spec 对齐交付以 §10 的 **GGUF Q4_K_M(Qwen3)** 为准;此处 torchao int8/int4 数字仅作早期探索记录。
+- **ckpt**:`_archive_non_spec/projector_L14_qwenInstruct_ft_best.pt`
 - **数据**:`data/flickr_1k/` 实为 **Flickr30k Karpathy test 的 1000 图**,900/100 内部切分(**训练用到了 test**)
 - corpus BLEU-4 **20.59%** / sentence 22.18%(100 val)。**仅作架构演进记录,勿用于论文对标。**
 
@@ -59,9 +62,9 @@ python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_test_1000.json -
 
 | 声明 | 复核命令 | 需要 |
 |---|---|---|
-| 3a 官方指标 | `python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_test_1000.json --no-spice` | 仅提交的 JSON(**无需模型/数据**) |
-| 3a 手写 BLEU | `python evaluate.py --ckpt checkpoints/projector_flickr8k_best.pt --data data/flickr8k/test.jsonl --image-root data/flickr8k/images --max-samples 1000` | ckpt + flickr8k 数据(均 gitignored,需重建) |
-| 3c 量化 | `python evaluate.py --ckpt checkpoints/projector_L14_qwenInstruct_ft_best.pt --quant int8 --max-samples 100` | ckpt + flickr_1k 数据 |
+| 3a 官方指标 | `python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_qwen3_test_1000.json --no-spice` | 仅提交的 JSON(**无需模型/数据**) |
+| 3a 手写 BLEU | `python evaluate.py --ckpt checkpoints/projector_stage1_qwen3_best.pt --data data/flickr8k/test.jsonl --image-root data/flickr8k/images --max-samples 1000` | ckpt + flickr8k 数据(均 gitignored,需重建) |
+| 3c 量化(归档轨) | `python evaluate.py --ckpt checkpoints/_archive_non_spec/projector_L14_qwenInstruct_ft_best.pt --quant int8 --max-samples 100` | 归档 ckpt + flickr_1k 数据 |
 | 3d latency | `python benchmark/profile_latency.py` | ckpt |
 | 数据重建(flickr8k) | 下 `jxie/flickr8k` 4 个 parquet 到 `data/flickr8k/` → `python data/prepare_flickr8k.py` | ~1.1GB 下载 |
 
@@ -78,9 +81,9 @@ python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_test_1000.json -
 
 1. **两套数据别混**:Flickr8k(3a,干净,旗舰)vs Flickr30k-test-1k(3b,train-on-test,旧)。`data/flickr_1k/` 名字叫 1k 但**是 Flickr30k 的 test split**。
 2. **量化/latency 数字在 arch-dev ckpt(3b/3c/3d)上测,不是 Flickr8k**。若要 Flickr8k 上的量化数需另跑。
-3. **CIDEr 跨数据集不可比**:Flickr8k 的 92.7 ≠ COCO SOTA 130-155(不同语料 TF-IDF)。
+3. **CIDEr 跨数据集不可比**:Flickr8k 的 94.0 ≠ COCO SOTA 130-155(不同语料 TF-IDF)。
 4. **BLEU 两种口径**:corpus(标准、可对标)vs sentence-level+平滑(内部追踪,偏高)。
-5. **手写 BLEU 已被官方 pycocoevalcap 复核**(31.76 vs 31.73)。
+5. **手写 BLEU 已被官方 pycocoevalcap 复核**(Qwen3: 32.93 vs 32.91;归档 Qwen2.5: 31.76 vs 31.73)。
 
 ## 7 · 已知坑(踩过并修复,供核对代码)
 
@@ -95,7 +98,7 @@ python benchmark/eval_coco_metrics.py --json logs/eval_flickr8k_test_1000.json -
 
 - **S2 航拍领域适配**:**已撤销**(2026-07-14 用户决定不做);历史 spec 仍留 `docs/s2_aerial_plan.md` 备查,不再作为待办。
 - **git 身份是占位** `徐悦 <xuyue@localhost>`(本地配置),需改真实邮箱。
-- **SOTA ckpt gitignored**(`*.pt`);若要开箱可跑可 `git add -f checkpoints/projector_flickr8k_best.pt`(7.5MB)。
+- **SOTA ckpt gitignored**(`*.pt`);若要开箱可跑可 `git add -f checkpoints/projector_stage1_qwen3_best.pt`(8.4MB)。
 - **无 git remote**;未推送。
 - **SPICE 未跑**(需大内存 Java、1000 图易卡);CIDEr 已是主指标。
 - **COCO 同轴对标未做**(需 COCO 训练,大成本且注定不 competes SOTA;结论:不比数字,比范式+效率,见 `docs/benchmark_landscape.md`)。

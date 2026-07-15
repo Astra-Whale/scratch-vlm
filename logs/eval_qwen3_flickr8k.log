@@ -1,0 +1,108 @@
+Failed to load /home/l/miniforge3/envs/dl/lib/python3.11/site-packages/torchao/_C_cutlass_90a.abi3.so: Could not load this library: /home/l/miniforge3/envs/dl/lib/python3.11/site-packages/torchao/_C_cutlass_90a.abi3.so
+Failed to load /home/l/miniforge3/envs/dl/lib/python3.11/site-packages/torchao/_C_mxfp8.cpython-310-x86_64-linux-gnu.so: Could not load this library: /home/l/miniforge3/envs/dl/lib/python3.11/site-packages/torchao/_C_mxfp8.cpython-310-x86_64-linux-gnu.so
+[ckpt] checkpoints/projector_stage1_qwen3_best.pt: trained_steps=2850, final_loss=None
+[model] vision=openai/clip-vit-large-patch14-336
+[model] llm=models/Qwen3-0.6B
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:  64%|██████▎   | 249/391 [00:00<00:00, 2428.98it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 2636.89it/s]
+[transformers] [1mCLIPVisionModel LOAD REPORT[0m from: openai/clip-vit-large-patch14-336
+Key                                                          | Status     |  | 
+-------------------------------------------------------------+------------+--+-
+text_model.encoder.layers.{0...11}.self_attn.v_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.out_proj.weight | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc2.weight            | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.out_proj.bias   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm2.weight        | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc1.bias              | UNEXPECTED |  | 
+visual_projection.weight                                     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc1.weight            | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.k_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.q_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.v_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm1.weight        | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.k_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm2.bias          | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc2.bias              | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.q_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm1.bias          | UNEXPECTED |  | 
+logit_scale                                                  | UNEXPECTED |  | 
+text_model.embeddings.token_embedding.weight                 | UNEXPECTED |  | 
+text_model.final_layer_norm.weight                           | UNEXPECTED |  | 
+text_model.embeddings.position_embedding.weight              | UNEXPECTED |  | 
+text_projection.weight                                       | UNEXPECTED |  | 
+text_model.final_layer_norm.bias                             | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 12258.05it/s]
+[ckpt] projector 权重加载完成
+[model] setup 耗时 5.2s
+[vram] 权重常驻显存: 1723 MB
+[data] 评测 1000 张图 (5000 条 GT caption)
+  [10/1000] avg BLEU-4 so far: 0.3035  (2s)
+  [20/1000] avg BLEU-4 so far: 0.3420  (4s)
+  [30/1000] avg BLEU-4 so far: 0.3488  (6s)
+  [40/1000] avg BLEU-4 so far: 0.3698  (7s)
+  [50/1000] avg BLEU-4 so far: 0.3457  (9s)
+  [60/1000] avg BLEU-4 so far: 0.3321  (11s)
+  [70/1000] avg BLEU-4 so far: 0.3461  (12s)
+  [80/1000] avg BLEU-4 so far: 0.3492  (14s)
+  [90/1000] avg BLEU-4 so far: 0.3481  (15s)
+  [100/1000] avg BLEU-4 so far: 0.3550  (17s)
+  [110/1000] avg BLEU-4 so far: 0.3463  (18s)
+  [120/1000] avg BLEU-4 so far: 0.3526  (20s)
+  [130/1000] avg BLEU-4 so far: 0.3528  (22s)
+  [140/1000] avg BLEU-4 so far: 0.3494  (23s)
+  [150/1000] avg BLEU-4 so far: 0.3534  (25s)
+  [160/1000] avg BLEU-4 so far: 0.3585  (27s)
+  [170/1000] avg BLEU-4 so far: 0.3499  (28s)
+  [180/1000] avg BLEU-4 so far: 0.3433  (30s)
+  [190/1000] avg BLEU-4 so far: 0.3414  (32s)
+  [200/1000] avg BLEU-4 so far: 0.3406  (33s)
+  [210/1000] avg BLEU-4 so far: 0.3393  (35s)
+  [220/1000] avg BLEU-4 so far: 0.3365  (37s)
+  [230/1000] avg BLEU-4 so far: 0.3349  (38s)
+  [240/1000] avg BLEU-4 so far: 0.3334  (40s)
+  [250/1000] avg BLEU-4 so far: 0.3323  (42s)
+  [260/1000] avg BLEU-4 so far: 0.3315  (43s)
+  [270/1000] avg BLEU-4 so far: 0.3301  (45s)
+  [280/1000] avg BLEU-4 so far: 0.3292  (47s)
+  [290/1000] avg BLEU-4 so far: 0.3293  (48s)
+  [300/1000] avg BLEU-4 so far: 0.3296  (50s)
+  [310/1000] avg BLEU-4 so far: 0.3274  (52s)
+  [320/1000] avg BLEU-4 so far: 0.3279  (53s)
+  [330/1000] avg BLEU-4 so far: 0.3274  (55s)
+  [340/1000] avg BLEU-4 so far: 0.3288  (57s)
+  [350/1000] avg BLEU-4 so far: 0.3316  (58s)
+  [360/1000] avg BLEU-4 so far: 0.3342  (60s)
+  [370/1000] avg BLEU-4 so far: 0.3348  (62s)
+  [380/1000] avg BLEU-4 so far: 0.3356  (63s)
+  [390/1000] avg BLEU-4 so far: 0.3368  (65s)
+  [400/1000] avg BLEU-4 so far: 0.3382  (67s)
+  [410/1000] avg BLEU-4 so far: 0.3392  (68s)
+  [420/1000] avg BLEU-4 so far: 0.3375  (70s)
+  [430/1000] avg BLEU-4 so far: 0.3366  (71s)
+  [440/1000] avg BLEU-4 so far: 0.3371  (73s)
+  [450/1000] avg BLEU-4 so far: 0.3400  (75s)
+  [460/1000] avg BLEU-4 so far: 0.3387  (76s)
+  [470/1000] avg BLEU-4 so far: 0.3391  (78s)
+  [480/1000] avg BLEU-4 so far: 0.3388  (80s)
+  [490/1000] avg BLEU-4 so far: 0.3396  (81s)
+  [500/1000] avg BLEU-4 so far: 0.3405  (83s)
+  [510/1000] avg BLEU-4 so far: 0.3398  (85s)
+  [520/1000] avg BLEU-4 so far: 0.3388  (86s)
+  [530/1000] avg BLEU-4 so far: 0.3385  (88s)
+  [540/1000] avg BLEU-4 so far: 0.3370  (90s)
+  [550/1000] avg BLEU-4 so far: 0.3349  (91s)
+  [560/1000] avg BLEU-4 so far: 0.3324  (93s)
+  [570/1000] avg BLEU-4 so far: 0.3314  (94s)
+  [580/1000] avg BLEU-4 so far: 0.3304  (96s)
+  [590/1000] avg BLEU-4 so far: 0.3301  (98s)
+  [600/1000] avg BLEU-4 so far: 0.3317  (99s)
+  [610/1000] avg BLEU-4 so far: 0.3328  (101s)
+  [620/1000] avg BLEU-4 so far: 0.3339  (103s)
+  [630/1000] avg BLEU-4 so far: 0.3344  (104s)
+  [640/1000] avg BLEU-4 so far: 0.3343  (106s)
+  [650/1000] avg BLEU-4 so far: 0.3323  (107s)
+  [660/1000] avg BLEU-4 so far: 0.3335  (109s)
+  [670/1000] avg BLEU-4 so far: 0.3341  (111s)
