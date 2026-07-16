@@ -1,0 +1,36 @@
+{
+  "random": {
+    "acc": 84.67,
+    "precision": 92.55,
+    "recall": 75.4,
+    "f1": 83.1,
+    "yes_ratio": 40.73,
+    "n": 3000,
+    "missing_img": 0,
+    "unparseable": 0,
+    "unparseable_ratio": 0.0
+  },
+  "popular": {
+    "acc": 79.0,
+    "precision": 81.25,
+    "recall": 75.4,
+    "f1": 78.22,
+    "yes_ratio": 46.4,
+    "n": 3000,
+    "missing_img": 0,
+    "unparseable": 0,
+    "unparseable_ratio": 0.0
+  },
+  "adversarial": {
+    "acc": 73.9,
+    "precision": 73.2,
+    "recall": 75.4,
+    "f1": 74.29,
+    "yes_ratio": 51.5,
+    "n": 3000,
+    "missing_img": 0,
+    "unparseable": 0,
+    "unparseable_ratio": 0.0
+  },
+  "avg_f1": 78.54
+}
