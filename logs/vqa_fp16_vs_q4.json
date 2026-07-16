@@ -1,0 +1,96 @@
+{
+  "n_pairs": 12,
+  "identical": 0,
+  "identical_ratio": 0.0,
+  "models": {
+    "fp16": "qwen3-stage2-merged-f16.gguf",
+    "q4_k_m": "qwen3-stage2-merged-q4_k_m.gguf",
+    "mmproj": "mmproj-model-f16.gguf"
+  },
+  "results": [
+    {
+      "image": "COCO_val2014_000000001171.jpg",
+      "prompt": "Describe this image.",
+      "fp16": "The image features a large, colorful train, likely a steam train, standing in the background. The train is decorated with various lights and decorations, creating a festive atmosphere. It is positioned in a park",
+      "q4_k_m": "The image features a black and white train with a white and black color scheme, standing in the background. The train is surrounded by a variety of trees, some of which are located in the foreground and",
+      "identical": false
+    },
+    {
+      "image": "COCO_val2014_000000001171.jpg",
+      "prompt": "What is the main subject of this image?",
+      "fp16": "The main subject of the image is a large, colorful train, likely a steam train, standing in the background.",
+      "q4_k_m": "The main subject of this image is a black and white train, which is a classic train model.",
+      "identical": false
+    },
+    {
+      "image": "COCO_val2014_000000003845.jpg",
+      "prompt": "Describe this image.",
+      "fp16": "The image features a large plate of food, consisting of a plate with a plate of rice and a plate of meat. The meat is placed on top of the rice, and there are two bowls of",
+      "q4_k_m": "The image features a plate with a large, white, and soft salmon fillet on it. There are two people sitting on the plate, enjoying their meal. One person is sitting on the left side",
+      "identical": false
+    },
+    {
+      "image": "COCO_val2014_000000003845.jpg",
+      "prompt": "What is the main subject of this image?",
+      "fp16": "The main subject of the image is a plate of food, consisting of a large plate with a plate of rice and a plate of meat. The plate of meat is placed on top of the rice,",
+      "q4_k_m": "The main subject of this image is a meal consisting of a plate with a dish of rice and a plate with a dish of fish. The dish of rice is placed on the left side of the plate",
+      "identical": false
+    },
+    {
+      "image": "COCO_val2014_000000006033.jpg",
+      "prompt": "Describe this image.",
+      "fp16": "The image features a man standing next to a large, brown and white dog, holding the dog's tail. The man is wearing a white shirt and a brown pants. The dog is standing on the",
+      "q4_k_m": "The scene is set in a busy city, with a man standing next to a large white and blue horse. The horse is being held by the man, who is wearing a white shirt. The man",
+      "identical": false
+    },
+    {
+      "image": "COCO_val2014_000000006033.jpg",
+      "prompt": "What is the main subject of this image?",
+      "fp16": "The main subject of the image is a man holding a brown and white dog, standing on a dirt road.",
+      "q4_k_m": "The main subject of the image is a man holding a white and blue dog in a dirt yard.",
+      "identical": false
+    },
+    {
+      "image": "COCO_val2014_000000007320.jpg",
+      "prompt": "Describe this image.",
+      "fp16": "The image features a white and black movie theater with a large screen displaying a video game. A person is standing in front of the screen, holding a white and black movie theater with a large screen displaying",
+      "q4_k_m": "The image features a person holding a white and blue video game controller, likely a Nintendo Wii controller, in a room. The controller is placed on a desk, with the person sitting next to it.",
+      "identical": false
+    },
+    {
+      "image": "COCO_val2014_000000007320.jpg",
+      "prompt": "What is the main subject of this image?",
+      "fp16": "The main subject of the image is a white, rectangular, and rectangular-shaped movie screen with a black background. The screen is positioned in the center of the image, and it displays a video game.",
+      "q4_k_m": "The image features a person holding a white, 3D-printed white, 3D-printed white, 3D-printed white, 3D-printed white, 3D",
+      "identical": false
+    },
+    {
+      "image": "COCO_val2014_000000007795.jpg",
+      "prompt": "Describe this image.",
+      "fp16": "The image features a bedroom with a large bed, a dresser, and a couple of chairs. The bed is placed on a large bed frame, and the dresser is situated on the left side of the",
+      "q4_k_m": "The image features a white room with a white bed and a white bed frame. The bed is placed on a white sheet, and there are several other sheets spread across the room. The room is illuminated",
+      "identical": false
+    },
+    {
+      "image": "COCO_val2014_000000007795.jpg",
+      "prompt": "What is the main subject of this image?",
+      "fp16": "The main subject of this image is a bedroom with a large bed, a dresser, and a couple of chairs. The bed is placed on a large sheet, and the dresser is situated on the left",
+      "q4_k_m": "The main subject of this image is a white bed with a white bed frame, surrounded by a variety of items. The bed is placed in a room with a white wall, and there are several other",
+      "identical": false
+    },
+    {
+      "image": "COCO_val2014_000000008749.jpg",
+      "prompt": "Describe this image.",
+      "fp16": "The image features a large, rectangular pizza on a wooden table, surrounded by a group of people enjoying a meal together. The pizza is placed on a wooden table, and there are several people sitting around",
+      "q4_k_m": "The image features a wooden dining table with a large, colorful pizza on it. The pizza is made of dough and has a unique, colorful design. It is placed on the table, and there are",
+      "identical": false
+    },
+    {
+      "image": "COCO_val2014_000000008749.jpg",
+      "prompt": "What is the main subject of this image?",
+      "fp16": "The main subject of the image is a large, rectangular pizza that is being enjoyed by a group of people at a restaurant. The pizza is placed on a dining table, and there are several people sitting",
+      "q4_k_m": "The main subject of the image is a person sitting on a couch, surrounded by a variety of books and a dining table.",
+      "identical": false
+    }
+  ]
+}

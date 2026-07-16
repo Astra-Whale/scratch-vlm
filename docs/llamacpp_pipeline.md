@@ -112,7 +112,19 @@ cd "/home/l/SKDWorks/米来/vlm/thirdparty/llama.cpp"
 **量化引入的 PPL 退化：绝对 +1.716，相对 +8.74%。**
 
 > 说明：PPL 绝对值偏高（约 19–21）是因为这是 **0.6B 小基座模型** 在 wikitext 上、且用了较短的 512 上下文与语料切片；
-> 这里关注的是 **f16→Q4_K_M 的相对退化（约 +8.7%）**，对 0.6B 模型来说属正常范围。要更严谨可跑完整 `wiki.test.raw` 并用更大 `-c`。
+> 这里关注的是 **f16→Q4_K_M 的相对退化（约 +8.7%）**,对 0.6B 模型来说属正常范围。要更严谨可跑完整 `wiki.test.raw` 并用更大 `-c`。
+
+### VQA 定性对照(f16 vs Q4_K_M)
+
+PPL 给整体退化量,定性对照给逐样本的可读差异。用合并后的 f16 / Q4_K_M 模型 + mmproj,
+对同批 COCO val 图跑 `Describe` / `What is the main subject` 两组 prompt(`benchmark/vqa_fp16_vs_q4.py`,
+产物 `logs/vqa_fp16_vs_q4.json`,`llama-mtmd-cli --temp 0`):
+
+- 12 对中 **0 对逐字一致** —— Q4_K_M 有可见语义漂移。典型:
+  - "colorful **steam** train" → "**black and white** train"
+  - "a **movie theater** with a large screen" → "a person holding a **video game controller**"
+  - "a **pizza** being eaten" → "a **person sitting on a couch**"
+- 结论:0.6B + Q4_K_M 在描述**主体**上大体保留,但**属性/细节**(颜色、场景类别)会漂;端侧用需权衡。
 
 ---
 
