@@ -5,8 +5,10 @@
     "recall": 0.0,
     "f1": 0.0,
     "yes_ratio": 0.0,
-    "n": 500,
-    "missing_img": 0
+    "n": 3000,
+    "missing_img": 0,
+    "unparseable": 2991,
+    "unparseable_ratio": 99.7
   },
   "popular": {
     "acc": 50.0,
@@ -14,8 +16,10 @@
     "recall": 0.0,
     "f1": 0.0,
     "yes_ratio": 0.0,
-    "n": 500,
-    "missing_img": 0
+    "n": 3000,
+    "missing_img": 0,
+    "unparseable": 2991,
+    "unparseable_ratio": 99.7
   },
   "adversarial": {
     "acc": 50.0,
@@ -23,8 +27,10 @@
     "recall": 0.0,
     "f1": 0.0,
     "yes_ratio": 0.0,
-    "n": 500,
-    "missing_img": 0
+    "n": 3000,
+    "missing_img": 0,
+    "unparseable": 2990,
+    "unparseable_ratio": 99.67
   },
   "avg_f1": 0.0
 }

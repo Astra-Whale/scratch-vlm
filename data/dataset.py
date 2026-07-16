@@ -6,7 +6,7 @@ MVP Caption Dataset · 通用图文对 loader
 image 可为相对路径 (相对于指定的 image_root) 或绝对路径。
 
 单样本构造流程:
-    1. 加载图 → CLIP image_processor → pixel_values [3, 224, 224]
+    1. 加载图 → CLIP image_processor → pixel_values [3, 336, 336]
     2. 构造 prompt: "<image>\n{QUESTION}"  例如 "<image>\nDescribe this image."
     3. tokenize prompt (前半, label=-100) 和 answer (=caption, label=真实 token id)
     4. 拼成 full_ids + full_labels
@@ -35,7 +35,7 @@ class MVPCaptionDataset(Dataset):
         tokenizer,
         image_token: str = "<image>",
         question: str = DEFAULT_QUESTION,
-        max_length: int = 128,
+        max_length: int = 256,
     ):
         self.samples = self._load_jsonl(jsonl_path)
         self.image_root = Path(image_root)

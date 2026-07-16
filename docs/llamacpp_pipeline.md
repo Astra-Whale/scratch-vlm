@@ -205,7 +205,7 @@ llama.cpp 的 mmproj GGUF，与 **LoRA 合并后**的 Qwen3 GGUF 组合，在量
 
 ### 步骤
 
-1. **合并 stage-2 LoRA 进 Qwen3**（`tools_merge_lora.py`）→ 完整 HF 模型 `weights/qwen3_stage2_merged/`
+1. **合并 stage-2 LoRA 进 Qwen3**（`tools/merge_lora.py`）→ 完整 HF 模型 `weights/qwen3_stage2_merged/`
    （用 `ScratchVLM` 保证 `<image>` token resize 与训练一致，再 `merge_and_unload`）。
 2. **merged → GGUF f16 → Q4_K_M**：`convert_hf_to_gguf.py` + `llama-quantize`
    → `weights/gguf/qwen3-stage2-merged-q4_k_m.gguf`（**372 MiB**）。

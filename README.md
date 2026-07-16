@@ -31,7 +31,7 @@
 
 | 阶段 | 可训部分 | 数据 | 配置 |
 |-----|---------|------|------|
-| **stage-1** projector 对齐 | projector (4.20M) | Flickr8k train (5999 图) | batch 4 / grad-accum 4 / lr 2e-4 / bf16 |
+| **stage-1** projector 对齐 | projector (4.20M) | Flickr8k train (5999 图 × 5 caption = 30000 pair) | batch 4 / grad-accum 4 / lr 1e-3 / bf16 |
 | **stage-2** 指令微调 | projector + Qwen q/v LoRA (r=16, α=32) | LLaVA-Instruct (detail_23k + conversation_58k) + VQAv2 平衡 yes/no,共 11022 条 | batch 1 / grad-accum 16 / 700 步 / lr 2e-4 |
 
 stage-2 可训参数 6.49M(LoRA 2.29M + projector 4.20M),峰值显存 7.2GB。
@@ -47,6 +47,8 @@ stage-1 模型在 Flickr8k 1000-test(5 参考)上,官方 `pycocoevalcap`:
 | **0.940** | **32.91** | 75.8 | 59.6 | 44.9 | 0.276 | 0.573 |
 
 （本项目手写 corpus BLEU-4 = 32.93,与官方一致。）
+
+> BLEU-1..4 为 pycocoevalcap 累积口径(几何平均,与论文对标)。SPICE 因 Java 内存约束未跑,CIDEr 为主对标指标。
 
 ### POPE 幻觉评测 · stage-2 模型
 
@@ -68,6 +70,8 @@ SFT 数据配比对 POPE 的影响(消融):
 | + conversation | 50 | 66.7 |
 | + 平衡 VQAv2 | 70–83 | **78.59** |
 
+> 三行均 n=3000(三 split 各 3000 题)。detail-only F1=0 不是"低幻觉":该模型只输出描述文本、不会短答 yes/no(**unparseable=100%**),parser 保守判 no → 全 no → acc≈50(yes/no 各半的随机水平)、F1=0。+conversation 学会答但偏 yes(训练短答 93% 是 yes),F1 66.7 虚高;+平衡 VQAv2 才均衡。
+
 ### 量化 · llama.cpp
 
 Qwen3-0.6B 转 GGUF:
@@ -77,6 +81,8 @@ Qwen3-0.6B 转 GGUF:
 | f16 | 1.5 GB | 19.63 |
 | **Q4_K_M** | **0.48 GB**(3.12×) | 21.35 |
 
+> PPL 语料:wikitext-2 test 前 90KB / 43 × 512-token chunks / ctx=512(小切片,关注 f16→Q4 的相对退化 +8.7%)。另有 fp16 vs Q4_K_M 的 VQA 定性对照(`logs/vqa_fp16_vs_q4.json`)。
+
 llama-server SSE 流式输出跑通;详见 [`docs/llamacpp_pipeline.md`](docs/llamacpp_pipeline.md)。
 
 ### 端侧多模态推理 · mmproj
@@ -85,7 +91,9 @@ CLIP + projector 打包为 llama.cpp mmproj GGUF(590MB),与合并 LoRA 后的 Qw
 
 ### 推理开销
 
-5060 Ti · bf16 · batch=1 实测:视觉编码 14.8ms(一次性)+ prefill 20.7ms + decode **94 tok/s**(memory-bandwidth-bound)。视觉编码仅占 32-token 生成的 4.1%。`logs/latency_profile.json` / `benchmark/profile_latency.py`。
+5060 Ti · bf16 · batch=1 · **Qwen3-0.6B + CLIP-L/14@336**(stage-1 旗舰 ckpt)实测:视觉编码 14.8ms(一次性)+ prefill 20.7ms + decode **94 tok/s**(memory-bandwidth-bound)。视觉编码仅占 32-token 生成的 4.1%。`logs/latency_profile.json` / `benchmark/profile_latency.py`。
+
+> decode/token 用 (g64−g16)/48 差分法,假设 decode 恒定、忽略 KV-cache 增长的 O(n) 项(对分档估计够用)。
 
 ## 目录结构
 
@@ -128,7 +136,7 @@ python tests/test_forward.py
 python train.py --data data/flickr8k/train.jsonl --val-data data/flickr8k/val.jsonl \
                 --image-root data/flickr8k/images \
                 --vision openai/clip-vit-large-patch14-336 --llm weights/Qwen3-0.6B \
-                --steps 3000 --batch 4 --grad-accum 4 --lr 2e-4 --dtype bf16 \
+                --steps 3000 --batch 4 --grad-accum 4 --lr 1e-3 --dtype bf16 \
                 --out checkpoints/projector_stage1_qwen3.pt
 
 # stage-2 · LoRA + projector SFT

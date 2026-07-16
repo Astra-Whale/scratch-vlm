@@ -110,6 +110,8 @@ def main():
     res = {
         "device": torch.cuda.get_device_name(0) if device == "cuda" else "cpu",
         "dtype": args.dtype,
+        "llm_name": ck.get("llm_name"),
+        "ckpt": args.ckpt,
         "vision_encode_ms": round(t_vis, 1),
         "generate_1tok_ms": round(g1, 1),
         "generate_16tok_ms": round(g16, 1),

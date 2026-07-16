@@ -71,6 +71,8 @@ class ScratchVLM(nn.Module):
             self.tokenizer.add_special_tokens(
                 {"additional_special_tokens": [IMAGE_TOKEN]}
             )
+            # 注: resize 后新增的 <image> 行是随机初始化, 但 forward 里 <image> 位置
+            # 会被视觉 token 完全替换, 该 embedding 行永不进 lookup, 故不影响结果。
             self.llm.resize_token_embeddings(len(self.tokenizer))
         self.image_token_id = self.tokenizer.convert_tokens_to_ids(IMAGE_TOKEN)
 
@@ -116,6 +118,11 @@ class ScratchVLM(nn.Module):
             attention_mask: [B, T]
             labels: [B, T]  可为 None (只做前向), 视觉位置会被替换为 -100
         """
+        # batch pad 逻辑(下方)依赖 labels/attention_mask 与 embeds 列表逐样本同步 append;
+        # 当前所有 caller(train/train_sft/test_forward)都传非 None。若要支持 None, 需改
+        # 成 dict/sentinel 索引避免混合 image/无-image batch 时的串位。
+        assert attention_mask is not None and labels is not None, \
+            "forward 需 attention_mask 与 labels 非 None(见 batch pad 逻辑)"
         B = input_ids.shape[0]
 
         # 1. 视觉 tokens

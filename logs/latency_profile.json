@@ -1,6 +1,8 @@
 {
   "device": "NVIDIA GeForce RTX 5060 Ti",
   "dtype": "bf16",
+  "llm_name": "weights/Qwen3-0.6B",
+  "ckpt": "checkpoints/projector_stage1_qwen3_best.pt",
   "vision_encode_ms": 14.8,
   "generate_1tok_ms": 31.3,
   "generate_16tok_ms": 191.6,

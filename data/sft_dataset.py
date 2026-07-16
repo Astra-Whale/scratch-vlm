@@ -11,13 +11,15 @@
   - 与 ScratchVLM.forward 无缝: 产出 input_ids/labels/attention_mask, forward 负责 <image>→视觉token 替换
 """
 import json
+import sys
 from pathlib import Path
 
 import torch
 from torch.utils.data import Dataset
 from PIL import Image
 
-IMAGE_TOKEN = "<image>"
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from model.vlm import IMAGE_TOKEN  # 单一来源, 避免与 model.vlm 定义漂移
 
 
 class LlavaInstructDataset(Dataset):

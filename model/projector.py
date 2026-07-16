@@ -24,7 +24,7 @@ class MLPProjector(nn.Module):
         hidden_dim: int = 2048,  # 中间隐层
         # 目标 LLM 的 hidden_size: ScratchVLM 会自动从 llm.config 读并覆盖
         # 参考值: CLIP-L=1024, Qwen3-0.6B=1024
-        output_dim: int = 960,
+        output_dim: int = 1024,
         dtype: torch.dtype = torch.float16,
     ):
         super().__init__()

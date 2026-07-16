@@ -32,12 +32,13 @@ PROMPT = ("<|im_start|>user\n{img}\n{q}\nAnswer the question using a single word
 
 
 def parse_yesno(text):
+    """返回 (答案, 是否可解析)。无法从输出判定时保守判 no, 但标记 unparseable=True。"""
     t = text.strip().lower()
-    if t.startswith("yes"): return "yes"
-    if t.startswith("no"): return "no"
-    if "yes" in t[:20] and "no" not in t[:20]: return "yes"
-    if "no" in t[:20] and "yes" not in t[:20]: return "no"
-    return "no"  # 无法判定按 no(保守)
+    if t.startswith("yes"): return "yes", True
+    if t.startswith("no"): return "no", True
+    if "yes" in t[:20] and "no" not in t[:20]: return "yes", True
+    if "no" in t[:20] and "yes" not in t[:20]: return "no", True
+    return "no", False  # 无法判定按 no(保守), 计入 unparseable
 
 
 def f1_stats(preds, gts):
@@ -87,7 +88,7 @@ def main():
         rows = [json.loads(l) for l in open(fp, encoding="utf-8") if l.strip()]
         if args.max_per_split:
             rows = rows[:args.max_per_split]
-        preds, gts, miss = [], [], 0
+        preds, gts, miss, unpar = [], [], 0, 0
         for i, r in enumerate(rows):
             ipath = img_root / Path(r["image"]).name
             if not ipath.exists():
@@ -96,10 +97,13 @@ def main():
             pv = model.vision_encoder.image_processor(images=image, return_tensors="pt")["pixel_values"].to(device)
             g = model.generate(pixel_values=pv, prompt=PROMPT.format(img=IMAGE_TOKEN, q=r["text"]),
                                max_new_tokens=8, temperature=0.0)
-            preds.append(parse_yesno(g["clean"] if isinstance(g, dict) else g))
+            ans, ok = parse_yesno(g["clean"] if isinstance(g, dict) else g)
+            preds.append(ans); unpar += (0 if ok else 1)
             gts.append(r["label"].strip().lower())
             if (i+1) % 500 == 0: print(f"  {split} {i+1}/{len(rows)}")
         st = f1_stats(preds, gts); st["missing_img"] = miss
+        st["unparseable"] = unpar
+        st["unparseable_ratio"] = round(unpar / max(1, len(preds)) * 100, 2)
         results[split] = st
         print(f"[{split:12}] acc={st['acc']} f1={st['f1']} yes%={st['yes_ratio']} (n={st['n']}, miss={miss})")
 

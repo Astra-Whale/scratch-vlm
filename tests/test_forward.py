@@ -80,8 +80,8 @@ def test_shapes_and_forward():
     print("    ✓ 仅 projector 可训, CLIP + LLM 已冻结")
 
     # ============ [3] 构造假输入 ============
-    print("\n[3] 构造假输入 (batch=2, 224×224 图, prompt=IMAGE_TOKEN + 中文描述指令)")
-    fake_img = torch.randn(2, 3, 224, 224).to(device)
+    print("\n[3] 构造假输入 (batch=2, 336×336 图, prompt=IMAGE_TOKEN + 中文描述指令)")
+    fake_img = torch.randn(2, 3, 336, 336).to(device)
 
     prompt_text = f"{IMAGE_TOKEN}\n描述这张图片。"
     tokenized = model.tokenizer(
