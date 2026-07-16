@@ -62,6 +62,8 @@ stage-1 模型在 Flickr8k 1000-test(5 参考)上,官方 `pycocoevalcap`:
 
 平均 F1 **78.59**。
 
+> **prompt 口径**:上表用的是加了 "Answer using a single word, yes or no" 引导的 **POPE-like 变体**(稳定 0.6B 模型的短答)。POPE 原论文口径(仅问句、无引导)的对照结果见 `logs/pope_stage2_mix2_origprompt.json`(`evaluate_pope.py --prompt-style original`)。
+
 SFT 数据配比对 POPE 的影响(消融):
 
 | SFT 数据 | acc | avg F1 |

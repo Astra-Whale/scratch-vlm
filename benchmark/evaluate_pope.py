@@ -27,8 +27,15 @@ sys.path.insert(0, str(_ROOT))
 from model.vlm import ScratchVLM, IMAGE_TOKEN
 
 SPLITS = ["random", "popular", "adversarial"]
-PROMPT = ("<|im_start|>user\n{img}\n{q}\nAnswer the question using a single word, yes or no.<|im_end|>\n"
-          "<|im_start|>assistant\n")
+# 两种 prompt 口径:
+#   single-word: 加 "Answer using a single word" 引导(稳定短答, 本项目旗舰口径)
+#   original   : POPE 原论文口径, 只给问句, 不加引导
+PROMPTS = {
+    "single-word": ("<|im_start|>user\n{img}\n{q}\nAnswer the question using a single word, yes or no.<|im_end|>\n"
+                    "<|im_start|>assistant\n"),
+    "original": ("<|im_start|>user\n{img}\n{q}<|im_end|>\n"
+                 "<|im_start|>assistant\n"),
+}
 
 
 def parse_yesno(text):
@@ -64,8 +71,11 @@ def main():
     p.add_argument("--image-root", default="data/coco/val2014")
     p.add_argument("--max-per-split", type=int, default=0, help="0=全部")
     p.add_argument("--dtype", default="bf16")
+    p.add_argument("--prompt-style", default="single-word", choices=["single-word", "original"],
+                   help="single-word=加短答引导(旗舰口径);original=POPE 原论文只给问句")
     p.add_argument("--out", default="logs/pope_eval.json")
     args = p.parse_args()
+    PROMPT = PROMPTS[args.prompt_style]
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     dtype = torch.bfloat16 if args.dtype == "bf16" else torch.float16
