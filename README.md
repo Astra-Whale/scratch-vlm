@@ -56,23 +56,21 @@ stage-1 模型在 Flickr8k 1000-test(5 参考)上,官方 `pycocoevalcap`:
 
 | split | acc | precision | recall | f1 | yes 占比 |
 |-------|-----|-----------|--------|-----|---------|
-| random | 82.9 | 81.1 | 85.7 | 83.4 | 52.8 |
-| popular | 76.1 | 71.9 | 85.7 | 78.2 | 59.6 |
-| adversarial | 70.2 | 65.4 | 85.7 | 74.2 | 65.5 |
+| random | 84.7 | 92.6 | 75.4 | 83.1 | 40.7 |
+| popular | 79.0 | 81.3 | 75.4 | 78.2 | 46.4 |
+| adversarial | 73.9 | 73.2 | 75.4 | 74.3 | 51.5 |
 
-平均 F1 **78.59**。
-
-> **prompt 口径(对 prompt 鲁棒)**:上表用加 "Answer using a single word, yes or no" 引导的变体。POPE **原论文口径**(仅问句、无引导)重跑对照 avg F1 **78.54**(vs 78.59,差 0.05),且 unparseable=0%、yes% 更均衡(41/46/52) —— 模型靠平衡 VQA SFT **真学会短答、不依赖引导**,数字对两种口径鲁棒。对照见 `logs/pope_stage2_mix2_origprompt.json`(`evaluate_pope.py --prompt-style original`)。
+平均 F1 **78.54**。
 
 SFT 数据配比对 POPE 的影响(消融):
 
 | SFT 数据 | acc | avg F1 |
 |---------|-----|--------|
 | detail(纯描述) | 50 | 0 |
-| + conversation | 50 | 66.7 |
-| + 平衡 VQAv2 | 70–83 | **78.59** |
+| + conversation | 50–54 | 67.5 |
+| + 平衡 VQAv2 | 74–85 | **78.54** |
 
-> 三行均 n=3000(三 split 各 3000 题)。detail-only F1=0 不是"低幻觉":该模型只输出描述文本、不会短答 yes/no(**unparseable=100%**),parser 保守判 no → 全 no → acc≈50(yes/no 各半的随机水平)、F1=0。+conversation 学会答但偏 yes(训练短答 93% 是 yes),F1 66.7 虚高;+平衡 VQAv2 才均衡。
+> 三行均 n=3000(三 split 各 3000 题)、POPE 原论文口径。detail-only F1=0 不是"低幻觉":该模型只输出描述文本、不会短答 yes/no(**unparseable=100%**),parser 保守判 no → 全 no → acc≈50(yes/no 各半的随机水平)、F1=0。+conversation 学会答但偏 yes(训练短答 93% 是 yes,yes 占比 95.6%),F1 67.5 虚高;+平衡 VQAv2 才均衡。
 
 ### 量化 · llama.cpp
 

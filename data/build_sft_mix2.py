@@ -1,11 +1,11 @@
-"""构建 stage-2 SFT 混合数据集 sft_mix2.json(旗舰 POPE 78.59 的训练数据)。
+"""构建 stage-2 SFT 混合数据集 sft_mix2.json(旗舰 POPE 78.54 的训练数据)。
 
 组成(均过滤到本地已有的 COCO train2014 图):
   - LLaVA-Instruct detail_23k     : 图像详细描述
   - LLaVA-Instruct conversation_58k: 多轮视觉对话
   - VQAv2 平衡 yes/no             : 从 VQAv2 抽 answer_type=='yes/no', 下采样成 50/50
 
-平衡 yes/no 是把 POPE 从 all-yes(F1 66.7 虚高)拉到均衡(avg F1 78.59)的关键。
+平衡 yes/no 是把 POPE 从 all-yes(F1 67.5 虚高)拉到均衡(avg F1 78.54)的关键。
 
 源文件(gitignored, 需先下载, 见 docs/data_sourcing.md):
   - data/llava_instruct/detail_23k.json

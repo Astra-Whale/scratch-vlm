@@ -1,30 +1,36 @@
 {
   "random": {
-    "acc": 50.0,
-    "precision": 50.0,
-    "recall": 100.0,
-    "f1": 66.67,
-    "yes_ratio": 100.0,
+    "acc": 54.23,
+    "precision": 52.21,
+    "recall": 99.87,
+    "f1": 68.57,
+    "yes_ratio": 95.63,
     "n": 3000,
-    "missing_img": 0
+    "missing_img": 0,
+    "unparseable": 0,
+    "unparseable_ratio": 0.0
   },
   "popular": {
-    "acc": 50.0,
-    "precision": 50.0,
-    "recall": 100.0,
-    "f1": 66.67,
-    "yes_ratio": 100.0,
+    "acc": 51.07,
+    "precision": 50.54,
+    "recall": 99.87,
+    "f1": 67.11,
+    "yes_ratio": 98.8,
     "n": 3000,
-    "missing_img": 0
+    "missing_img": 0,
+    "unparseable": 0,
+    "unparseable_ratio": 0.0
   },
   "adversarial": {
-    "acc": 50.0,
-    "precision": 50.0,
-    "recall": 100.0,
-    "f1": 66.67,
-    "yes_ratio": 100.0,
+    "acc": 50.4,
+    "precision": 50.2,
+    "recall": 99.87,
+    "f1": 66.82,
+    "yes_ratio": 99.47,
     "n": 3000,
-    "missing_img": 0
+    "missing_img": 0,
+    "unparseable": 0,
+    "unparseable_ratio": 0.0
   },
-  "avg_f1": 66.67
+  "avg_f1": 67.5
 }
