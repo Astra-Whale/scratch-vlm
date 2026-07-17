@@ -93,10 +93,10 @@ class MVPCaptionDataset(Dataset):
         full_ids = prompt_ids + answer_ids
         labels = [-100] * len(prompt_ids) + list(answer_ids)
 
-        # 截断保护
+        # 截断保护: 头部截断, 但保留末尾 <|im_end|> 停止信号(否则模型学不到何时停)
         if len(full_ids) > self.max_length:
-            full_ids = full_ids[: self.max_length]
-            labels = labels[: self.max_length]
+            full_ids = full_ids[: self.max_length - 1] + [full_ids[-1]]
+            labels = labels[: self.max_length - 1] + [labels[-1]]
 
         return {
             "pixel_values": pixel_values,

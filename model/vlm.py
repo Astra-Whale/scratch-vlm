@@ -9,10 +9,7 @@
 <image> 特殊 token 用于在 prompt 中占位, 训练/推理时被替换为
 视觉特征投影后的 embedding, 与文本 token embedding 拼接后送入 LLM。
 """
-# 中国大陆直连 HuggingFace 速度慢, 默认使用 hf-mirror 加速。
-# 如需强制走原站, 请在启动前设置 HF_ENDPOINT=https://huggingface.co
-import os
-os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")
+# 默认走官方 HuggingFace。国内如需镜像加速, 启动前 export HF_ENDPOINT=https://hf-mirror.com
 
 from typing import Optional
 import torch
