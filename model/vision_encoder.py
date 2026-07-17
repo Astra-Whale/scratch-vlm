@@ -10,7 +10,9 @@ CLIP-ViT-L/14 视觉编码器
   (最后一层过于向语言侧塌缩, 丢失视觉细节)
 - select_feature="patch": 去掉 CLS token, 保留 576 个 patch token
 """
-# 默认走官方 HuggingFace(与 vlm.py 一致);镜像可 export HF_ENDPOINT=https://hf-mirror.com
+# 默认走 hf-mirror(与 vlm.py 一致);走官方站请 export HF_ENDPOINT=https://huggingface.co
+import os
+os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")
 
 from typing import Optional
 import torch

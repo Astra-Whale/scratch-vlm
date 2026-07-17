@@ -4,7 +4,7 @@
 > 原则:**数据集身份可替代,但用法/格式必须严格对齐 LLaVA v1.5 方法**。本文所有源均在本机 `conda env dl`(python3.11)实测过可达性与下载吞吐,推荐项优先「吞吐已验证」的源。
 >
 > 实测日期:2026-07-14。实测机:项目 Ubuntu 主机,中文 locale。
-> 基线吞吐:`huggingface.co` 直连 ≈ **145–175 KB/s**(稳定,无需梯子);`hf-mirror.com` 镜像实测 ≈ 160 KB/s,**与直连无明显优势**,故一律用官方 HF。
+> 基线吞吐:`huggingface.co` 直连 ≈ **145–175 KB/s**;`hf-mirror.com` 镜像 ≈ 160 KB/s(两者实测同速)。**代码默认走 hf-mirror**(`model/vlm.py`/`vision_encoder.py` 里 `os.environ.setdefault("HF_ENDPOINT", ...)`),国内更省心;要走官方站 `export HF_ENDPOINT=https://huggingface.co` 即可。
 
 ---
 
